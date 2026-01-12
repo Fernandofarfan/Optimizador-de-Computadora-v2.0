@@ -1,4 +1,4 @@
-# PC Optimizer Suite v2.9
+# PC Optimizer Suite v3.0
 
 > **Herramienta profesional de optimización y mantenimiento para Windows 10/11**
 
@@ -11,7 +11,7 @@
 
 Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediante limpieza inteligente, gestión de servicios y reparación de componentes de sistema.
 
-**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.9.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.9.0)**
+**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v3.0.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v3.0.0)**
 
 ## ✨ Características
 
@@ -171,7 +171,92 @@ Una vez ejecutado, verás las siguientes opciones:
 | **[30]** | **🔐 Privacidad Avanzada** | **Sí** | 3-10 min |
 | **[31]** | **📦 Gestor Aplicaciones** | **Sí** | 5-20 min |
 | **[32]** | **🔋 Gestor Energía** | **Sí** | 2-5 min |
+| **[33]** | **📡 Monitor de Red** | **Sí** | Continuo |
+| **[34]** | **🔍 Gestor Duplicados** | No | 5-30 min |
+| **[35]** | **🌐 Dashboard Web** | **Sí** | Continuo |
+| **[36]** | **🤖 Asistente IA** | **Sí** | 2-10 min |
 | **[0]** | Salir | - | - |
+
+### Nuevas Funciones en v3.0 - Suite de Red, Análisis y Monitoreo
+
+#### 📡 Monitor de Red en Tiempo Real
+Monitoreo y control avanzado de conexiones:
+- **Tráfico por aplicación**: Listado de procesos con conexiones activas, PID y conteo
+- **Monitor en vivo**: Dashboard actualizado cada 2 segundos con top 5 aplicaciones
+- **Detección de conexiones inusuales**: Identifica puertos no comunes y procesos sospechosos
+- **Bloqueo/desbloqueo de apps**: Crea reglas de firewall para bloquear conexiones salientes
+- **Test de velocidad**: Ping a múltiples servidores (8.8.8.8, 1.1.1.1, Cloudflare) + test descarga
+- **Consulta WHOIS**: Resolución DNS y enlaces a información detallada de IPs
+- Análisis con Get-NetTCPConnection y Get-NetAdapterStatistics
+- Gestión de reglas de firewall creadas por el optimizador
+
+#### 🔍 Gestor Inteligente de Duplicados
+Localización y eliminación segura de archivos duplicados:
+- **Escaneo por hash**: MD5 o SHA256 con Get-FileHash para detección precisa
+- **Visualización TreeSize**: Reporte HTML con gráficos de barras por espacio desperdiciado
+- **Estrategias de eliminación**: KeepFirst, KeepNewest, KeepOldest con confirmación doble
+- **Compresión antes de eliminar**: Backup ZIP automático de duplicados antes de borrar
+- **Filtros avanzados**: Por extensión, tamaño mínimo, escaneo recursivo
+- **Exportación**: JSON con metadata + HTML responsivo con diseño gradiente
+- Estadísticas detalladas: archivos totales, duplicados, grupos, espacio desperdiciado
+- Progress bar con velocidad de procesamiento (archivos/seg)
+
+#### 🌐 Dashboard Web con API REST
+Servidor HTTP para monitoreo remoto del sistema:
+- **Servidor HTTP**: System.Net.HttpListener en puerto configurable (default 8080)
+- **API REST completa**: /api/metrics, /api/info, /api/services, /api/processes
+- **Dashboard HTML interactivo**: Auto-refresh cada 5 segundos, diseño responsivo con CSS gradients
+- **Métricas en tiempo real**: CPU, memoria, disco, red, top 5 procesos por uso
+- **API Key**: Autenticación con token GUID regenerable
+- **CORS habilitado**: Acceso desde aplicaciones web externas
+- Gestión en segundo plano con PowerShell Jobs
+- Documentación de endpoints integrada en dashboard
+
+#### 🤖 Asistente Inteligente con IA
+Análisis de logs y recomendaciones automatizadas:
+- **Análisis de Event Logs**: System, Application, Security (Critical/Error/Warning)
+- **Base de conocimiento**: 10+ patrones conocidos (BSOD, drivers, memoria, red, updates)
+- **Detección de patrones**: Matching contra problemas comunes de Windows con regex
+- **Puntuación de salud**: Score 0-100 basado en CPU, RAM, disco, servicios y errores recientes
+- **Recomendaciones priorizadas**: Soluciones ordenadas por severidad (Critical > High > Medium > Low)
+- **Correcciones automáticas**: Restart servicios, flush DNS, reset Winsock, optimizar servicios
+- **Reporte HTML completo**: Diagnóstico con score visual, grupos de problemas, tabla de errores
+- Categorización: Hardware, Drivers, Memory, Services, Updates, Performance, Network
+
+### Nuevas Funciones en v2.9 - Privacidad, Aplicaciones y Energía
+
+#### 🔐 Centro de Privacidad Avanzada
+Control total sobre privacidad y telemetría:
+- Gestión de permisos de aplicaciones (cámara, micrófono, ubicación, contactos, calendario)
+- Desactivación de 30+ configuraciones de telemetría (DataCollection, TailoredExperiences, Cortana, Timeline)
+- Limpieza de historial de actividades (ConnectedDevicesPlatform, ActivitiesCache.db)
+- Análisis de conexiones activas con detección de IPs sospechosas
+- Modo Máxima Privacidad que ejecuta todas las acciones
+- Reportes detallados en HTML con puntuación de privacidad (0-100)
+- Detiene servicios de diagnóstico (DiagTrack, dmwappushservice)
+- Interfaz con 8 opciones y confirmaciones de seguridad
+
+#### 📦 Gestor Inteligente de Aplicaciones
+Administración completa de software instalado:
+- Listado de aplicaciones Win32 + UWP con tamaños calculados
+- Detección de bloatware (25+ patrones: CandyCrush, Xbox, Bing, McAfee, Norton)
+- Desinstalación masiva con soporte para rangos (1-10) y listas (1,3,5)
+- Identificación de aplicaciones no usadas (>90 días sin ejecutar)
+- Exportación/importación de listas en JSON con metadata
+- Integración con winget y chocolatey para actualizaciones masivas
+- Limpieza total de bloatware detectado con confirmación
+- Estadísticas detalladas y reportes de desinstalación
+
+#### 🔋 Gestor Inteligente de Energía
+Optimización de consumo y planes de energía:
+- Gestión completa de planes (listar, cambiar, crear personalizados)
+- Perfiles predefinidos: Máximo Rendimiento, Equilibrado, Ahorro, Gaming
+- Estado y salud de batería (química, capacidad, tiempo restante)
+- Reporte detallado de batería con powercfg /batteryreport
+- Análisis de consumo (CPU, brillo, top 5 procesos)
+- Detección de bloqueadores de suspensión (drivers, procesos, servicios)
+- Configuración rápida para Desktop/Laptop/Gaming
+- Optimizaciones específicas según tipo de sistema
 
 ### Nuevas Funciones en v2.8 - Herramientas Empresariales
 

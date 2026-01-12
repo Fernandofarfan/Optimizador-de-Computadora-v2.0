@@ -14,7 +14,7 @@ $ErrorActionPreference = 'SilentlyContinue'
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
 Set-Location -Path $scriptPath
 
-$title = "OPTIMIZADOR DE COMPUTADORA v2.9"
+$title = "OPTIMIZADOR DE COMPUTADORA v3.0"
 
 # --- Funciones Auxiliares ---
 
@@ -143,8 +143,18 @@ do {
     Write-Host ""
     Write-Host "  [32] 🔋 GESTOR ENERGÍA" -ForegroundColor Yellow
     Write-Host "       (Planes, batería, consumo, bloqueadores)"
+    Write-Host ""    Write-Host "  [33] 📡 MONITOR DE RED" -ForegroundColor Magenta
+    Write-Host "       (Tráfico, conexiones, bloqueo, test velocidad)"
     Write-Host ""
-    Write-Host "  [0] SALIR" -ForegroundColor Gray
+    Write-Host "  [34] 🔍 GESTOR DUPLICADOS" -ForegroundColor Yellow
+    Write-Host "       (Hash MD5/SHA256, TreeSize, compresión)"
+    Write-Host ""
+    Write-Host "  [35] 🌐 DASHBOARD WEB" -ForegroundColor Blue
+    Write-Host "       (API REST, servidor HTTP, métricas)"
+    Write-Host ""
+    Write-Host "  [36] 🤖 ASISTENTE IA" -ForegroundColor Green
+    Write-Host "       (Diagnóstico, logs, recomendaciones)"
+    Write-Host ""    Write-Host "  [0] SALIR" -ForegroundColor Gray
     Write-Host ""
     
     $input = Read-Host "  Ingrese numero > "
@@ -470,6 +480,48 @@ do {
                 if (Test-Path ".\Gestor-Energia.ps1") { 
                     & ".\Gestor-Energia.ps1" 
                 } else { Write-Host "Error: No se encuentra Gestor-Energia.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '33' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Monitor de Red." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Monitor-Red.ps1") { 
+                    & ".\Monitor-Red.ps1" 
+                } else { Write-Host "Error: No se encuentra Monitor-Red.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '34' {
+            if (Test-Path ".\Gestor-Duplicados.ps1") { 
+                & ".\Gestor-Duplicados.ps1" 
+            } else { Write-Host "Error: No se encuentra Gestor-Duplicados.ps1" -ForegroundColor Red }
+            Wait-Key
+        }
+        '35' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Dashboard Web." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Dashboard-Web.ps1") { 
+                    & ".\Dashboard-Web.ps1" 
+                } else { Write-Host "Error: No se encuentra Dashboard-Web.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '36' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Asistente IA." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Asistente-IA.ps1") { 
+                    & ".\Asistente-IA.ps1" 
+                } else { Write-Host "Error: No se encuentra Asistente-IA.ps1" -ForegroundColor Red }
                 Wait-Key
             }
         }

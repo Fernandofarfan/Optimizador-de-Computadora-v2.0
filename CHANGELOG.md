@@ -2,6 +2,93 @@
 
 Todos los cambios notables en este proyecto se documentan en este archivo.
 
+## [3.0.0] - 2026-01-12
+
+### ✨ Agregado - Suite de Red, Análisis y Monitoreo
+
+- **📡 Monitor de Red en Tiempo Real** - `Monitor-Red.ps1`
+  - Función `Get-NetworkTrafficByProcess`: Analiza tráfico por aplicación con Get-NetTCPConnection
+  - Muestra conexiones activas, PID, puertos locales/remotos por cada proceso
+  - Función `Start-RealTimeMonitoring`: Dashboard actualizado cada 2 segundos con top 5 apps
+  - Integración con Get-NetAdapterStatistics para bytes enviados/recibidos en tiempo real
+  - Función `Get-UnusualConnections`: Detecta puertos no comunes (no 80/443/22/etc) y procesos no confiables
+  - Excluye rangos privados (10.*, 172.16-31.*, 192.168.*, 127.*) de detección de sospechosos
+  - Función `Block-ProcessNetwork`: Crea reglas de firewall con New-NetFirewallRule para bloquear salidas
+  - Función `Unblock-ProcessNetwork`: Elimina reglas de bloqueo por nombre
+  - Función `Show-BlockedProcesses`: Lista aplicaciones bloqueadas con estado activo/inactivo
+  - Función `Test-InternetSpeed`: Ping a 8.8.8.8, 1.1.1.1, 208.67.222.222 + test descarga 1MB
+  - Calcula latencia promedio y clasifica: Excelente (<50ms), Buena (<100ms), Aceptable (<200ms)
+  - Función `Get-WHOISInfo`: Resolución DNS inversa + enlace a domaintools
+  - Menú con 8 opciones incluyendo test de velocidad y consulta WHOIS
+
+- **🔍 Gestor Inteligente de Duplicados** - `Gestor-Duplicados.ps1`
+  - Función `Get-DuplicateFiles`: Escaneo recursivo con Get-FileHash (MD5 o SHA256)
+  - Soporta filtros por extensión, tamaño mínimo (bytes), inclusión/exclusión de subdirectorios
+  - Progress bar con estadísticas: archivos procesados, porcentaje, velocidad (archivos/seg)
+  - Agrupa archivos por hash y detecta duplicados (más de 1 archivo con mismo hash)
+  - Calcula espacio desperdiciado: tamaño_archivo * (duplicados - 1) en MB y GB
+  - Función `Show-DuplicateGroups`: Muestra top 20 grupos con mayor espacio desperdiciado
+  - Función `Remove-DuplicateFiles`: 3 estrategias (KeepFirst, KeepNewest, KeepOldest)
+  - Confirmación doble antes de eliminar, resumen de archivos eliminados y espacio liberado
+  - Función `Export-DuplicatesReport`: HTML responsivo con CSS gradients y gráficos de barras
+  - Top 10 grupos visualizados con progress bars dinámicos y porcentajes
+  - Función `Export-DuplicatesJSON`: Exporta metadata completa (ScanDate, Algorithm, Summary)
+  - Función `Compress-DuplicateFiles`: Backup ZIP con System.IO.Compression antes de eliminar
+  - Nombres de archivos en ZIP: {hash_8_chars}_{filename} para evitar conflictos
+  - Menú con 7 opciones incluyendo compresión segura antes de eliminar
+
+- **🌐 Dashboard Web con API REST** - `Dashboard-Web.ps1`
+  - Servidor HTTP con System.Net.HttpListener en puerto configurable (default 8080)
+  - Función `Get-SystemMetrics`: CPU, memoria, disco (todos los volúmenes), red, top 5 procesos
+  - Función `Get-SystemInfo`: OS, hardware, CPU, BIOS, uptime en días/horas
+  - Función `Get-Services`: Estado de servicios críticos (wuauserv, BITS, Winmgmt, etc.)
+  - Función `Get-HTMLDashboard`: Dashboard interactivo con auto-refresh cada 5 segundos
+  - Dashboard con CSS gradients (667eea → 764ba2), progress bars con colores dinámicos
+  - Animación de pulso en indicador de estado online
+  - API REST endpoints: /api/metrics, /api/info, /api/services, /api/processes
+  - CORS habilitado para acceso desde aplicaciones web externas
+  - Función `Start-WebServer`: Loop de procesamiento con GetContext asíncrono
+  - Función `Stop-WebServer`: Cierre limpio de listener y cleanup de recursos
+  - Función `Test-APIEndpoint`: Cliente REST para probar endpoints con Invoke-RestMethod
+  - API Key regenerable con GUID único (OptimizadorPC-{guid})
+  - Gestión con PowerShell Jobs para ejecución en segundo plano sin bloqueo
+  - Menú con 8 opciones incluyendo test de endpoints y gestión de API Key
+
+- **🤖 Asistente Inteligente de Diagnóstico** - `Asistente-IA.ps1`
+  - Función `Get-EventLogErrors`: Analiza System, Application, Security logs (Critical/Error/Warning)
+  - Filtro por últimos N días con Get-WinEvent -FilterHashtable y StartTime
+  - Base de conocimiento con 10+ patrones: BSOD (KERNEL_DATA_INPAGE_ERROR, DRIVER_IRQL), memoria, servicios
+  - Cada patrón incluye: Severity, Category, Description, Symptoms, Solutions, Priority (1-4)
+  - Función `Find-ErrorPatterns`: Regex matching contra mensajes de eventos
+  - Agrupa por patrón y cuenta ocurrencias con Group-Object
+  - Función `Get-SystemHealthScore`: Calcula score 0-100 basado en CPU, RAM, disco, servicios
+  - Penalizaciones: CPU >80% (-10), RAM >85% (-10), disco >90% (-5), servicios críticos parados (-5)
+  - Errores críticos en últimas 24h (-3 puntos cada uno)
+  - Clasificación: Excelente (≥80), Bueno (≥60), Regular (≥40), Crítico (<40)
+  - Función `Show-Recommendations`: Muestra soluciones priorizadas con colores por severidad
+  - Función `Export-DiagnosticReport`: HTML con score visual (círculo de 200px con gradiente)
+  - Cards de problemas con border-left coloreado según severidad (Critical red, High orange)
+  - Tabla de errores recientes (top 20) con fecha, nivel, fuente, mensaje truncado
+  - Función `Start-AutomaticFix`: Aplica correcciones automáticas (restart servicios, flush DNS, etc.)
+  - Correcciones disponibles: Windows Update, Disk 100%, High CPU, Network Connectivity
+  - Confirmación requerida antes de ejecutar, resumen de correcciones exitosas/fallidas
+  - Menú con 6 opciones incluyendo diagnóstico completo y correcciones automáticas
+
+### 🔧 Mejorado
+
+- Optimizador.ps1 actualizado a **v3.0**
+- Menú expandido de **32 a 36 funciones** (+4 herramientas avanzadas)
+- Todas las nuevas herramientas requieren permisos de administrador excepto Gestor-Duplicados
+- Integración completa con Logger.ps1 para todas las nuevas herramientas
+
+### 📝 Documentación
+
+- README.md actualizado con **v3.0** y tabla de 36 opciones
+- Nueva sección "Nuevas Funciones en v3.0 - Suite de Red, Análisis y Monitoreo" con 4 herramientas detalladas
+- CHANGELOG.md con detalles técnicos completos de funciones, parámetros y algoritmos
+- Total de scripts: **46 archivos PowerShell** (42 anteriores + 4 nuevos)
+- Total de líneas agregadas: **~3850 líneas** en 4 nuevos scripts
+
 ## [2.9.0] - 2026-01-12
 
 ### ✨ Agregado - Privacidad, Aplicaciones y Energía
