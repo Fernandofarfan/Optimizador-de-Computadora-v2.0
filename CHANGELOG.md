@@ -2,6 +2,76 @@
 
 Todos los cambios notables en este proyecto se documentan en este archivo.
 
+## [2.6.0] - 2025-01-12
+
+### ✨ Agregado
+- **💾 Backup Completo de Drivers** - `Backup-Drivers.ps1`
+  - Exportación automática de todos los drivers instalados
+  - Export-WindowsDriver para cada dispositivo
+  - Carpeta organizada: Backup-Drivers-[timestamp]
+  - Filtrado de drivers Microsoft básicos (opcional)
+  - Reporte INFO_BACKUP.txt con detalles completos
+  - Información de proveedor, versión, fecha, clase
+  - Identificación de drivers críticos para arranque
+  - Instrucciones de restauración incluidas
+  - Cálculo de tamaño total del backup
+
+- **🦠 Limpieza de Malware y Adware** - `Limpiar-Malware.ps1`
+  - Análisis de archivo HOSTS (redirecciones maliciosas)
+  - Detección de tareas programadas sospechosas
+  - Análisis de extensiones de navegador (Chrome)
+  - Búsqueda de programas PUPs instalados
+  - Detección de scripts ejecutables en TEMP
+  - Identificación de procesos sospechosos
+  - Escaneo rápido integrado con Windows Defender
+  - Limpieza interactiva con confirmación de usuario
+  - Backup automático antes de modificaciones
+
+- **📄 Generador de Reportes PDF** - `Generar-Reporte-PDF.ps1`
+  - Generación de reportes profesionales en HTML
+  - Conversión automática a PDF (Chrome/Edge headless)
+  - Diseño responsive con gradientes modernos
+  - Métricas visuales: CPU, RAM, Disco con progress bars
+  - Estado de seguridad con badges de color
+  - Recomendaciones dinámicas personalizadas
+  - Información detallada de hardware
+  - Actualización de Windows Update verificada
+  - Apertura automática en navegador
+  - Compatible con impresión
+
+- **📊 Historial de Optimizaciones** - `Historico-Optimizaciones.ps1`
+  - Base de datos JSON persistente
+  - Registro automático de fecha, script, descripción
+  - Captura de métricas antes/después
+  - Función Add-OptimizacionHistorial exportable
+  - Visualización de últimas N optimizaciones
+  - Estadísticas globales: Total, por script, resultados
+  - Cálculo de espacio liberado acumulado
+  - Exportación a TXT formateado
+  - Limpieza automática de entradas antiguas (>90 días)
+  - Registro manual de optimizaciones
+
+### 🔧 Mejorado
+- **Analizar-Seguridad.ps1**: Corregido error de compatibilidad internacional
+  - Ahora usa SID S-1-5-32-544 en lugar de "Administradores"
+  - Compatible con Windows en cualquier idioma
+- Menú principal extendido a 18 opciones
+- README actualizado con v2.6.0 completo
+- CHANGELOG con detalles técnicos de todas las mejoras
+- Consistencia en mensajes de error y warnings
+- Integración Logger en todos los scripts nuevos
+
+### 📝 Documentación
+- Guías de uso para cada herramienta nueva
+- Tabla de menú actualizada (opciones 15-18)
+- Descripciones técnicas detalladas
+- Ejemplos de uso para funciones avanzadas
+- Requisitos de Chrome/Edge para PDFs
+
+### 🐛 Corregido
+- Error en Analizar-Seguridad.ps1 con grupo "Administradores" en sistemas en inglés
+- Ahora usa SID universal para máxima compatibilidad
+
 ## [2.5.0] - 2025-01-12
 
 ### ✨ Agregado

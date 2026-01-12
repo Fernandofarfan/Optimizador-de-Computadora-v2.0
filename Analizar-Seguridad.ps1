@@ -278,7 +278,9 @@ $report += "-" * 50
 
 try {
     $localUsers = Get-LocalUser -ErrorAction Stop | Where-Object { $_.Enabled -eq $true }
-    $adminUsers = Get-LocalGroupMember -Group "Administradores" -ErrorAction Stop
+    # Usar SID en lugar de nombre para compatibilidad con cualquier idioma
+    # S-1-5-32-544 = Administrators group
+    $adminUsers = Get-LocalGroupMember -SID "S-1-5-32-544" -ErrorAction Stop
     
     Write-Host "  ℹ️  Cuentas activas: $($localUsers.Count)" -ForegroundColor White
     $report += "Cuentas activas: $($localUsers.Count)"

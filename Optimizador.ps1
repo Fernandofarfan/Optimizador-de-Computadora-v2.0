@@ -14,7 +14,7 @@ $ErrorActionPreference = 'SilentlyContinue'
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
 Set-Location -Path $scriptPath
 
-$title = "OPTIMIZADOR DE COMPUTADORA v2.5"
+$title = "OPTIMIZADOR DE COMPUTADORA v2.6"
 
 # --- Funciones Auxiliares ---
 
@@ -89,6 +89,18 @@ do {
     Write-Host ""
     Write-Host "  [14] 🔍 DIAGNÓSTICO AUTOMÁTICO" -ForegroundColor Magenta
     Write-Host "       (Detección inteligente de problemas del sistema)"
+    Write-Host ""
+    Write-Host "  [15] 💾 BACKUP DE DRIVERS" -ForegroundColor Yellow
+    Write-Host "       (Exportar todos los drivers instalados)"
+    Write-Host ""
+    Write-Host "  [16] 🦠 LIMPIAR MALWARE" -ForegroundColor Red
+    Write-Host "       (Detectar y limpiar PUPs, adware, malware)"
+    Write-Host ""
+    Write-Host "  [17] 📄 GENERAR REPORTE PDF" -ForegroundColor Cyan
+    Write-Host "       (Crear reporte profesional del sistema)"
+    Write-Host ""
+    Write-Host "  [18] 📊 HISTORIAL" -ForegroundColor Blue
+    Write-Host "       (Ver historial de optimizaciones)"
     Write-Host ""
     Write-Host "  [0] SALIR" -ForegroundColor Gray
     Write-Host ""
@@ -221,6 +233,40 @@ do {
             if (Test-Path ".\Diagnostico-Automatico.ps1") { 
                 & ".\Diagnostico-Automatico.ps1" 
             } else { Write-Host "Error: No se encuentra Diagnostico-Automatico.ps1" -ForegroundColor Red }
+            Wait-Key
+        }
+        '15' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Backup de Drivers." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Backup-Drivers.ps1") { 
+                    & ".\Backup-Drivers.ps1" 
+                } else { Write-Host "Error: No se encuentra Backup-Drivers.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '16' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nAdvertencia: Se recomienda ejecutar como Administrador para mejores resultados." -ForegroundColor Yellow
+            }
+            if (Test-Path ".\Limpiar-Malware.ps1") { 
+                & ".\Limpiar-Malware.ps1" 
+            } else { Write-Host "Error: No se encuentra Limpiar-Malware.ps1" -ForegroundColor Red }
+            Wait-Key
+        }
+        '17' {
+            if (Test-Path ".\Generar-Reporte-PDF.ps1") { 
+                & ".\Generar-Reporte-PDF.ps1" 
+            } else { Write-Host "Error: No se encuentra Generar-Reporte-PDF.ps1" -ForegroundColor Red }
+            Wait-Key
+        }
+        '18' {
+            if (Test-Path ".\Historico-Optimizaciones.ps1") { 
+                & ".\Historico-Optimizaciones.ps1" 
+            } else { Write-Host "Error: No se encuentra Historico-Optimizaciones.ps1" -ForegroundColor Red }
             Wait-Key
         }
         '0' {

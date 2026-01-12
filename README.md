@@ -1,4 +1,4 @@
-# PC Optimizer Suite v2.5
+# PC Optimizer Suite v2.6
 
 > **Herramienta profesional de optimización y mantenimiento para Windows 10/11**
 
@@ -11,7 +11,7 @@
 
 Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediante limpieza inteligente, gestión de servicios y reparación de componentes de sistema.
 
-**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.4.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.4.0)**
+**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.6.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.6.0)**
 
 ## ✨ Características
 
@@ -153,9 +153,51 @@ Una vez ejecutado, verás las siguientes opciones:
 | **[12]** | **🌐 Red Avanzada** | **Sí** | 5-10 min |
 | **[13]** | **📊 Comparar Rendimiento** | No | 1 min |
 | **[14]** | **🔍 Diagnóstico Automático** | No | 2-3 min |
+| **[15]** | **💾 Backup de Drivers** | **Sí** | 5-10 min |
+| **[16]** | **🦠 Limpiar Malware** | **Sí** | 3-5 min |
+| **[17]** | **📄 Generar Reporte PDF** | No | 1-2 min |
+| **[18]** | **📊 Historial** | No | 1 min |
 | **[0]** | Salir | - | - |
 
-### Nuevas Funciones en v2.5
+### Nuevas Funciones en v2.6
+
+#### 💾 Backup de Drivers
+Exportación completa de drivers:
+- Export-WindowsDriver de todos los dispositivos
+- Carpeta organizada con timestamp
+- Filtra drivers críticos y de terceros
+- Reporte INFO con detalles completos
+- Instrucciones de restauración incluidas
+
+#### 🦠 Limpieza de Malware
+Detección y eliminación de amenazas:
+- Verificación archivo HOSTS (redirecciones maliciosas)
+- Tareas programadas sospechosas (adware, toolbars)
+- Extensiones de navegador (Chrome)
+- Programas PUPs instalados
+- Archivos ejecutables en TEMP
+- Procesos sospechosos en ejecución
+- Escaneo rápido con Windows Defender
+
+#### 📄 Generador de Reportes PDF
+Reportes profesionales en HTML/PDF:
+- Información general del sistema
+- Métricas visuales con progress bars
+- Estado de seguridad con badges
+- Recomendaciones personalizadas dinámicas
+- Exportación automática a PDF (Chrome/Edge)
+- Diseño responsive y profesional
+
+#### 📊 Historial de Optimizaciones
+Registro completo con JSON:
+- Base de datos de todas las optimizaciones
+- Métricas antes/después por ejecución
+- Estadísticas globales (total, por script, espacio liberado)
+- Exportación a TXT
+- Limpieza automática de entradas antiguas
+- Registro manual de optimizaciones
+
+### Funciones en v2.5
 
 #### 💻 Análisis Hardware Detallado
 Diagnóstico completo de componentes con:
