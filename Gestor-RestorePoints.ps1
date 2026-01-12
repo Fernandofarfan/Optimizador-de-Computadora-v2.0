@@ -125,7 +125,7 @@ function New-RestorePointAdvanced {
     
     # Verificar si está habilitada la protección del sistema
     try {
-        Get-ComputerRestorePoint -ErrorAction Stop | Out-Null
+        $null = Get-ComputerRestorePoint -ErrorAction Stop
     }
     catch {
         Write-ColoredText "❌ La protección del sistema no está habilitada" "Red"
@@ -286,8 +286,8 @@ function Remove-OldRestorePoints {
     
     try {
         # Usar vssadmin para eliminar puntos antiguos
-        $output = vssadmin delete shadows /for=c: /oldest /quiet 2>&1
-        Write-ColoredText "  Resultado: $($output -join ' ')" "Gray"
+        $result = vssadmin delete shadows /for=c: /oldest /quiet 2>&1
+        Write-ColoredText "  Resultado: $($result -join ' ')" "Gray"
         
         Write-ColoredText "`n✅ Puntos de restauración antiguos eliminados" "Green"
         
@@ -327,7 +327,7 @@ function Get-SystemProtectionStatus {
             $protectionEnabled = $false
             
             try {
-                Get-ComputerRestorePoint -ErrorAction SilentlyContinue | Out-Null
+                $null = Get-ComputerRestorePoint -ErrorAction SilentlyContinue
                 $protectionEnabled = $true
             }
             catch {
