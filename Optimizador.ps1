@@ -14,7 +14,7 @@ $ErrorActionPreference = 'SilentlyContinue'
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
 Set-Location -Path $scriptPath
 
-$title = "OPTIMIZADOR DE COMPUTADORA v2.7"
+$title = "OPTIMIZADOR DE COMPUTADORA v2.8"
 
 # --- Funciones Auxiliares ---
 
@@ -119,6 +119,21 @@ do {
     Write-Host ""
     Write-Host "  [24] 🔄 GESTOR UPDATES" -ForegroundColor DarkYellow
     Write-Host "       (Control completo de Windows Update)"
+    Write-Host ""
+    Write-Host "  [25] 🔙 PUNTOS RESTAURACIÓN" -ForegroundColor Cyan
+    Write-Host "       (Crear, listar, restaurar, eliminar puntos)"
+    Write-Host ""
+    Write-Host "  [26] ⏰ MANTENIMIENTO AUTO" -ForegroundColor Green
+    Write-Host "       (Programar limpiezas, defrag, updates automáticos)"
+    Write-Host ""
+    Write-Host "  [27] 📊 BENCHMARK SISTEMA" -ForegroundColor Magenta
+    Write-Host "       (Pruebas CPU, RAM, Disco con comparación histórica)"
+    Write-Host ""
+    Write-Host "  [28] ☁️  BACKUP NUBE" -ForegroundColor Blue
+    Write-Host "       (OneDrive, Google Drive, Dropbox con encriptación)"
+    Write-Host ""
+    Write-Host "  [29] 🖥️  DASHBOARD AVANZADO" -ForegroundColor Yellow
+    Write-Host "       (Métricas 30 días, gráficos, exportar HTML/PDF)"
     Write-Host ""
     Write-Host "  [0] SALIR" -ForegroundColor Gray
     Write-Host ""
@@ -350,6 +365,66 @@ do {
                 if (Test-Path ".\Gestor-Actualizaciones.ps1") { 
                     & ".\Gestor-Actualizaciones.ps1" 
                 } else { Write-Host "Error: No se encuentra Gestor-Actualizaciones.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '25' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Puntos de Restauración." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Gestor-RestorePoints.ps1") { 
+                    & ".\Gestor-RestorePoints.ps1" 
+                } else { Write-Host "Error: No se encuentra Gestor-RestorePoints.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '26' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Mantenimiento Automático." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Mantenimiento-Automatico.ps1") { 
+                    & ".\Mantenimiento-Automatico.ps1" 
+                } else { Write-Host "Error: No se encuentra Mantenimiento-Automatico.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '27' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Benchmark del Sistema." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Benchmark-Sistema.ps1") { 
+                    & ".\Benchmark-Sistema.ps1" 
+                } else { Write-Host "Error: No se encuentra Benchmark-Sistema.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '28' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Backup a la Nube." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Backup-Nube.ps1") { 
+                    & ".\Backup-Nube.ps1" 
+                } else { Write-Host "Error: No se encuentra Backup-Nube.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '29' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Dashboard Avanzado." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Dashboard-Avanzado.ps1") { 
+                    & ".\Dashboard-Avanzado.ps1" 
+                } else { Write-Host "Error: No se encuentra Dashboard-Avanzado.ps1" -ForegroundColor Red }
                 Wait-Key
             }
         }

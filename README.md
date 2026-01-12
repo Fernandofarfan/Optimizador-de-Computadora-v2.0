@@ -1,4 +1,4 @@
-# PC Optimizer Suite v2.7
+# PC Optimizer Suite v2.8
 
 > **Herramienta profesional de optimización y mantenimiento para Windows 10/11**
 
@@ -11,7 +11,7 @@
 
 Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediante limpieza inteligente, gestión de servicios y reparación de componentes de sistema.
 
-**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.7.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.7.0)**
+**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.8.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.8.0)**
 
 ## ✨ Características
 
@@ -148,21 +148,6 @@ Una vez ejecutado, verás las siguientes opciones:
 | **[7]** | **🔒 Analizar Seguridad** | No | 3-5 min |
 | **[8]** | **🔄 Revertir Cambios** | **Sí** | 2-5 min |
 | **[9]** | **🎮 Modo Gaming** | **Sí** | 2-3 min |
-| **[10]** | Ver Logs | No | Inmediato |
-| **[11]** | Análisis Hardware | No | 2-3 min |
-| **[12]** | Tareas Programadas | **Sí** | 2-4 min |
-| **[13]** | Optimizar Red | **Sí** | 3-5 min |
-| **[14]** | Comparación Sistema | No | 1-2 min |
-| **[15]** | **💾 Backup Drivers** | **Sí** | 5-10 min |
-| **[16]** | **🦠 Limpiar Malware** | **Sí** | 10-20 min |
-| **[17]** | **📄 Reporte PDF** | No | 2-3 min |
-| **[18]** | **📊 Historial** | No | 1-2 min |
-| **[19]** | **📡 Monitor Tiempo Real** | No | Continuo |
-| **[20]** | **⚙️ Perfiles Optimización** | **Sí** | 1-2 min |
-| **[21]** | **🎮 Optimizar Juegos** | **Sí** | 2-5 min |
-| **[22]** | **🗂️ Limpiar Registro** | **Sí** | 3-5 min |
-| **[23]** | **💿 Defragmentar** | **Sí** | 10-60 min |
-| **[24]** | **🔄 Gestor Updates** | **Sí** | 2-10 min |
 | **[10]** | **💻 Análisis Hardware** | No | 3-4 min |
 | **[11]** | **⏰ Tareas Programadas** | **Sí** | 1-2 min |
 | **[12]** | **🌐 Red Avanzada** | **Sí** | 5-10 min |
@@ -178,7 +163,68 @@ Una vez ejecutado, verás las siguientes opciones:
 | **[22]** | **🗂️ Limpiar Registro** | **Sí** | 3-5 min |
 | **[23]** | **💿 Defragmentar** | **Sí** | 10-60 min |
 | **[24]** | **🔄 Gestor Updates** | **Sí** | 2-10 min |
+| **[25]** | **🔙 Puntos Restauración** | **Sí** | 1-5 min |
+| **[26]** | **⏰ Mantenimiento Auto** | **Sí** | 2-5 min |
+| **[27]** | **📊 Benchmark Sistema** | **Sí** | 5-10 min |
+| **[28]** | **☁️ Backup Nube** | **Sí** | 5-30 min |
+| **[29]** | **🖥️ Dashboard Avanzado** | **Sí** | Continuo |
 | **[0]** | Salir | - | - |
+
+### Nuevas Funciones en v2.8 - Herramientas Empresariales
+
+#### 🔙 Gestor de Puntos de Restauración
+Control completo de restore points:
+- Crear puntos con descripción personalizada
+- Listar todos con detalles (fecha, tipo, descripción)
+- Restaurar sistema a punto específico (con confirmación)
+- Eliminar puntos antiguos para liberar espacio
+- Verificar espacio disponible en disco
+- Programar creación automática (diaria/semanal/mensual)
+- Estado de protección del sistema por unidad
+
+#### ⏰ Mantenimiento Automático
+Programador de tareas inteligente:
+- **Limpieza automática**: Temporales, caché navegadores, papelera (diaria/semanal/mensual)
+- **Desfragmentación automática**: HDD defrag o SSD TRIM según detección (semanal/mensual)
+- **Búsqueda de updates**: Notificaciones de actualizaciones disponibles (semanal/mensual)
+- **Verificación de salud**: Reportes de disco, errores, servicios (semanal/mensual)
+- Gestión completa: ver, habilitar, deshabilitar, eliminar tareas
+- Ejecución manual de mantenimiento completo
+- Integración total con Windows Task Scheduler
+
+#### 📊 Suite de Benchmarks
+Medición precisa de rendimiento del sistema:
+- **Benchmark CPU**: Cálculo de números primos, Single-Core y Multi-Core, speedup en threads
+- **Benchmark RAM**: Velocidad lectura/escritura/copia en MB/s
+- **Benchmark Disco**: Lectura/escritura secuencial, IOPS 4K aleatorios
+- Puntuación global del sistema (CPU 40% + RAM 30% + Disco 30%)
+- Histórico JSON con últimos 50 resultados
+- Comparación automática con resultado anterior
+- Clasificación: Excelente (>2000), Muy Bueno (>1500), Bueno (>1000)
+- Suite completa 5-10 minutos
+
+#### ☁️ Backup a la Nube
+Sistema profesional de respaldos:
+- Soporte **OneDrive, Google Drive y Dropbox** con auto-detección
+- Perfiles personalizados con múltiples carpetas
+- Compresión ZIP automática (20-60% reducción)
+- Encriptación AES-256 opcional con contraseña
+- Versionado con timestamp (Backup_Perfil_20260112_143059)
+- Respaldo selectivo o completo
+- Estadísticas de archivos copiados y tamaño
+- Gestión de perfiles: crear, listar, eliminar
+
+#### 🖥️ Dashboard Avanzado
+Panel de control empresarial con exportación:
+- **Dashboard en vivo**: Actualización cada 2 segundos con gráficos ASCII
+- Progress bars con colores según umbral (Verde <60%, Amarillo 60-80%, Red >80%)
+- Sparklines (mini gráficos) de histórico reciente (últimos 50 valores)
+- Top 5 procesos por CPU y RAM en tiempo real
+- Temperatura CPU si está disponible
+- **Histórico 30 días**: 720 snapshots (1 por hora) guardados en JSON
+- Gráficos históricos con promedios y máximos
+- **Exportación HTML**: Dashboard responsivo con CSS gradients, tablas interactivas
+- Diseño profesional para presentaciones
 
 ### Nuevas Funciones en v2.7 - Herramientas Profesionales
 

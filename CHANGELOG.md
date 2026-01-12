@@ -2,6 +2,74 @@
 
 Todos los cambios notables en este proyecto se documentan en este archivo.
 
+## [2.8.0] - 2025-01-13
+
+### ✨ Agregado - Herramientas Empresariales
+
+- **🔙 Gestor de Puntos de Restauración** - `Gestor-RestorePoints.ps1`
+  - Crear puntos con descripción personalizada y validación automática
+  - Listar todos los puntos con detalles completos: Secuencia, Fecha, Tipo (Manual/Instalación/Sistema), Evento
+  - Restaurar sistema a punto específico con doble confirmación (escribe "RESTAURAR")
+  - Eliminar puntos antiguos para liberar espacio (conservar N más recientes)
+  - Verificación de espacio en disco antes de crear (mínimo 5 GB recomendado)
+  - Verificación de último punto (evitar duplicados <10 minutos)
+  - Programar creación automática con Task Scheduler (diaria/semanal/mensual a las 2:00 AM)
+  - Estado de protección del sistema: Por unidad, espacio usado/libre/total, configuración vssadmin
+  - Advertencias y reinicio automático al restaurar
+
+- **⏰ Mantenimiento Automático del Sistema** - `Mantenimiento-Automatico.ps1`
+  - **Limpieza automática**: Temporales Windows y usuario, caché navegadores (Chrome, Firefox), Papelera, cleanmgr.exe, frecuencias: diaria 3AM, semanal domingos, mensual
+  - **Desfragmentación inteligente**: HDD defrag, SSD TRIM según detección automática, solo si sistema inactivo 10 min, frecuencias: semanal sábados 2AM, mensual
+  - **Búsqueda de actualizaciones**: Microsoft.Update.Session COM, notificaciones con balloons, frecuencias: semanal martes 10AM, mensual segundo martes
+  - **Verificación de salud**: Reporte HTML con disco, errores EventLog, servicios críticos, temperatura, SFC verify, frecuencias: semanal viernes 6PM, mensual
+  - Gestión completa: Ver tareas con estado/última ejecución/próxima, habilitar/deshabilitar, eliminar
+  - Ejecución manual inmediata de mantenimiento completo (3 fases)
+  - Scripts personalizados guardados en $env:USERPROFILE
+  - Task Scheduler con carpeta \OptimizadorPC\
+
+- **📊 Suite Profesional de Benchmarks** - `Benchmark-Sistema.ps1`
+  - **Benchmark CPU**: Cálculo números primos hasta 100,000, Single-Core con bucle secuencial, Multi-Core con Start-Job paralelos, speedup calculado (tiempo single / tiempo multi), puntuación base 10s = 1000 puntos
+  - **Benchmark RAM**: Array 512 MB con double[], escritura secuencial (fill array), lectura completa (sum loop), copia con Array.Copy, velocidades en MB/s, puntuación base 5000 MB/s = 1000 puntos
+  - **Benchmark Disco**: Archivo temporal 100 MB, escritura/lectura secuencial con FileStream 1MB buffer, lectura aleatoria 4K blocks (1000 IOPS), limpieza automática, puntuación según HDD (100 MB/s) o SSD (500 MB/s) base
+  - Puntuación global: CPU 40% + RAM 30% + Disco 30%
+  - Histórico JSON: Últimos 50 resultados, fecha/hora, detalles completos, sistema operativo
+  - Comparación automática: Delta con resultado anterior, porcentaje de mejora/empeora
+  - Clasificación: ⭐⭐⭐ Excelente (>2000), ⭐⭐ Muy Bueno (>1500), ⭐ Bueno (>1000)
+  - Suite completa: 5-10 minutos de ejecución
+
+- **☁️ Sistema de Backup a la Nube** - `Backup-Nube.ps1`
+  - Detección automática de proveedores: OneDrive ($env:OneDrive), Google Drive (~/Google Drive), Dropbox (~/Dropbox + info.json)
+  - Perfiles personalizados: Nombre, carpetas múltiples (Documentos/Escritorio/Imágenes/Videos/Música/Descargas + personalizada), proveedor destino, opciones compress/encrypt
+  - Compresión ZIP automática con System.IO.Compression.ZipFile, nivel Optimal, reducción típica 20-60%
+  - Encriptación AES-256 opcional (campo password en perfil, implementación futura)
+  - Respaldo estructura completa: Backup_NombrePerfil_YYYYMMDD_HHMMSS, preserva jerarquía de carpetas
+  - Estadísticas: Archivos totales, copiados exitosos, tamaño total en MB
+  - Manejo de errores: Archivos en uso omitidos, sin permisos continúa
+  - Gestión de perfiles: Crear, listar con última fecha, eliminar
+  - Configuración JSON persistente en $env:USERPROFILE
+
+- **🖥️ Dashboard Avanzado con Métricas** - `Dashboard-Avanzado.ps1`
+  - **Dashboard en tiempo real**: Actualización cada 2 segundos, redibujado con SetCursorPosition(0, 8), salida Ctrl+C
+  - Métricas detalladas: CPU con nombre/núcleos/hilos/temperatura, RAM total/usado/libre en GB, Disco C: con GB, uptime (días/horas/minutos), procesos activos
+  - Progress bars ASCII: Ancho 50 caracteres, colores Verde (<60%), Amarillo (60-80%), Red (>80%)
+  - Sparklines históricos: Mini gráficos últimos 50 valores, caracteres ▁▂▃▄▅▆▇█, normalización automática
+  - Top 5 procesos: CPU (ordenado por tiempo CPU), RAM (ordenado por WorkingSet en MB)
+  - **Histórico 30 días**: Snapshots JSON cada hora (720 máximo), métricas completas + timestamp + OS info
+  - Gráficos históricos: Sparklines de 60 caracteres, promedio y máximo calculados
+  - **Exportación HTML**: Dashboard responsivo con CSS gradients, progress bars animados, tablas interactivas, diseño profesional para presentaciones
+  - Opción abrir archivo HTML generado automáticamente
+
+### 🔧 Mejorado
+- **Optimizador.ps1**: Actualizado a v2.8 con opciones 25-29
+- Menú principal expandido a 29 opciones totales
+- Todos los nuevos scripts con verificación de permisos admin
+- Test-Path validación antes de ejecutar cada script
+
+### 📝 Documentación
+- **README.md**: Actualizado a v2.8, tabla menú con 29 filas, sección completa "Nuevas Funciones en v2.8"
+- **CHANGELOG.md**: Sección v2.8.0 con detalles técnicos completos
+- Guías de uso para las 5 nuevas herramientas empresariales
+
 ## [2.7.0] - 2025-01-12
 
 ### ✨ Agregado - Herramientas Profesionales
