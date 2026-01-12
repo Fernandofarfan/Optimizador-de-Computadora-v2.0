@@ -1,7 +1,34 @@
 # Changelog
 
 Todos los cambios notables en este proyecto se documentan en este archivo.
+## [2.2.0] - 2026-01-12
 
+### ✨ Agregado
+- **Templates de GitHub para Issues y PRs**
+  - `.github/ISSUE_TEMPLATE/bug_report.md` - Template estructurado para reportar bugs
+  - `.github/ISSUE_TEMPLATE/feature_request.md` - Template para solicitudes de funcionalidad
+  - `.github/PULL_REQUEST_TEMPLATE.md` - Template completo para pull requests
+  - `.github/CODE_OF_CONDUCT.md` - Código de conducta basado en Contributor Covenant
+- **Sistema de Puntos de Restauración**
+  - `Crear-PuntoRestauracion.ps1` - Crea restore points antes de cambios críticos
+  - Verificación de System Restore habilitado
+  - Validación de espacio en disco
+  - Integración automática en módulos de limpieza y servicios
+- **Integración completa del Logger**
+  - Analizar-Sistema.ps1 ahora registra todo el proceso de análisis
+  - Limpieza-Profunda.ps1 registra archivos eliminados y espacio liberado
+  - Optimizar-Servicios.ps1 registra cambios en servicios con estado previo
+
+### 🔧 Mejorado
+- Los módulos críticos (Limpieza y Servicios) ahora sugieren crear punto de restauración
+- Logging detallado en todas las operaciones principales
+- Mejor trazabilidad de errores con niveles de severidad
+- README actualizado con sección de backup y logging integrado
+
+### 🛡️ Seguridad
+- Puntos de restauración garantizan reversibilidad de cambios
+- Validación de permisos de administrador antes de operaciones críticas
+- Logs completos de todas las modificaciones al sistema
 ## [2.2.0] - 2026-01-12
 
 ### ✨ Agregado
