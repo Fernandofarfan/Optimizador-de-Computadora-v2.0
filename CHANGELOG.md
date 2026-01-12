@@ -6,7 +6,123 @@ Todos los cambios notables en este proyecto se documentan en este archivo.
 
 ### 🚀 Nueva Era - Testing, Configuración, GUI y Multi-idioma
 
-#### ✨ Agregado - Nuevas Funcionalidades Principales
+#### 📈 MEJORAS POST-RELEASE v4.0.0
+
+- **📜 Sistema de Historial de Operaciones** - `Operations-History.ps1`
+  - Registro persistente de todas las optimizaciones realizadas
+  - Almacenamiento en JSON: `%USERPROFILE%\OptimizadorPC\history\operations.json`
+  - Información capturada por operación:
+    - Timestamp (fecha y hora exacta)
+    - Nombre de la operación
+    - Estado (SUCCESS, ERROR, WARNING, PENDING)
+    - Descripción y detalles
+    - Duración en segundos
+    - Usuario que ejecutó la operación
+    - Máquina donde se ejecutó
+    - Mensajes de error si los hay
+  - Funciones principales:
+    - `Get-OperationHistory`: Obtener últimas N operaciones
+    - `Add-OperationRecord`: Registrar nueva operación
+    - `Show-OperationHistory`: Mostrar historial con formato
+    - `Export-OperationHistoryHTML`: Generar reporte HTML profesional
+    - `Clear-OldOperationHistory`: Limpiar registros > N días
+  - Reporte HTML con:
+    - Estadísticas (total, éxitos, errores, duración promedio)
+    - Tabla interactiva de operaciones
+    - Estilos responsivos y profesionales
+    - Exportación automática con timestamp
+  - Limpieza automática (máximo 1000 entradas)
+  - Interfaz de menú integrada
+
+- **🎨 Módulo de Mejoras de UI (UX)** - `UI-Enhancements.ps1`
+  - Barras de progreso: `Show-ProgressBar` para operaciones largas
+  - Animaciones de carga: `Show-LoadingAnimation` spinner interactivo
+  - Confirmaciones de usuario: `Get-UserConfirmation` con validación
+  - Menús mejorados: `Show-EnhancedMenu` con selección visual
+  - Notificaciones: `Show-Notification` (INFO, SUCCESS, WARNING, ERROR)
+  - Resultados de operación: `Show-OperationResult` con detalles
+  - Tablas formateadas: `Show-FormattedTable` con propiedades
+  - Procesamiento con spinner: `Invoke-WithSpinner` para tareas async
+  - Entrada validada: `Get-ValidatedInput` con validación personalizada
+  - Barra de estado: `Show-StatusBar` para información destacada
+  - Encabezados de sección: `Show-SectionHeader` con iconos
+  - Advertencias importantes: `Show-ImportantWarning` con bordes
+  - Cajas de información: `Show-InfoBox` para contenido estructurado
+  - Todas las funciones exportadas como módulo reutilizable
+
+#### 🔗 Integración Completa
+
+- **Menú Principal Actualizado** (Optimizador.ps1)
+  - Opción 37: 🎨 INTERFAZ GRÁFICA (GUI-Optimizador.ps1)
+  - Opción 38: 💾 SALUD DEL SSD (SSD-Health.ps1)
+  - Opción 39: 🎮 OPTIMIZAR GPU (GPU-Optimization.ps1)
+  - Opción 40: 🌍 IDIOMA / LANGUAGE (Localization.ps1)
+  - Opción 41: 📈 ESTADÍSTICAS TELEMETRÍA (Telemetry.ps1)
+  - Opción 42: 📜 HISTORIAL DE OPERACIONES (Operations-History.ps1)
+  - Todos con validación de permisos donde sea necesario
+
+- **Instalador Mejorado** (Instalar.ps1)
+  - Creación de directorio de usuario: `%USERPROFILE%\OptimizadorPC`
+  - Creación de carpeta de logs: `./logs`
+  - Creación de carpeta de backups: `./backups`
+  - Creación de carpeta de exports: `./exports`
+  - Creación de directorio de historial: `%USERPROFILE%\OptimizadorPC\history`
+  - Copia automática de config.default.json → config.json
+  - Verificación e instalación de Pester si es necesario
+  - Mensajes de estado mejorados con checkmarks
+
+- **Configuración Expandida** (config.default.json)
+  - Nueva versión: 4.0.0 (actualizada de 3.0.0)
+  - Secciones GPU:
+    - `nvidia_enabled`: true
+    - `amd_enabled`: true
+    - `intel_enabled`: true
+    - `disable_game_dvr`: true
+    - `disable_transparency`: true
+    - `enable_gpu_scheduling`: true
+  - Secciones SSD:
+    - `monitor_smart`: true
+    - `check_interval_hours`: 24
+    - `alert_on_high_temp`: true
+    - `alert_on_wear`: true
+    - `temp_threshold_celsius`: 70
+    - `wear_threshold_percent`: 80
+    - `auto_trim`: true
+  - Sección Telemetría:
+    - `enabled`: false (opt-in por defecto)
+    - `ask_on_startup`: true
+    - `local_storage_only`: true
+    - `max_events`: 100
+  - Sección Localización:
+    - `auto_detect_system_language`: true
+    - `fallback_language`: "es"
+    - `supported_languages`: ["es", "en", "pt", "fr"]
+  - Sección Historial de Operaciones:
+    - `enabled`: true
+    - `store_logs`: true
+    - `max_entries`: 1000
+    - `log_path`: configurable
+    - `auto_backup_history`: true
+
+#### 🎯 Características de cada nueva mejora
+
+**Operations-History.ps1:**
+- ✅ Persistencia JSON con rotación automática
+- ✅ Estadísticas agregadas (success rate, duración promedio)
+- ✅ Exportación HTML profesional
+- ✅ Filtrado por operación o estado
+- ✅ Interfaz de menú interactivo
+- ✅ Limpieza automática de registros antiguos
+
+**UI-Enhancements.ps1:**
+- ✅ 13 funciones de UI reutilizables
+- ✅ Compatible con PowerShell 5.1+
+- ✅ Colores y emojis para mejor UX
+- ✅ Validación de entrada
+- ✅ Exportable como módulo
+- ✅ Documentación en cada función
+
+### ✨ Agregado - Nuevas Funcionalidades Principales
 
 - **🖥️ GUI con Windows Forms** - `GUI-Optimizador.ps1`
   - Interfaz gráfica nativa completa

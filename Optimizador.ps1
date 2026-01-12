@@ -154,7 +154,26 @@ do {
     Write-Host ""
     Write-Host "  [36] 🤖 ASISTENTE IA" -ForegroundColor Green
     Write-Host "       (Diagnóstico, logs, recomendaciones)"
-    Write-Host ""    Write-Host "  [0] SALIR" -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "  [37] 🎨 INTERFAZ GRÁFICA" -ForegroundColor Cyan
+    Write-Host "       (Acceso visual a todas las funciones)"
+    Write-Host ""
+    Write-Host "  [38] 💾 SALUD DEL SSD" -ForegroundColor Blue
+    Write-Host "       (Monitoreo S.M.A.R.T, temperatura, desgaste)"
+    Write-Host ""
+    Write-Host "  [39] 🎮 OPTIMIZAR GPU" -ForegroundColor Magenta
+    Write-Host "       (NVIDIA, AMD, Intel - Drivers y ajustes)"
+    Write-Host ""
+    Write-Host "  [40] 🌍 IDIOMA / LANGUAGE" -ForegroundColor Yellow
+    Write-Host "       (Cambiar idioma de la aplicación)"
+    Write-Host ""
+    Write-Host "  [41] 📈 ESTADÍSTICAS TELEMETRÍA" -ForegroundColor Green
+    Write-Host "       (Ver datos recopilados y opciones de privacidad)"
+    Write-Host ""
+    Write-Host "  [42] 📜 HISTORIAL DE OPERACIONES" -ForegroundColor Blue
+    Write-Host "       (Ver y exportar historial de optimizaciones)"
+    Write-Host ""
+    Write-Host "  [0] SALIR" -ForegroundColor Gray
     Write-Host ""
     
     $input = Read-Host "  Ingrese numero > "
@@ -524,6 +543,54 @@ do {
                 } else { Write-Host "Error: No se encuentra Asistente-IA.ps1" -ForegroundColor Red }
                 Wait-Key
             }
+        }
+        '37' {
+            if (Test-Path ".\GUI-Optimizador.ps1") { 
+                & ".\GUI-Optimizador.ps1" 
+            } else { Write-Host "Error: No se encuentra GUI-Optimizador.ps1" -ForegroundColor Red }
+            Wait-Key
+        }
+        '38' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Salud del SSD." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\SSD-Health.ps1") { 
+                    & ".\SSD-Health.ps1" 
+                } else { Write-Host "Error: No se encuentra SSD-Health.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '39' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Optimizar GPU." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\GPU-Optimization.ps1") { 
+                    & ".\GPU-Optimization.ps1" 
+                } else { Write-Host "Error: No se encuentra GPU-Optimization.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '40' {
+            if (Test-Path ".\Localization.ps1") { 
+                & ".\Localization.ps1" 
+            } else { Write-Host "Error: No se encuentra Localization.ps1" -ForegroundColor Red }
+            Wait-Key
+        }
+        '41' {
+            if (Test-Path ".\Telemetry.ps1") { 
+                & ".\Telemetry.ps1" 
+            } else { Write-Host "Error: No se encuentra Telemetry.ps1" -ForegroundColor Red }
+            Wait-Key
+        }
+        '42' {
+            if (Test-Path ".\Operations-History.ps1") { 
+                & ".\Operations-History.ps1" 
+            } else { Write-Host "Error: No se encuentra Operations-History.ps1" -ForegroundColor Red }
+            Wait-Key
         }
         '0' {
             Write-Host "Cerrando..." -ForegroundColor Gray

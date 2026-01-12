@@ -1,12 +1,15 @@
 {
-  "version": "3.0.0",
+  "version": "4.0.0",
   "general": {
     "language": "es",
     "theme": "dark",
     "auto_update": true,
     "check_updates_on_startup": true,
     "telemetry": false,
-    "analytics": false
+    "analytics": false,
+    "enable_gui": true,
+    "enable_progress_bars": true,
+    "show_operation_history": true
   },
   "logging": {
     "enabled": true,
@@ -102,5 +105,44 @@
       "frequency": "daily",
       "time": "23:00"
     }
+  },
+  "gpu_optimization": {
+    "enabled": true,
+    "auto_detect": true,
+    "nvidia_enabled": true,
+    "amd_enabled": true,
+    "intel_enabled": true,
+    "disable_game_dvr": true,
+    "disable_transparency": true,
+    "enable_gpu_scheduling": true
+  },
+  "ssd_health": {
+    "enabled": true,
+    "monitor_smart": true,
+    "check_interval_hours": 24,
+    "alert_on_high_temp": true,
+    "alert_on_wear": true,
+    "temp_threshold_celsius": 70,
+    "wear_threshold_percent": 80,
+    "auto_trim": true
+  },
+  "telemetry_settings": {
+    "enabled": false,
+    "ask_on_startup": true,
+    "local_storage_only": true,
+    "max_events": 100,
+    "auto_clear_days": 30
+  },
+  "localization": {
+    "auto_detect_system_language": true,
+    "fallback_language": "es",
+    "supported_languages": ["es", "en", "pt", "fr"]
+  },
+  "operation_history": {
+    "enabled": true,
+    "store_logs": true,
+    "max_entries": 1000,
+    "log_path": "%USERPROFILE%\\OptimizadorPC\\history",
+    "auto_backup_history": true
   }
 }

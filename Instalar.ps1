@@ -117,6 +117,68 @@ if (-not (Test-Path $logsPath)) {
     Write-Host "  ✅ Carpeta de logs existente" -ForegroundColor Green
 }
 
+# Crear carpeta de backups
+$backupsPath = Join-Path $scriptPath "backups"
+if (-not (Test-Path $backupsPath)) {
+    New-Item -ItemType Directory -Path $backupsPath -Force | Out-Null
+    Write-Host "  ✅ Carpeta de backups creada: backups/" -ForegroundColor Green
+} else {
+    Write-Host "  ✅ Carpeta de backups existente" -ForegroundColor Green
+}
+
+# Crear carpeta de exports
+$exportsPath = Join-Path $scriptPath "exports"
+if (-not (Test-Path $exportsPath)) {
+    New-Item -ItemType Directory -Path $exportsPath -Force | Out-Null
+    Write-Host "  ✅ Carpeta de exports creada: exports/" -ForegroundColor Green
+} else {
+    Write-Host "  ✅ Carpeta de exports existente" -ForegroundColor Green
+}
+
+# Crear directorio de configuración del usuario
+$userConfigPath = "$env:USERPROFILE\OptimizadorPC"
+if (-not (Test-Path $userConfigPath)) {
+    New-Item -ItemType Directory -Path $userConfigPath -Force | Out-Null
+    Write-Host "  ✅ Directorio de usuario creado: $userConfigPath" -ForegroundColor Green
+} else {
+    Write-Host "  ✅ Directorio de usuario existente" -ForegroundColor Green
+}
+
+# Crear directorio de historial
+$historyPath = "$userConfigPath\history"
+if (-not (Test-Path $historyPath)) {
+    New-Item -ItemType Directory -Path $historyPath -Force | Out-Null
+    Write-Host "  ✅ Directorio de historial creado: $historyPath" -ForegroundColor Green
+} else {
+    Write-Host "  ✅ Directorio de historial existente" -ForegroundColor Green
+}
+
+# Copiar config.default.json a config.json si no existe
+$configDefaultPath = Join-Path $scriptPath "config.default.json"
+$configUserPath = "$userConfigPath\config.json"
+if ((Test-Path $configDefaultPath) -and -not (Test-Path $configUserPath)) {
+    Copy-Item -Path $configDefaultPath -Destination $configUserPath -Force | Out-Null
+    Write-Host "  ✅ Configuración inicial copiada: config.json" -ForegroundColor Green
+} elseif (Test-Path $configUserPath) {
+    Write-Host "  ✅ Configuración existente" -ForegroundColor Green
+}
+
+# Verificar e instalar Pester si es necesario
+Write-Host ""
+Write-Host "Verificando módulos necesarios..." -ForegroundColor Yellow
+try {
+    Import-Module Pester -ErrorAction Stop
+    Write-Host "  ✅ Pester instalado" -ForegroundColor Green
+} catch {
+    Write-Host "  ⚠️  Pester no encontrado. Instalando..." -ForegroundColor Yellow
+    try {
+        Install-Module -Name Pester -Force -SkipPublisherCheck -Scope CurrentUser -ErrorAction SilentlyContinue
+        Write-Host "  ✅ Pester instalado correctamente" -ForegroundColor Green
+    } catch {
+        Write-Host "  ⚠️  No se pudo instalar Pester. Algunos tests no funcionarán" -ForegroundColor Yellow
+    }
+}
+
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "INSTALACIÓN COMPLETADA" -ForegroundColor Cyan
