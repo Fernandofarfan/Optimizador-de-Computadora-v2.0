@@ -1,19 +1,121 @@
-name: PowerShell CI
+name: PowerShell CI/CD
 
 on:
   push:
     branches: [ main, develop ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
+  analyze:
+    name: PSScriptAnalyzer
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
+
+      - name: Run PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          $results = Invoke-ScriptAnalyzer -Path . -Recurse -Settings .PSScriptAnalyzerSettings.psd1 -ReportSummary
+          $errors = $results | Where-Object { $_.Severity -eq 'Error' }
+          $warnings = $results | Where-Object { $_.Severity -eq 'Warning' }
+          
+          Write-Host "✅ Analysis complete"
+          Write-Host "Errors: $($errors.Count)"
+          Write-Host "Warnings: $($warnings.Count)"
+          
+          if ($errors.Count -gt 0) {
+            $errors | Format-Table -AutoSize
+            exit 1
+          }
+
+  test:
+    name: Pester Tests
+    runs-on: windows-latest
+    needs: analyze
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Pester
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module -Name Pester -MinimumVersion 5.0.0 -Force -Scope CurrentUser
+
+      - name: Run Unit Tests
+        shell: pwsh
+        run: |
+          $config = New-PesterConfiguration
+          $config.Run.Path = './tests/Unit'
+          $config.Run.PassThru = $true
+          $config.CodeCoverage.Enabled = $true
+          $config.CodeCoverage.Path = '*.ps1'
+          $config.CodeCoverage.OutputFormat = 'JaCoCo'
+          $config.CodeCoverage.OutputPath = './coverage.xml'
+          $config.Output.Verbosity = 'Detailed'
+          
+          $result = Invoke-Pester -Configuration $config
+          
+          if ($result.FailedCount -gt 0) {
+            Write-Host "❌ $($result.FailedCount) tests failed"
+            exit 1
+          }
+          
+          Write-Host "✅ All $($result.PassedCount) tests passed"
+          Write-Host "📊 Code Coverage: $($result.CodeCoverage.CoveragePercent)%"
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage.xml
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+
+  integration-test:
+    name: Integration Tests
+    runs-on: windows-latest
+    needs: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Pester
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module -Name Pester -MinimumVersion 5.0.0 -Force -Scope CurrentUser
+
+      - name: Run Integration Tests
+        shell: pwsh
+        run: |
+          $config = New-PesterConfiguration
+          $config.Run.Path = './tests/Integration'
+          $config.Run.PassThru = $true
+          $config.Output.Verbosity = 'Detailed'
+          
+          $result = Invoke-Pester -Configuration $config
+          
+          if ($result.FailedCount -gt 0) {
+            exit 1
+          }
+
   powershell-validation:
     name: Validación de Scripts PowerShell
     runs-on: windows-latest
     
     steps:
     - name: Checkout código
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       
     - name: Validar sintaxis de PowerShell
       shell: pwsh

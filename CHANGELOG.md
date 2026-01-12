@@ -4,9 +4,96 @@ Todos los cambios notables en este proyecto se documentan en este archivo.
 
 ## [4.0.0] - 2026-01-15
 
-### 🚀 Nueva Era - Testing, Configuración y Automatización
+### 🚀 Nueva Era - Testing, Configuración, GUI y Multi-idioma
 
-#### ✨ Agregado
+#### ✨ Agregado - Nuevas Funcionalidades Principales
+
+- **🖥️ GUI con Windows Forms** - `GUI-Optimizador.ps1`
+  - Interfaz gráfica nativa completa
+  - Dashboard visual con métricas del sistema en tiempo real
+  - 5 tabs organizadas: Dashboard, Optimización, Análisis, Herramientas, Configuración
+  - Selección múltiple de optimizaciones con checkboxes
+  - Output en tiempo real con colores (estilo consola)
+  - Botones categorizados por tipo de acción
+  - Integración total con todos los módulos existentes
+  - Soporte para ejecución paralela de scripts
+
+- **🌍 Sistema Multi-idioma (i18n)** - `Localization.ps1`
+  - Soporte completo para 4 idiomas:
+    - 🇪🇸 Español (es) - Predeterminado
+    - 🇬🇧 English (en)
+    - 🇧🇷 Português (pt)
+    - 🇫🇷 Français (fr)
+  - Auto-detección del idioma del sistema
+  - Menú interactivo de selección de idioma
+  - +80 strings traducidas (menús, mensajes, características)
+  - Función helper `Get-Translation` con alias `t` para fácil uso
+  - Soporte para formateo de strings con parámetros
+  - Persistencia de preferencia de idioma
+
+- **💾 Análisis de Salud de Discos** - `SSD-Health.ps1`
+  - Monitoreo completo S.M.A.R.T. (Self-Monitoring, Analysis and Reporting Technology)
+  - Detección automática de tipo de disco (SSD vs HDD)
+  - Métricas monitoreadas:
+    - Temperatura en tiempo real
+    - Errores de lectura/escritura acumulados
+    - Desgaste de SSD (Wear Level)
+    - Horas totales de operación (Power-On Hours)
+    - Estado operacional y de salud
+  - Sistema de puntuación 0-100 con evaluación:
+    - Excelente (80-100)
+    - Bueno (60-79)
+    - Regular (40-59)
+    - Crítico (0-39)
+  - Advertencias y problemas críticos categorizados
+  - Recomendaciones personalizadas según el estado
+  - Optimización específica para SSDs:
+    - Ejecución de comando TRIM
+    - Verificación de SysMain (Superfetch)
+  - Información detallada de hardware:
+    - Modelo y fabricante
+    - Número de serie y firmware
+    - Tipo de interfaz (SATA, NVMe, etc.)
+    - Capacidad total
+
+- **🎮 Optimización de GPU** - `GPU-Optimization.ps1`
+  - Soporte multi-fabricante:
+    - **NVIDIA**: nvidia-smi integration, performance mode
+    - **AMD**: Guías de Radeon Software (Anti-Lag, Boost, Image Sharpening)
+    - **Intel Graphics**: Intel Graphics Command Center settings
+  - Optimización de Windows para gráficos:
+    - Deshabilitar Game DVR
+    - Efectos visuales optimizados para rendimiento
+    - Deshabilitar transparencia de Windows
+    - Hardware-accelerated GPU scheduling (Windows 10 20H1+)
+  - Reporte detallado de GPU:
+    - Nombre y fabricante
+    - VRAM disponible
+    - Versión y fecha de drivers
+    - Resolución y tasa de refresco actuales
+  - Auto-detección de fabricante
+  - Guías paso a paso para configuración manual
+
+- **📊 Sistema de Telemetría Opcional** - `Telemetry.ps1`
+  - Completamente opt-in (requiere consentimiento explícito)
+  - Diálogo informativo de consentimiento
+  - Datos anónimos recopilados:
+    - Funciones utilizadas (sin datos personales)
+    - Tiempos de ejecución promedio
+    - Errores encontrados (sin información privada)
+    - Versión de Windows y PowerShell
+    - Tipo de hardware general (CPU/RAM)
+  - Garantías de privacidad:
+    - NO recopila: información personal, contenido de archivos, contraseñas, IPs, nombres de usuario
+  - Almacenamiento local en JSON
+  - Estadísticas locales visualizables
+  - Funciones de gestión:
+    - `Get-TelemetryStatistics`: Ver uso local
+    - `Clear-TelemetryData`: Eliminar todos los datos
+    - `Enable-Telemetry` / `Disable-Telemetry`: Control total
+  - Límite de 100 eventos (rotación automática)
+
+#### ✨ Agregado - Framework y CI/CD
 
 - **🧪 Framework de Testing Completo** - `/tests/`
   - Suite de tests con Pester (framework estándar de PowerShell)

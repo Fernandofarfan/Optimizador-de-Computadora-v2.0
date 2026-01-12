@@ -1,0 +1,91 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    name: Create GitHub Release
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get version from tag
+        id: get_version
+        shell: pwsh
+        run: |
+          $tag = "${{ github.ref }}" -replace 'refs/tags/', ''
+          $version = $tag -replace 'v', ''
+          echo "version=$version" >> $env:GITHUB_OUTPUT
+          echo "tag=$tag" >> $env:GITHUB_OUTPUT
+
+      - name: Extract changelog for version
+        id: changelog
+        shell: pwsh
+        run: |
+          $version = "${{ steps.get_version.outputs.version }}"
+          $changelog = Get-Content -Path CHANGELOG.md -Raw
+          
+          # Extract section for this version
+          if ($changelog -match "(?s)## \[$version\].*?(?=\n## \[|\z)") {
+            $notes = $matches[0]
+          } else {
+            $notes = "Release $version"
+          }
+          
+          $notes | Out-File -FilePath release_notes.txt -Encoding UTF8
+          Get-Content release_notes.txt
+
+      - name: Create Release Package
+        shell: pwsh
+        run: |
+          $version = "${{ steps.get_version.outputs.version }}"
+          $archiveName = "Optimizador-PC-v$version.zip"
+          
+          # Crear estructura limpia
+          $releaseDir = "release-temp"
+          New-Item -ItemType Directory -Path $releaseDir -Force | Out-Null
+          
+          # Copiar archivos esenciales
+          $include = @(
+            'Optimizador.ps1',
+            'EJECUTAR-COMO-ADMIN.bat',
+            'Instalar.ps1',
+            '*.ps1',
+            'config.default.json',
+            'README.md',
+            'LICENSE',
+            'CHANGELOG.md',
+            'docs/'
+          )
+          
+          foreach ($pattern in $include) {
+            Get-ChildItem -Path $pattern -Recurse -ErrorAction SilentlyContinue | 
+              Copy-Item -Destination { Join-Path $releaseDir $_.FullName.Substring($PWD.Path.Length + 1) } -Force
+          }
+          
+          # Crear ZIP
+          Compress-Archive -Path "$releaseDir\*" -DestinationPath $archiveName -Force
+          
+          Remove-Item -Path $releaseDir -Recurse -Force
+          
+          Write-Host "✅ Created $archiveName"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: "Optimizador de PC v${{ steps.get_version.outputs.version }}"
+          body_path: release_notes.txt
+          files: |
+            Optimizador-PC-v${{ steps.get_version.outputs.version }}.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

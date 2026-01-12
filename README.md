@@ -16,6 +16,8 @@ Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediant
 
 ## 🆕 Novedades en v4.0
 
+**🎉 Actualización Mayor - Framework Completo**
+
 - **🧪 Framework de Testing con Pester**: Suite completa de tests unitarios e integración
 - **⚙️ Configuración Centralizada**: Sistema de configuración JSON con valores predeterminados
 - **📊 Logging Avanzado**: Logs estructurados con rotación automática y niveles (TRACE a FATAL)
@@ -23,6 +25,12 @@ Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediant
 - **🎮 Modo Gaming Automático**: Detección de juegos y optimización automática de recursos
 - **📄 Reportes HTML Profesionales**: Generación de reportes visuales con gráficos y métricas
 - **🔔 Notificaciones Toast**: Notificaciones nativas de Windows 10/11 para eventos importantes
+- **🖥️ GUI con Windows Forms**: Interfaz gráfica completa con dashboard visual y selección de optimizaciones
+- **🌍 Multi-idioma**: Soporte para Español, English, Português y Français
+- **💾 Análisis de SSD/HDD**: Monitoreo SMART y optimización específica para SSDs
+- **🎮 Optimización de GPU**: Soporte para NVIDIA, AMD e Intel Graphics
+- **📊 Telemetría Opcional**: Sistema opt-in para mejorar el proyecto con métricas anónimas
+- **🚀 CI/CD con GitHub Actions**: Tests automáticos y releases con cada commit
 
 ## ✨ Características
 
