@@ -1,7 +1,7 @@
 /* Variables de color */
 :root {
-    --primary: #0066ff;
-    --secondary: #00d4ff;
+    --primary: #667eea;
+    --secondary: #764ba2;
     --dark: #0a0e27;
     --light: #f0f2f5;
     --text: #1a1a1a;
@@ -9,6 +9,7 @@
     --success: #10b981;
     --warning: #f59e0b;
     --danger: #ef4444;
+    --new-feature: #8b5cf6;
 }
 
 /* Reset y estilos globales */
@@ -21,7 +22,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text);
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     line-height: 1.6;
 }
 
@@ -45,6 +46,17 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 20px;
+}
+
+/* Destacar nuevas características */
+.new-feature {
+    background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+    border-left: 3px solid var(--new-feature);
+    font-weight: 600;
+}
+
+.new-feature td:first-child {
+    color: var(--new-feature);
 }
 
 .logo {

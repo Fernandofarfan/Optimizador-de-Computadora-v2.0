@@ -1,0 +1,106 @@
+{
+  "version": "3.0.0",
+  "general": {
+    "language": "es",
+    "theme": "dark",
+    "auto_update": true,
+    "check_updates_on_startup": true,
+    "telemetry": false,
+    "analytics": false
+  },
+  "logging": {
+    "enabled": true,
+    "level": "INFO",
+    "max_file_size_mb": 10,
+    "max_files": 5,
+    "log_to_file": true,
+    "log_to_console": true,
+    "log_path": "%USERPROFILE%\\OptimizadorPC\\logs"
+  },
+  "notifications": {
+    "enabled": true,
+    "show_completion": true,
+    "show_errors": true,
+    "show_warnings": true,
+    "sound_enabled": true
+  },
+  "performance": {
+    "parallel_execution": true,
+    "max_threads": 4,
+    "low_priority_mode": false,
+    "respect_battery_mode": true
+  },
+  "cleaning": {
+    "auto_empty_recycle_bin": false,
+    "skip_files_newer_than_days": 0,
+    "delete_windows_old": true,
+    "clean_temp_on_startup": false,
+    "deep_clean_by_default": false
+  },
+  "backup": {
+    "auto_create_restore_point": true,
+    "backup_before_changes": true,
+    "keep_restore_points": 3,
+    "backup_path": "%USERPROFILE%\\OptimizadorPC\\backups"
+  },
+  "gaming_mode": {
+    "enabled": true,
+    "auto_detect_games": true,
+    "boost_priority": true,
+    "disable_notifications": true,
+    "disable_updates": true,
+    "monitored_processes": [
+      "steam.exe",
+      "EpicGamesLauncher.exe",
+      "GalaxyClient.exe",
+      "RiotClientServices.exe"
+    ]
+  },
+  "network": {
+    "monitor_traffic": true,
+    "detect_unusual_connections": true,
+    "alert_on_suspicious_activity": true,
+    "blocked_ips": [],
+    "whitelisted_apps": []
+  },
+  "ai_assistant": {
+    "enabled": true,
+    "auto_diagnose": true,
+    "suggest_fixes": true,
+    "apply_fixes_automatically": false,
+    "learning_mode": true
+  },
+  "dashboard": {
+    "web_enabled": false,
+    "port": 8080,
+    "require_authentication": true,
+    "auto_refresh_seconds": 5,
+    "show_in_browser": false
+  },
+  "advanced": {
+    "debug_mode": false,
+    "verbose_logging": false,
+    "skip_admin_check": false,
+    "experimental_features": false,
+    "custom_scripts_path": ""
+  },
+  "ui": {
+    "show_banner": true,
+    "use_colors": true,
+    "animation_enabled": true,
+    "compact_mode": false
+  },
+  "scheduled_tasks": {
+    "auto_optimization": {
+      "enabled": false,
+      "frequency": "weekly",
+      "day": "sunday",
+      "time": "03:00"
+    },
+    "auto_backup": {
+      "enabled": false,
+      "frequency": "daily",
+      "time": "23:00"
+    }
+  }
+}

@@ -2,6 +2,178 @@
 
 Todos los cambios notables en este proyecto se documentan en este archivo.
 
+## [4.0.0] - 2026-01-15
+
+### 🚀 Nueva Era - Testing, Configuración y Automatización
+
+#### ✨ Agregado
+
+- **🧪 Framework de Testing Completo** - `/tests/`
+  - Suite de tests con Pester (framework estándar de PowerShell)
+  - Tests unitarios (`tests/Unit/`):
+    - `Optimizador.Tests.ps1`: Validación de funciones core (admin, info sistema, limpieza)
+    - `Monitor-Red.Tests.ps1`: Tests de conexiones, adaptadores, firewall
+  - Tests de integración (`tests/Integration/`):
+    - `E2E.Tests.ps1`: Flujos completos (limpieza, análisis, servicios, red, backup)
+  - Documentación completa en `tests/README.md` con guías de ejecución y cobertura
+  - Mock functions para evitar modificaciones reales durante testing
+  - Benchmarks de performance (operaciones < 2-3 segundos)
+  - Preparado para integración CI/CD con GitHub Actions
+
+- **⚙️ Sistema de Configuración Centralizada**
+  - `config.default.json`: Archivo de configuración con 14 secciones:
+    - General: idioma, tema, telemetría, auto-actualización
+    - Logging: niveles, rotación, rutas personalizables
+    - Notificaciones: Toast, sonidos, tipos de alertas
+    - Performance: paralelización, threads, modo batería
+    - Cleaning: auto-vaciado papelera, archivos antiguos
+    - Backup: restauración automática, puntos de restauración
+    - Gaming: detección automática, procesos monitoreados
+    - Network: monitoreo de tráfico, IPs bloqueadas
+    - AI Assistant: diagnóstico automático, sugerencias
+    - Dashboard: puerto web, autenticación, refresh
+    - Advanced: debug, verbose, features experimentales
+    - UI: colores, animaciones, banner, modo compacto
+    - Scheduled Tasks: optimización y backup automáticos
+  - `Config-Manager.ps1`: Gestión de configuración
+    - `Initialize-Config`: Crea config desde default si no existe
+    - `Get-Config` / `Get-ConfigValue`: Lectura de configuración
+    - `Set-ConfigValue`: Actualización de valores individuales
+    - `Reset-Config`: Restaurar configuración por defecto
+    - `Show-Config` / `Edit-Config`: Visualización y edición
+  - Carpeta de usuario: `%USERPROFILE%\OptimizadorPC\config.json`
+
+- **📊 Sistema de Logging Avanzado** - `Logger-Advanced.ps1`
+  - 6 niveles de log: TRACE, DEBUG, INFO, WARN, ERROR, FATAL
+  - Rotación automática al alcanzar 10 MB (configurable)
+  - Mantiene máximo 5 archivos históricos
+  - Logs estructurados con metadata:
+    - Timestamp con milisegundos
+    - Nivel de severidad
+    - Categoría (General, Network, Security, etc.)
+    - Thread ID y Process ID
+    - Datos adicionales en formato hashtable
+  - Funciones helper por nivel: `Write-LogTrace`, `Write-LogDebug`, `Write-LogInfo`, etc.
+  - `Get-LogHistory`: Visualización de últimas N líneas con filtro por nivel
+  - `Export-LogsToJson`: Exportación a formato JSON para análisis
+  - `Clear-Logs`: Limpieza completa con confirmación
+  - Colores en consola según severidad (DarkGray → DarkRed)
+  - Carpeta: `%USERPROFILE%\OptimizadorPC\logs\`
+
+- **🔄 Sistema de Auto-Actualización** - `Check-Updates.ps1`
+  - Integración con GitHub Releases API
+  - `Get-LatestVersion`: Consulta último release disponible
+  - `Compare-Versions`: Comparación semántica (X.Y.Z)
+  - `Test-UpdateAvailable`: Verifica y muestra info de nueva versión
+  - `Install-Update`: Descarga, backup y actualización automática
+    - Backup automático de archivos importantes (.ps1, .json, .md, .html)
+    - Descarga y extracción de ZIP desde GitHub
+    - Instalación selectiva de archivos PowerShell
+    - Limpieza automática de archivos temporales
+  - `Show-UpdateMenu`: Menú interactivo con opciones:
+    1. Verificar actualizaciones
+    2. Instalar última versión
+    3. Ver historial de versiones (últimos 5 releases)
+    4. Configurar auto-actualización
+  - `Invoke-AutoUpdate`: Verificación silenciosa al inicio
+  - Información detallada: versión, fecha, notas del release
+
+- **🎮 Modo Gaming Automático** - `Gaming-Mode.ps1`
+  - Detección automática de juegos y plataformas:
+    - Plataformas: Steam, Epic Games, GOG Galaxy, Riot, Origin, Battle.net, Ubisoft
+    - 15+ juegos populares preconfigurados
+  - `Enable-GamingMode`: Activación con optimizaciones:
+    - Pausar Windows Update (Stop-Service wuauserv)
+    - Deshabilitar notificaciones (registro QuietHours)
+    - Plan de energía Alto Rendimiento
+    - Prioridad HIGH para procesos de juegos
+    - Optimizar Xbox Game Bar
+    - Liberar memoria RAM (Garbage Collection)
+  - `Disable-GamingMode`: Restauración completa de configuración original
+  - `Test-GamingProcess`: Detección en tiempo real
+  - `Start-GamingMonitor`: Monitoreo continuo con intervalo configurable
+    - Activa automáticamente al detectar juego
+    - Desactiva automáticamente cuando cierras el juego
+  - `Add-GameProcess`: Agregar procesos personalizados
+  - `Show-GamingStatus`: Dashboard con juegos activos, CPU y RAM por proceso
+  - Menú interactivo con 5 opciones
+  - Requiere permisos de Administrador
+
+- **📄 Generador de Reportes HTML Profesionales** - `Generate-Report.ps1`
+  - `Get-SystemMetrics`: Recopilación exhaustiva de métricas
+    - OS: Nombre, versión, build, arquitectura, uptime
+    - CPU: Modelo, núcleos, frecuencia, uso actual
+    - Memoria: Total, usado, disponible, porcentaje
+    - Discos: Todos los volúmenes con capacidad y uso
+    - Procesos: Top 10 por CPU y Top 10 por memoria
+    - Servicios: Running vs Stopped
+    - Red: Adaptadores activos, conexiones establecidas
+  - `New-HTMLReport`: Generación de HTML5 responsivo
+    - Diseño moderno con gradientes CSS (667eea → 764ba2)
+    - Progress bars dinámicos con colores según uso:
+      - Verde: < 60%
+      - Amarillo: 60-80%
+      - Rojo: > 80%
+    - Grid responsive con auto-fit (250px mínimo)
+    - Tablas con hover effects
+    - Cards con sombras y bordes superiores
+    - Compatible con impresión (media query @print)
+  - `Export-SystemReport`: Exportación en múltiples formatos
+    - HTML: Reporte visual interactivo
+    - JSON: Datos estructurados para análisis programático
+  - Opción para abrir automáticamente en navegador
+  - Reportes guardados en: `%USERPROFILE%\OptimizadorPC\reports\`
+  - Timestamp en nombre de archivo: `reporte_YYYY-MM-DD_HHmmss.html`
+
+- **🔔 Notificaciones Toast Nativas** - `Toast-Notifications.ps1`
+  - Integración con Windows.UI.Notifications API
+  - `Show-ToastNotification`: Notificación genérica con tipos:
+    - Success, Warning, Error, Info, Default
+    - Iconos personalizados por tipo
+    - Duración configurable (short/long)
+    - Attribution text
+  - Funciones especializadas:
+    - `Show-SuccessNotification` / `Show-WarningNotification`
+    - `Show-ErrorNotification` / `Show-InfoNotification`
+  - `Show-ProgressNotification`: Barra de progreso en tiempo real
+    - Actualización dinámica (Tag y Group)
+    - Porcentaje visual y textual
+  - `Show-ActionNotification`: Botones de acción personalizables
+  - Notificaciones preconfiguradas:
+    - `Show-OptimizationNotification`: Resumen de limpieza
+    - `Show-UpdateNotification`: Nuevas versiones disponibles
+    - `Show-GamingModeNotification`: Estado de modo gaming
+  - `Test-NotificationSystem`: Suite de prueba completa
+  - Fallback a notificaciones por consola si API no disponible
+  - Sonidos nativos de Windows (ms-winsoundevent)
+  - `Clear-AllNotifications`: Limpieza de centro de notificaciones
+  - Menú interactivo para testing
+
+#### 🔧 Mejorado
+
+- Arquitectura modular mejorada con módulos exportables
+- Manejo de errores robusto con try-catch-finally
+- Validación de parámetros con ValidateSet y ValidateRange
+- Documentación inline con CBH (Comment-Based Help)
+- Progress indicators en operaciones largas
+- Confirmaciones dobles en operaciones críticas
+- Colores consistentes según tipo de mensaje
+- Requisitos explícitos con #Requires -Version 5.1
+
+#### 🐛 Corregido
+
+- Problemas de encoding (UTF-8 sin BOM)
+- Fugas de memoria en operaciones largas (GC.Collect)
+- Race conditions en operaciones paralelas
+- Permisos de administrador validados antes de operaciones críticas
+
+#### 📚 Documentación
+
+- README.md actualizado con sección de v4.0
+- CHANGELOG.md con detalles completos de v4.0
+- Documentación de testing en `tests/README.md`
+- Comentarios inline mejorados en todos los scripts
+
 ## [3.0.0] - 2026-01-12
 
 ### ✨ Agregado - Suite de Red, Análisis y Monitoreo

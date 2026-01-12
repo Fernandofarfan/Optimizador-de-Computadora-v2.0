@@ -1,6 +1,6 @@
-# PC Optimizer Suite v3.0
+# PC Optimizer Suite v4.0 🚀
 
-> **Herramienta profesional de optimización y mantenimiento para Windows 10/11**
+> **Herramienta profesional de optimización y mantenimiento para Windows 10/11 con IA, testing y auto-actualización**
 
 [![GitHub Release](https://img.shields.io/github/v/release/Fernandofarfan/Optimizador-de-Computadora-v2.0?style=flat-square&logo=github)](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases)
 [![License MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
@@ -8,10 +8,21 @@
 [![Windows 10/11](https://img.shields.io/badge/Windows-10%2F11-blue.svg?style=flat-square)](#)
 [![GitHub Stars](https://img.shields.io/github/stars/Fernandofarfan/Optimizador-de-Computadora-v2.0?style=flat-square&logo=github)](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0)
 [![CI Status](https://img.shields.io/github/actions/workflow/status/Fernandofarfan/Optimizador-de-Computadora-v2.0/powershell-ci.yml?style=flat-square&label=CI)](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/actions)
+[![Pester Tests](https://img.shields.io/badge/Tests-Pester-green?style=flat-square)](tests/)
 
 Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediante limpieza inteligente, gestión de servicios y reparación de componentes de sistema.
 
-**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v3.0.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v3.0.0)**
+**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v4.0.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v4.0.0)**
+
+## 🆕 Novedades en v4.0
+
+- **🧪 Framework de Testing con Pester**: Suite completa de tests unitarios e integración
+- **⚙️ Configuración Centralizada**: Sistema de configuración JSON con valores predeterminados
+- **📊 Logging Avanzado**: Logs estructurados con rotación automática y niveles (TRACE a FATAL)
+- **🔄 Auto-Actualización**: Sistema automático de verificación e instalación de actualizaciones desde GitHub
+- **🎮 Modo Gaming Automático**: Detección de juegos y optimización automática de recursos
+- **📄 Reportes HTML Profesionales**: Generación de reportes visuales con gráficos y métricas
+- **🔔 Notificaciones Toast**: Notificaciones nativas de Windows 10/11 para eventos importantes
 
 ## ✨ Características
 
