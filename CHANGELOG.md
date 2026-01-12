@@ -2,6 +2,36 @@
 
 Todos los cambios notables en este proyecto se documentan en este archivo.
 
+## [2.1.0] - 2026-01-12
+
+### ✨ Agregado
+- **Sistema de Logging Avanzado** - Logger.ps1 con rotación automática de logs
+  - Rotación automática al alcanzar 5 MB por archivo
+  - Niveles de severidad: DEBUG, INFO, SUCCESS, WARNING, ERROR, CRITICAL
+  - Exportación de reportes de errores y advertencias
+  - Historial completo de operaciones
+  - Configuración flexible por módulo
+- **GitHub Actions CI/CD** - Validación automática de sintaxis PowerShell
+  - Workflow para validar todos los scripts en push/PR
+  - Verificación de estructura del proyecto
+  - Análisis de formato de código (BOM, tabs, líneas largas)
+- **Guía de Contribución** - CONTRIBUTING.md con proceso completo
+  - Instrucciones para fork y clone
+  - Estándares de código PowerShell
+  - Nomenclatura de ramas y commits (Conventional Commits)
+  - Proceso de revisión de PRs
+- **Política de Seguridad** - SECURITY.md con alcance y divulgación
+  - Versiones soportadas
+  - Proceso para reportar vulnerabilidades
+  - Alcance de operaciones sensibles
+  - Auditoría de código
+
+### 🔧 Mejorado
+- README actualizado con sección de logging
+- .gitignore expandido para logs/ y archivos de backup
+- Estructura profesional del proyecto con documentación completa
+- Badges actualizados en README
+
 ## [2.0.0] - 2026-01-12
 
 ### ✨ Agregado
@@ -43,10 +73,15 @@ Todos los cambios notables en este proyecto se documentan en este archivo.
 - `Optimizar-Servicios.ps1` - Gestión de servicios
 - `Gestionar-Procesos.ps1` - Startup y RAM
 - `Reparar-Red-Sistema.ps1` - Reparación avanzada
+- `Logger.ps1` - Sistema de logging avanzado
 - `EJECUTAR-COMO-ADMIN.bat` - Lanzador con permisos
 - `README.md` - Documentación principal
+- `CONTRIBUTING.md` - Guía para contribuidores
+- `SECURITY.md` - Política de seguridad
+- `CHANGELOG.md` - Este archivo
 - `.gitignore` - Configuración Git
 - `LICENSE` - MIT License
+- `.github/workflows/powershell-ci.yml` - GitHub Actions
 - `docs/index.html` - Landing page
 - `docs/style.css` - Estilos profesionales
 
@@ -54,13 +89,16 @@ Todos los cambios notables en este proyecto se documentan en este archivo.
 
 ## Notas Futuras
 
-### Planned [2.1.0]
+### Planned [2.2.0]
+- [ ] Integración del Logger en todos los módulos
 - [ ] Interfaz gráfica (GUI) en PowerShell
 - [ ] Soporte para Windows 7/8
 - [ ] Backups automáticos antes de cambios
 - [ ] Restore points automáticos
 - [ ] Estadísticas de uso (local, sin cloud)
 - [ ] Programador de limpiezas automáticas
+- [ ] Módulo de actualización de drivers
+- [ ] Modo gaming (optimización para juegos)
 
 ### Contribuciones Bienvenidas
 Se aceptan pull requests, issues y sugerencias.

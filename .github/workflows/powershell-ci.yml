@@ -1,0 +1,130 @@
+name: PowerShell CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  powershell-validation:
+    name: Validación de Scripts PowerShell
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v4
+      
+    - name: Validar sintaxis de PowerShell
+      shell: pwsh
+      run: |
+        Write-Host "Validando sintaxis de todos los scripts PowerShell..." -ForegroundColor Cyan
+        
+        $scripts = Get-ChildItem -Path . -Filter "*.ps1" -Recurse | Where-Object { $_.DirectoryName -notlike "*\.git*" }
+        $errors = 0
+        
+        foreach ($script in $scripts) {
+            Write-Host "`nValidando: $($script.Name)" -ForegroundColor Yellow
+            
+            $content = Get-Content -Path $script.FullName -Raw -ErrorAction SilentlyContinue
+            
+            if (-not $content) {
+                Write-Host "  ⚠️  Advertencia: Archivo vacío" -ForegroundColor Yellow
+                continue
+            }
+            
+            $syntaxErrors = $null
+            $null = [System.Management.Automation.PSParser]::Tokenize($content, [ref]$syntaxErrors)
+            
+            if ($syntaxErrors.Count -gt 0) {
+                Write-Host "  ❌ ERROR: Sintaxis inválida" -ForegroundColor Red
+                foreach ($error in $syntaxErrors) {
+                    Write-Host "    Línea $($error.Token.StartLine): $($error.Message)" -ForegroundColor Red
+                }
+                $errors++
+            } else {
+                Write-Host "  ✅ Sintaxis válida" -ForegroundColor Green
+            }
+        }
+        
+        Write-Host "`n========================================" -ForegroundColor Cyan
+        if ($errors -eq 0) {
+            Write-Host "✅ Todos los scripts pasaron la validación" -ForegroundColor Green
+            exit 0
+        } else {
+            Write-Host "❌ $errors script(s) con errores de sintaxis" -ForegroundColor Red
+            exit 1
+        }
+    
+    - name: Verificar estructura del proyecto
+      shell: pwsh
+      run: |
+        Write-Host "Verificando estructura del proyecto..." -ForegroundColor Cyan
+        
+        $requiredFiles = @(
+            "Optimizador.ps1",
+            "Analizar-Sistema.ps1",
+            "Optimizar-Sistema-Seguro.ps1",
+            "Limpieza-Profunda.ps1",
+            "Optimizar-Servicios.ps1",
+            "Gestionar-Procesos.ps1",
+            "Reparar-Red-Sistema.ps1",
+            "EJECUTAR-COMO-ADMIN.bat",
+            "README.md",
+            "LICENSE",
+            "CHANGELOG.md"
+        )
+        
+        $missing = @()
+        foreach ($file in $requiredFiles) {
+            if (-not (Test-Path $file)) {
+                $missing += $file
+            }
+        }
+        
+        if ($missing.Count -gt 0) {
+            Write-Host "❌ Archivos faltantes:" -ForegroundColor Red
+            $missing | ForEach-Object { Write-Host "  - $_" -ForegroundColor Red }
+            exit 1
+        } else {
+            Write-Host "✅ Todos los archivos requeridos están presentes" -ForegroundColor Green
+        }
+    
+    - name: Verificar formato del código
+      shell: pwsh
+      run: |
+        Write-Host "Verificando formato del código..." -ForegroundColor Cyan
+        
+        $scripts = Get-ChildItem -Path . -Filter "*.ps1" -Recurse | Where-Object { $_.DirectoryName -notlike "*\.git*" }
+        $warnings = 0
+        
+        foreach ($script in $scripts) {
+            $content = Get-Content -Path $script.FullName -Raw
+            
+            # Verificar BOM UTF-8
+            if ($content -match '^\xEF\xBB\xBF') {
+                Write-Host "⚠️  $($script.Name): Contiene BOM UTF-8" -ForegroundColor Yellow
+                $warnings++
+            }
+            
+            # Verificar tabs vs espacios
+            if ($content -match '\t') {
+                Write-Host "⚠️  $($script.Name): Usa tabs en lugar de espacios" -ForegroundColor Yellow
+                $warnings++
+            }
+            
+            # Verificar líneas muy largas (>150 caracteres)
+            $lines = $content -split "`n"
+            $longLines = $lines | Where-Object { $_.Length -gt 150 }
+            if ($longLines.Count -gt 0) {
+                Write-Host "⚠️  $($script.Name): $($longLines.Count) línea(s) mayor(es) a 150 caracteres" -ForegroundColor Yellow
+                $warnings++
+            }
+        }
+        
+        Write-Host "`n========================================" -ForegroundColor Cyan
+        if ($warnings -eq 0) {
+            Write-Host "✅ Formato del código correcto" -ForegroundColor Green
+        } else {
+            Write-Host "⚠️  $warnings advertencia(s) de formato encontradas" -ForegroundColor Yellow
+        }

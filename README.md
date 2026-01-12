@@ -2,7 +2,15 @@
 
 > **Herramienta profesional de optimización y mantenimiento para Windows 10/11**
 
+[![GitHub Release](https://img.shields.io/github/v/release/Fernandofarfan/Optimizador-de-Computadora-v2.0?style=flat-square&logo=github)](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases)
+[![License MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
+[![PowerShell 5.1+](https://img.shields.io/badge/PowerShell-5.1%2B-blue.svg?style=flat-square)](https://www.microsoft.com/en-us/download/details.aspx?id=50395)
+[![Windows 10/11](https://img.shields.io/badge/Windows-10%2F11-blue.svg?style=flat-square)](#)
+[![GitHub Stars](https://img.shields.io/github/stars/Fernandofarfan/Optimizador-de-Computadora-v2.0?style=flat-square&logo=github)](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0)
+
 Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediante limpieza inteligente, gestión de servicios y reparación de componentes de sistema.
+
+**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.0.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.0.0)**
 
 ## ✨ Características
 
@@ -33,6 +41,12 @@ Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediant
 - **SFC Scan**: Búsqueda y reparación de archivos de sistema corruptos
 - **DISM Online**: Restauración de imagen de sistema desde servidores Microsoft
 - **Optimización de Disco**: Defragmentación/Trim automático según tipo de almacenamiento
+
+### 📝 **Sistema de Logging Avanzado**
+- **Rotación automática**: Logs se rotan al alcanzar 5 MB
+- **Niveles de severidad**: DEBUG, INFO, SUCCESS, WARNING, ERROR, CRITICAL
+- **Reportes de errores**: Exportación de resúmenes de problemas detectados
+- **Persistencia**: Historial completo de operaciones realizadas
 
 ## 📋 Requisitos del Sistema
 
@@ -87,6 +101,12 @@ Una vez ejecutado, verás las siguientes opciones:
 
 ```
 PC-Optimizer-Suite/
+├── .github/
+│   └── workflows/
+│       └── powershell-ci.yml        # GitHub Actions para validación automática
+├── docs/
+│   ├── index.html                   # Landing page del proyecto
+│   └── style.css                    # Estilos de la página web
 ├── EJECUTAR-COMO-ADMIN.bat          # Lanzador con permisos elevados
 ├── Optimizador.ps1                  # Menú principal (maestro)
 ├── Analizar-Sistema.ps1             # Módulo de análisis
@@ -95,8 +115,13 @@ PC-Optimizer-Suite/
 ├── Optimizar-Servicios.ps1          # Gestor de servicios del sistema
 ├── Gestionar-Procesos.ps1           # Startup y consumo de RAM
 ├── Reparar-Red-Sistema.ps1          # Herramientas de reparación
-├── README.md                         # Este archivo
-└── .gitignore                        # Archivos excluidos del repo
+├── Logger.ps1                       # Sistema de logging avanzado
+├── README.md                        # Este archivo
+├── CONTRIBUTING.md                  # Guía para contribuidores
+├── SECURITY.md                      # Política de seguridad
+├── LICENSE                          # Licencia MIT
+├── CHANGELOG.md                     # Historial de versiones
+└── .gitignore                       # Archivos excluidos del repo
 ```
 
 ## ⚠️ Notas Importantes
@@ -134,10 +159,20 @@ MIT License - Libre para uso personal y comercial
 
 ## 🤝 Contribuciones
 
-Se aceptan sugerencias, reportes de errores y mejoras vía GitHub Issues.
+¡Las contribuciones son bienvenidas! Por favor lee [CONTRIBUTING.md](CONTRIBUTING.md) para conocer el proceso.
+
+Para reportar vulnerabilidades de seguridad, consulta [SECURITY.md](SECURITY.md).
+
+### ¿Cómo contribuir?
+1. Haz fork del repositorio
+2. Crea una rama con tu funcionalidad (`git checkout -b feature/nueva-funcionalidad`)
+3. Commit tus cambios (`git commit -m 'feat: Agregar nueva funcionalidad'`)
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Abre un Pull Request
 
 ---
 
 **Versión**: 2.0.0  
 **Última actualización**: Enero 2026  
-**Compatibilidad**: Windows 10/11 (PowerShell 5.1+)
+**Compatibilidad**: Windows 10/11 (PowerShell 5.1+)  
+**Licencia**: [MIT](LICENSE)
