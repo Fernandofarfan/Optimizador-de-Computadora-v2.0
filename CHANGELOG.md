@@ -2,6 +2,78 @@
 
 Todos los cambios notables en este proyecto se documentan en este archivo.
 
+## [2.5.0] - 2025-01-12
+
+### ✨ Agregado
+- **💻 Análisis Hardware Detallado** - `Analizar-Hardware.ps1`
+  - Análisis completo de CPU (modelo, núcleos, velocidad, carga)
+  - Información detallada de RAM (módulos, velocidad, capacidad)
+  - Estado de discos con verificación SMART de salud
+  - Datos de GPU (modelo, VRAM, resolución, driver)
+  - Información de placa base y BIOS
+  - Benchmark rápido (CPU, RAM, Disco) con score general
+  - Recomendaciones personalizadas según hardware
+  - Reportes con timestamps en formato texto
+
+- **⏰ Tareas Programadas Automáticas** - `Crear-TareasProgramadas.ps1`
+  - Limpieza semanal programada (Domingos 2:00 AM)
+  - Análisis de seguridad mensual (día 1 del mes, 3:00 AM)
+  - Backup automático de logs (días 1 y 15, 4:00 AM)
+  - Análisis de sistema semanal (Lunes 1:00 AM)
+  - Ejecuta con privilegios SYSTEM para máximo acceso
+  - Gestión desde Programador de Tareas de Windows
+  - Script inline para compresión de logs
+
+- **🌐 Optimización de Red Avanzada** - `Optimizar-Red-Avanzada.ps1`
+  - Test de conectividad a 5 servidores (latencia promedio)
+  - Benchmark DNS de 4 proveedores (Google, CloudFlare, OpenDNS, Quad9)
+  - Optimización automática de MTU (prueba 6 tamaños)
+  - Limpieza completa: DNS flush, Winsock reset, TCP/IP reset
+  - Configuración avanzada: TCP autotune, DNS CloudFlare 1.1.1.1
+  - Detección automática del DNS más rápido
+  - Reportes con métricas de red y recomendaciones
+
+- **📊 Comparador de Rendimiento** - `Comparar-Rendimiento.ps1`
+  - Sistema de snapshots antes/después de optimizaciones
+  - Captura de métricas: CPU%, RAM%, Disco libre, Servicios, Startup
+  - Comparación con cálculo de deltas y porcentajes
+  - Persistencia en JSON para historial
+  - Visualización con colores (verde=mejora, rojo=empeora)
+  - Evaluación automática (X/4 mejoras detectadas)
+  - Función reutilizable Get-SystemSnapshot
+
+- **🔔 Sistema de Notificaciones** - `Notificaciones.ps1`
+  - Notificaciones Toast nativas de Windows 10/11
+  - Función Send-ToastNotification con 4 tipos
+  - Iconos visuales: ✅ SUCCESS, ⚠️ WARNING, ❌ ERROR, ℹ️ INFO
+  - API Windows.UI.Notifications integrada
+  - Módulo exportable para uso en otros scripts
+  - Notificaciones persistentes en Action Center
+
+- **🔍 Diagnóstico Automático** - `Diagnostico-Automatico.ps1`
+  - Detección inteligente de 8 categorías de problemas
+  - Alertas críticas: Disco <10%, RAM >90%, servicios caídos
+  - Advertencias: Espacio bajo, RAM/CPU alta, muchos startups
+  - Verificación de Windows Defender activo
+  - Conteo de actualizaciones pendientes
+  - Detección de procesos con alto consumo (>500MB)
+  - Recomendaciones automáticas para cada problema
+  - Resumen ejecutivo con colores (verde/amarillo/rojo)
+
+### 🔧 Mejorado
+- Menú principal actualizado con 6 nuevas opciones (10-14)
+- README extendido con documentación de v2.5.0
+- CHANGELOG actualizado con detalles técnicos
+- Integración Logger en todos los nuevos scripts
+- Consistencia en formato de reportes y outputs
+- Verificaciones de permisos admin donde requerido
+
+### 📝 Documentación
+- Guías de uso para cada nueva herramienta
+- Tabla de menú completa con tiempos y permisos
+- Descripciones técnicas de funcionalidades
+- Requisitos de sistema actualizados
+
 ## [2.4.0] - 2025-01-12
 
 ### ✨ Agregado

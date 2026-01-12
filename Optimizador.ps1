@@ -14,7 +14,7 @@ $ErrorActionPreference = 'SilentlyContinue'
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
 Set-Location -Path $scriptPath
 
-$title = "OPTIMIZADOR DE COMPUTADORA v2.4"
+$title = "OPTIMIZADOR DE COMPUTADORA v2.5"
 
 # --- Funciones Auxiliares ---
 
@@ -74,6 +74,21 @@ do {
     Write-Host ""
     Write-Host "  [9] 🎮 MODO GAMING (Alto Rendimiento)" -ForegroundColor Magenta
     Write-Host "      (Pausar updates, optimizar RAM, deshabilitar notificaciones)"
+    Write-Host ""
+    Write-Host "  [10] 💻 ANÁLISIS HARDWARE" -ForegroundColor Cyan
+    Write-Host "       (CPU, RAM, GPU, Disco con SMART, Benchmark)"
+    Write-Host ""
+    Write-Host "  [11] ⏰ TAREAS PROGRAMADAS" -ForegroundColor Yellow
+    Write-Host "       (Automatizar limpieza, seguridad, backups)"
+    Write-Host ""
+    Write-Host "  [12] 🌐 RED AVANZADA" -ForegroundColor Blue
+    Write-Host "       (Speedtest, DNS Benchmark, MTU, Optimizaciones)"
+    Write-Host ""
+    Write-Host "  [13] 📊 COMPARAR RENDIMIENTO" -ForegroundColor Green
+    Write-Host "       (Snapshots antes/después, métricas de mejora)"
+    Write-Host ""
+    Write-Host "  [14] 🔍 DIAGNÓSTICO AUTOMÁTICO" -ForegroundColor Magenta
+    Write-Host "       (Detección inteligente de problemas del sistema)"
     Write-Host ""
     Write-Host "  [0] SALIR" -ForegroundColor Gray
     Write-Host ""
@@ -163,6 +178,52 @@ do {
                 if (Test-Path ".\Optimizar-ModoGaming.ps1") { 
                     & ".\Optimizar-ModoGaming.ps1" 
                 } else { Write-Host "Error: No se encuentra Optimizar-ModoGaming.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '10' {
+            if (Test-Path ".\Analizar-Hardware.ps1") { 
+                & ".\Analizar-Hardware.ps1" 
+            } else { Write-Host "Error: No se encuentra Analizar-Hardware.ps1" -ForegroundColor Red }
+            Wait-Key
+        }
+        '11' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Tareas Programadas." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Crear-TareasProgramadas.ps1") { 
+                    & ".\Crear-TareasProgramadas.ps1" 
+                } else { Write-Host "Error: No se encuentra Crear-TareasProgramadas.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '12' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Red Avanzada." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Optimizar-Red-Avanzada.ps1") { 
+                    & ".\Optimizar-Red-Avanzada.ps1" 
+                } else { Write-Host "Error: No se encuentra Optimizar-Red-Avanzada.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '13' {
+            if (Test-Path ".\Comparar-Rendimiento.ps1") { 
+                & ".\Comparar-Rendimiento.ps1" 
+            } else { Write-Host "Error: No se encuentra Comparar-Rendimiento.ps1" -ForegroundColor Red }
+            Wait-Key
+        }
+        '14' {
+            if (Test-Path ".\Diagnostico-Automatico.ps1") { 
+                & ".\Diagnostico-Automatico.ps1" 
+            } else { Write-Host "Error: No se encuentra Diagnostico-Automatico.ps1" -ForegroundColor Red }
+            Wait-Key
+        }
+        '0' {
                 Wait-Key
             }
         }

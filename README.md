@@ -1,4 +1,4 @@
-# PC Optimizer Suite v2.4
+# PC Optimizer Suite v2.5
 
 > **Herramienta profesional de optimización y mantenimiento para Windows 10/11**
 
@@ -147,9 +147,69 @@ Una vez ejecutado, verás las siguientes opciones:
 | **[6]** | Reparar y Red | **Sí** | 10-30 min |
 | **[7]** | **🔒 Analizar Seguridad** | No | 3-5 min |
 | **[8]** | **🔄 Revertir Cambios** | **Sí** | 2-5 min |
+| **[9]** | **🎮 Modo Gaming** | **Sí** | 2-3 min |
+| **[10]** | **💻 Análisis Hardware** | No | 3-4 min |
+| **[11]** | **⏰ Tareas Programadas** | **Sí** | 1-2 min |
+| **[12]** | **🌐 Red Avanzada** | **Sí** | 5-10 min |
+| **[13]** | **📊 Comparar Rendimiento** | No | 1 min |
+| **[14]** | **🔍 Diagnóstico Automático** | No | 2-3 min |
 | **[0]** | Salir | - | - |
 
-### Nuevas Funciones en v2.3
+### Nuevas Funciones en v2.5
+
+#### 💻 Análisis Hardware Detallado
+Diagnóstico completo de componentes con:
+- CPU, RAM, Discos con estado SMART
+- GPU, Placa Base y BIOS
+- Benchmark rápido de rendimiento
+- Recomendaciones personalizadas
+- Reportes detallados con timestamps
+
+#### ⏰ Tareas Programadas Automáticas
+Mantenimiento programado con 4 tareas:
+- Limpieza semanal (Domingos 2:00 AM)
+- Seguridad mensual (día 1, 3:00 AM)
+- Backup de logs (días 1 y 15, 4:00 AM)
+- Análisis semanal (Lunes 1:00 AM)
+- Gestión desde Programador de Tareas
+
+#### 🌐 Optimización de Red Avanzada
+Mejora conectividad con:
+- Test de latencia a 5 servidores
+- Benchmark DNS de 4 proveedores
+- Optimización MTU automática
+- Limpieza caché DNS y reset TCP/IP
+- Configuración CloudFlare DNS 1.1.1.1
+
+#### 📊 Comparador de Rendimiento
+Sistema de snapshots antes/después:
+- Captura métricas: CPU, RAM, Disco, Servicios
+- Comparación con cálculo de mejoras
+- Historial de snapshots
+- Evaluación visual de cambios
+
+#### 🔍 Diagnóstico Automático
+Detección inteligente de problemas:
+- Disco lleno (<10% crítico)
+- RAM excesiva (>90% crítico)
+- CPU sostenida alta (>80%)
+- Servicios críticos caídos
+- Actualizaciones pendientes
+- Soluciones recomendadas automáticas
+
+### Funciones en v2.4
+
+#### 🎮 Modo Gaming
+Optimización extrema para gaming:
+- Plan de energía Alto Rendimiento
+- Pausar Windows Update 7 días
+- Deshabilitar Game Bar y notificaciones
+- Efectos visuales al mínimo
+- Limpieza RAM Standby
+- Prioridades CPU para juegos
+- FPS Boost (10-20% mejora)
+
+### Funciones en v2.3
 
 #### 🔒 Analizar Seguridad
 Auditoría completa de seguridad que verifica:
