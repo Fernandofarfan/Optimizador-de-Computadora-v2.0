@@ -112,9 +112,9 @@ $report += "-" * 50
 try {
     $firewallProfiles = Get-NetFirewallProfile -ErrorAction Stop
     
-    foreach ($profile in $firewallProfiles) {
-        $profileName = $profile.Name
-        if ($profile.Enabled) {
+    foreach ($fwProfile in $firewallProfiles) {
+        $profileName = $fwProfile.Name
+        if ($fwProfile.Enabled) {
             Write-Host "  ✅ Perfil $profileName : ACTIVO" -ForegroundColor Green
             $report += "✅ Perfil $profileName : ACTIVO"
             $goodItems++

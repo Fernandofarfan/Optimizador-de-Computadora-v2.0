@@ -55,7 +55,6 @@ if ($response -ne "S" -and $response -ne "s") {
 }
 
 Write-Host ""
-$optimizaciones = 0
 
 # ============================================
 # 1. PLAN DE ENERGÍA - ALTO RENDIMIENTO
