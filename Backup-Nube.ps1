@@ -1,4 +1,4 @@
- #Requires -RunAsAdministrator
+#Requires -RunAsAdministrator
 
 <#
 .SYNOPSIS
@@ -89,13 +89,15 @@ function Get-CloudProviderPath {
                 $providers.Dropbox += $info.personal.path
             }
         }
-        catch { }
+        catch {
+            Write-Error "Error obteniendo proveedores: $_"
+        }
     }
     
     return $providers
 }
 
-function Show-CloudProviders {
+function Get-CloudProvider {
     <#
     .SYNOPSIS
         Muestra proveedores de nube detectados
@@ -154,6 +156,8 @@ function Show-CloudProviders {
 }
 
 function New-BackupProfile {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param()
     <#
     .SYNOPSIS
         Crea un perfil de respaldo personalizado
@@ -283,7 +287,7 @@ function New-BackupProfile {
         }
     }
     
-    $config.Profiles += $backupProfile
+    $config.Profiles += $backupConfig
     
     try {
         $config | ConvertTo-Json -Depth 10 | Out-File $Global:BackupConfigPath -Encoding UTF8
@@ -305,10 +309,7 @@ function New-BackupProfile {
 }
 
 function Start-Backup {
-    <#
-    .SYNOPSIS
-        Ejecuta un respaldo según el perfil seleccionado
-    #>
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param(
         [object]$BackupConfig
     )
@@ -373,7 +374,7 @@ function Start-Backup {
                     $copiedFiles++
                 }
                 catch {
-                    # Archivo en uso o sin permisos, continuar
+                    Write-Error "No se pudo copiar $($file.Name): $_"
                 }
             }
         }
@@ -433,7 +434,9 @@ function Start-Backup {
         $config.Profiles[$profileIndex].LastBackup = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
         $config | ConvertTo-Json -Depth 10 | Out-File $Global:BackupConfigPath -Encoding UTF8
     }
-    catch { }
+    catch {
+        Write-Error "Error al guardar configuración: $_"
+    }
     
     Write-Host ""
     Write-ColoredText "✅ RESPALDO COMPLETADO EXITOSAMENTE" "Green"
@@ -445,7 +448,7 @@ function Start-Backup {
     }
 }
 
-function Show-BackupProfiles {
+function Get-BackupProfile {
     <#
     .SYNOPSIS
         Muestra todos los perfiles de respaldo configurados
@@ -499,6 +502,8 @@ function Show-BackupProfiles {
 }
 
 function Remove-BackupProfile {
+    [CmdletBinding(SupportsShouldProcess=$true)]
+    param()
     <#
     .SYNOPSIS
         Elimina un perfil de respaldo
@@ -556,6 +561,8 @@ function Remove-BackupProfile {
 }
 
 function Start-BackupFromMenu {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param()
     <#
     .SYNOPSIS
         Selecciona y ejecuta un perfil de respaldo

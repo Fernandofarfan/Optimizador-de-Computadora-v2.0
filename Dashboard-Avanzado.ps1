@@ -90,7 +90,9 @@ function Get-SystemMetricsDetailed {
             $temperature = [math]::Round(($temp.CurrentTemperature / 10) - 273.15, 1)
         }
     }
-    catch { }
+    catch {
+        Write-Host "Error en Dashboard" -ForegroundColor Red
+    }
     
     # Uptime
     $uptime = (Get-Date) - $os.ConvertToDateTime($os.LastBootUpTime)
@@ -135,6 +137,7 @@ function Get-SystemMetricsDetailed {
 }
 
 function New-BarChart {
+    [CmdletBinding(SupportsShouldProcess = $true)]
     <#
     .SYNOPSIS
         Dibuja un gráfico de barras ASCII
@@ -148,9 +151,7 @@ function New-BarChart {
     $filled = [math]::Round(($Percentage / 100) * $Width)
     $empty = $Width - $filled
     
-    $color = if ($Percentage -lt 60) { "Green" }
-              elseif ($Percentage -lt 80) { "Yellow" }
-              else { "Red" }
+    $color = if ($Percentage -lt 60) { "Green" } elseif ($Percentage -lt 80) { "Yellow" } else { "Red" }
     
     $bar = ("[" + ("█" * $filled) + (" " * $empty) + "]")
     
@@ -160,6 +161,7 @@ function New-BarChart {
 }
 
 function New-SparkLine {
+    [CmdletBinding(SupportsShouldProcess = $true)]
     <#
     .SYNOPSIS
         Dibuja un gráfico de línea ASCII (sparkline)
@@ -327,7 +329,7 @@ function Save-DashboardSnapshot {
     }
 }
 
-function Show-HistoricalCharts {
+function Get-HistoricalChart {
     <#
     .SYNOPSIS
         Muestra gráficos históricos de métricas
