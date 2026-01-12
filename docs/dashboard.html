@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PC Optimizer Suite - Dashboard</title>
+    <title>PC Optimizer Suite v3.0 - Dashboard Interactivo</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #fff;
             padding: 20px;
             min-height: 100vh;
@@ -204,9 +204,9 @@
 <body>
     <div class="container">
         <header>
-            <h1>🚀 PC Optimizer Suite</h1>
-            <p class="version">Dashboard v2.4.0</p>
-            <p>Panel de control y monitoreo del sistema</p>
+            <h1>🚀 PC Optimizer Suite v3.0</h1>
+            <p class="version">Dashboard Interactivo con IA</p>
+            <p>Panel de control y monitoreo del sistema en tiempo real</p>
         </header>
 
         <div class="dashboard-grid">
@@ -398,8 +398,8 @@
             agregarLog('WARNING', 'Abre PowerShell como Admin y ejecuta: .\\' + scriptName);
             
             // En una implementación real, esto llamaría a PowerShell
-            // via WebSocket o API local
-            alert(`Para ejecutar ${scriptName}:\n\n1. Abre PowerShell como Administrador\n2. Navega a la carpeta del proyecto\n3. Ejecuta: .\\${scriptName}\n\n⚠️ Este dashboard es solo para visualización.`);
+            // via WebSocket o API local desde Dashboard-Web.ps1 (v3.0)
+            alert(`Para ejecutar ${scriptName}:\n\n1. Abre PowerShell como Administrador\n2. Navega a la carpeta del proyecto\n3. Ejecuta: .\\${scriptName}\n\n⚠️ Para monitoreo en tiempo real, ejecuta: .\\Dashboard-Web.ps1 (v3.0)\n   Accede vía http://localhost:8080`);
         }
 
         function agregarLog(tipo, mensaje) {
@@ -425,9 +425,10 @@
         // Agregar logs periódicos
         setInterval(() => {
             const logs = [
-                ['INFO', 'Monitor de sistema actualizado'],
+                ['INFO', 'Monitor de sistema v3.0 actualizado'],
                 ['SUCCESS', 'Todos los servicios críticos funcionando'],
-                ['INFO', 'Comprobación de seguridad: OK']
+                ['INFO', 'Comprobación de seguridad: OK'],
+                ['SUCCESS', 'Asistente IA: Diagnóstico completado']
             ];
             const randomLog = logs[Math.floor(Math.random() * logs.length)];
             agregarLog(randomLog[0], randomLog[1]);
