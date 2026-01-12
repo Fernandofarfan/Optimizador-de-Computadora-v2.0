@@ -43,7 +43,9 @@ function Add-OptimizacionHistorial {
     
     if (Test-Path $historialPath) {
         try {
-            $historial = Get-Content $historialPath -Raw | ConvertFrom-Json
+            $historialTemp = Get-Content $historialPath -Raw | ConvertFrom-Json
+            # Forzar a array incluso si solo hay un elemento
+            $historial = @($historialTemp)
         } catch {
             Write-Log "Error al leer historial existente" -Level "WARNING"
         }
@@ -71,7 +73,9 @@ function Show-Historial {
     }
     
     try {
-        $historial = Get-Content $historialPath -Raw | ConvertFrom-Json
+        $historialTemp = Get-Content $historialPath -Raw | ConvertFrom-Json
+        # Forzar a array incluso si solo hay un elemento
+        $historial = @($historialTemp)
         
         if ($historial.Count -eq 0) {
             Write-Host "  ℹ️  El historial está vacío" -ForegroundColor Gray
@@ -137,7 +141,9 @@ function Show-Estadisticas {
     }
     
     try {
-        $historial = Get-Content $historialPath -Raw | ConvertFrom-Json
+        $historialTemp = Get-Content $historialPath -Raw | ConvertFrom-Json
+        # Forzar a array incluso si solo hay un elemento
+        $historial = @($historialTemp)
         
         if ($historial.Count -eq 0) {
             Write-Host "  ℹ️  No hay datos suficientes" -ForegroundColor Gray
@@ -188,7 +194,7 @@ function Show-Estadisticas {
         
         # Primera y última optimización
         $primera = $historial[0].Fecha
-        $ultima = $historial[-1].Fecha
+        $ultima = if ($historial.Count -gt 1) { $historial[-1].Fecha } else { $historial[0].Fecha }
         
         Write-Host ""
         Write-Host "  Primera optimización: $primera" -ForegroundColor Gray
@@ -209,7 +215,9 @@ function Export-Historial {
     $exportPath = "$scriptPath\Historial-Exportado-$(Get-Date -Format 'yyyyMMdd-HHmmss').txt"
     
     try {
-        $historial = Get-Content $historialPath -Raw | ConvertFrom-Json
+        $historialTemp = Get-Content $historialPath -Raw | ConvertFrom-Json
+        # Forzar a array incluso si solo hay un elemento
+        $historial = @($historialTemp)
         
         $reporte = @()
         $reporte += "=========================================="
@@ -279,7 +287,9 @@ function Clear-HistorialAntiguo {
     }
     
     try {
-        $historial = Get-Content $historialPath -Raw | ConvertFrom-Json
+        $historialTemp = Get-Content $historialPath -Raw | ConvertFrom-Json
+        # Forzar a array incluso si solo hay un elemento
+        $historial = @($historialTemp)
         $fechaLimite = (Get-Date).AddDays(-$DiasAntiguedad)
         
         $historialFiltrado = $historial | Where-Object {
