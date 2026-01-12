@@ -1,6 +1,7 @@
 # ============================================
 # Instalar.ps1 - Script de Instalación Inicial
 # Verifica requisitos y configura el optimizador
+# Versión: 4.0.0
 # ============================================
 
 $ErrorActionPreference = 'SilentlyContinue'
@@ -9,7 +10,7 @@ Set-Location -Path $scriptPath
 
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "INSTALACIÓN - PC OPTIMIZER SUITE v2.1" -ForegroundColor Cyan
+Write-Host "INSTALACIÓN - PC OPTIMIZER SUITE v4.0" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 

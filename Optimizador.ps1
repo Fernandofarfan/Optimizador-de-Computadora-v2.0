@@ -14,7 +14,7 @@ $ErrorActionPreference = 'SilentlyContinue'
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
 Set-Location -Path $scriptPath
 
-$title = "OPTIMIZADOR DE COMPUTADORA v3.0"
+$title = "OPTIMIZADOR DE COMPUTADORA v4.0"
 
 # --- Funciones Auxiliares ---
 
