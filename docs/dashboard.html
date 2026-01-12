@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PC Optimizer Suite v3.0 - Dashboard Interactivo</title>
+    <title>PC Optimizer Suite v4.0.0 - Dashboard Interactivo</title>
     <style>
         * {
             margin: 0;
@@ -204,8 +204,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>🚀 PC Optimizer Suite v3.0</h1>
-            <p class="version">Dashboard Interactivo con IA</p>
+            <h1>🚀 PC Optimizer Suite v4.0.0</h1>
+            <p class="version">Dashboard Interactivo con IA y Testing</p>
             <p>Panel de control y monitoreo del sistema en tiempo real</p>
         </header>
 
@@ -398,8 +398,8 @@
             agregarLog('WARNING', 'Abre PowerShell como Admin y ejecuta: .\\' + scriptName);
             
             // En una implementación real, esto llamaría a PowerShell
-            // via WebSocket o API local desde Dashboard-Web.ps1 (v3.0)
-            alert(`Para ejecutar ${scriptName}:\n\n1. Abre PowerShell como Administrador\n2. Navega a la carpeta del proyecto\n3. Ejecuta: .\\${scriptName}\n\n⚠️ Para monitoreo en tiempo real, ejecuta: .\\Dashboard-Web.ps1 (v3.0)\n   Accede vía http://localhost:8080`);
+            // via WebSocket o API local desde Dashboard-Web.ps1 (v4.0.0)
+            alert(`Para ejecutar ${scriptName}:\n\n1. Abre PowerShell como Administrador\n2. Navega a la carpeta del proyecto\n3. Ejecuta: .\\${scriptName}\n\n⚠️ Para monitoreo en tiempo real, ejecuta: .\\Dashboard-Web.ps1 (v4.0.0)\n   Accede vía http://localhost:8080`);
         }
 
         function agregarLog(tipo, mensaje) {
@@ -425,7 +425,7 @@
         // Agregar logs periódicos
         setInterval(() => {
             const logs = [
-                ['INFO', 'Monitor de sistema v3.0 actualizado'],
+                ['INFO', 'Monitor de sistema v4.0.0 actualizado'],
                 ['SUCCESS', 'Todos los servicios críticos funcionando'],
                 ['INFO', 'Comprobación de seguridad: OK'],
                 ['SUCCESS', 'Asistente IA: Diagnóstico completado']
