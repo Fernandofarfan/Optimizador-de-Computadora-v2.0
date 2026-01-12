@@ -129,6 +129,7 @@ PC-Optimizer-Suite/
 ├── Reparar-Red-Sistema.ps1          # Herramientas de reparación
 ├── Logger.ps1                       # Sistema de logging avanzado
 ├── Ejemplo-Logger.ps1               # Ejemplos de uso del logger
+├── Actualizar.ps1                   # Verificador de actualizaciones
 ├── README.md                        # Este archivo
 ├── CONTRIBUTING.md                  # Guía para contribuidores
 ├── SECURITY.md                      # Política de seguridad
@@ -158,6 +159,9 @@ $PSVersionTable.PSVersion
 ### SFC/DISM da error
 → Conecta a Internet e intenta nuevamente. Requiere descarga de componentes de Microsoft
 
+### Verificar actualizaciones
+→ Ejecuta `.\Actualizar.ps1` para comprobar si hay nuevas versiones disponibles
+
 ## 📊 Resultados Típicos
 
 En PCs con 4GB RAM y HDD:
@@ -165,6 +169,23 @@ En PCs con 4GB RAM y HDD:
 - ⬇️ Tiempo de arranque reducido 20-40%
 - ⬇️ Libera 2-5 GB de espacio en disco
 - ✅ CPU en reposo < 5%
+
+## 🔄 Mantenimiento
+
+### Verificar Actualizaciones
+```powershell
+.\Actualizar.ps1
+```
+Comprueba automáticamente si hay nuevas versiones en GitHub.
+
+### Ver Logs
+Los logs se almacenan en la carpeta `logs/` con rotación automática. Para ver estadísticas:
+```powershell
+.\Logger.ps1
+```
+
+### Ejemplos de Uso
+Consulta `Ejemplo-Logger.ps1` para ver casos prácticos de integración del sistema de logging.
 
 ## 📜 Licencia
 
