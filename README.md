@@ -1,4 +1,4 @@
-# PC Optimizer Suite v2.0
+# PC Optimizer Suite v2.1
 
 > **Herramienta profesional de optimización y mantenimiento para Windows 10/11**
 
@@ -7,10 +7,11 @@
 [![PowerShell 5.1+](https://img.shields.io/badge/PowerShell-5.1%2B-blue.svg?style=flat-square)](https://www.microsoft.com/en-us/download/details.aspx?id=50395)
 [![Windows 10/11](https://img.shields.io/badge/Windows-10%2F11-blue.svg?style=flat-square)](#)
 [![GitHub Stars](https://img.shields.io/github/stars/Fernandofarfan/Optimizador-de-Computadora-v2.0?style=flat-square&logo=github)](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0)
+[![CI Status](https://img.shields.io/github/actions/workflow/status/Fernandofarfan/Optimizador-de-Computadora-v2.0/powershell-ci.yml?style=flat-square&label=CI)](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/actions)
 
 Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediante limpieza inteligente, gestión de servicios y reparación de componentes de sistema.
 
-**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.0.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.0.0)**
+**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.1.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.1.0)**
 
 ## ✨ Características
 
@@ -172,7 +173,7 @@ Para reportar vulnerabilidades de seguridad, consulta [SECURITY.md](SECURITY.md)
 
 ---
 
-**Versión**: 2.0.0  
+**Versión**: 2.1.0  
 **Última actualización**: Enero 2026  
 **Compatibilidad**: Windows 10/11 (PowerShell 5.1+)  
 **Licencia**: [MIT](LICENSE)
