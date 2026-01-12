@@ -1,4 +1,4 @@
-# PC Optimizer Suite v2.3
+# PC Optimizer Suite v2.4
 
 > **Herramienta profesional de optimización y mantenimiento para Windows 10/11**
 
@@ -11,7 +11,7 @@
 
 Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediante limpieza inteligente, gestión de servicios y reparación de componentes de sistema.
 
-**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.3.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.3.0)**
+**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.4.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.4.0)**
 
 ## ✨ Características
 
@@ -70,6 +70,32 @@ Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediant
 - **Cuentas**: Análisis de cuentas de administrador y cuenta de invitado
 - **Servicios críticos**: Comprueba que servicios de seguridad estén ejecutándose
 - **Reporte detallado**: Genera informe de seguridad con puntuación y recomendaciones
+
+### 🎮 **Modo Gaming / Alto Rendimiento** 🆕
+- **Plan de energía**: Configuración automática de alto rendimiento
+- **Windows Update**: Pausa temporal de actualizaciones (7 días)
+- **Game Bar**: Deshabilitación de Xbox Game Bar y DVR
+- **Notificaciones**: Desactivación temporal para evitar interrupciones
+- **Efectos visuales**: Optimización para máximo rendimiento
+- **RAM Standby**: Limpieza de memoria en espera
+- **Prioridades**: Ajuste de prioridades de procesos en primer plano
+- **Mejora de FPS**: Optimizaciones que pueden aumentar rendimiento 10-20%
+
+### ⚙️ **Sistema de Configuración JSON** 🆕
+- **Personalización sin código**: Modifica comportamiento editando `config.json`
+- **Servicios excluidos**: Define qué servicios no deben optimizarse
+- **Parámetros de limpieza**: Días de logs antiguos, incluir/excluir componentes
+- **Logging configurable**: Nivel de detalle, rotación de archivos
+- **Modo gaming**: Personaliza comportamiento del modo alto rendimiento
+- **Seguridad**: Selecciona qué verificaciones realizar
+
+### 📊 **Dashboard HTML Interactivo** 🆕
+- **Monitoreo en tiempo real**: CPU, RAM, Disco
+- **Estado de seguridad**: Defender, Firewall, Updates
+- **Acciones rápidas**: Botones para ejecutar scripts
+- **Registro de actividad**: Logs en tiempo real
+- **Estadísticas visuales**: Barras de progreso y métricas
+- **Responsive**: Adaptado a cualquier tamaño de pantalla
 
 ## 📋 Requisitos del Sistema
 
@@ -289,7 +315,7 @@ Para reportar vulnerabilidades de seguridad, consulta [SECURITY.md](SECURITY.md)
 
 ---
 
-**Versión**: 2.3.0  
+**Versión**: 2.4.0  
 **Última actualización**: Enero 2025  
 **Compatibilidad**: Windows 10/11 (PowerShell 5.1+)  
 **Licencia**: [MIT](LICENSE)

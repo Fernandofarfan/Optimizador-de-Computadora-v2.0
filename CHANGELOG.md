@@ -2,6 +2,53 @@
 
 Todos los cambios notables en este proyecto se documentan en este archivo.
 
+## [2.4.0] - 2025-01-12
+
+### ✨ Agregado
+- **🎮 Modo Gaming / Alto Rendimiento** - `Optimizar-ModoGaming.ps1`
+  - Plan de energía configurado automáticamente a Alto Rendimiento
+  - Pausa temporal de Windows Update (7 días)
+  - Deshabilitación de Xbox Game Bar y DVR
+  - Desactivación temporal de notificaciones
+  - Optimización de efectos visuales para máximo rendimiento
+  - Limpieza de RAM Standby (memoria en espera)
+  - Ajuste de prioridades de procesos en primer plano
+  - Mejora estimada de FPS: 10-20% en gaming
+  - Integración completa con Logger
+
+- **⚙️ Sistema de Configuración JSON** - `config.json`
+  - Archivo de configuración centralizado
+  - Personalización de limpieza profunda (días de logs, componentes incluidos)
+  - Servicios excluidos de optimización (lista personalizable)
+  - Configuración de backup y logging
+  - Parámetros de modo gaming ajustables
+  - Verificaciones de seguridad selectivas
+  - Opciones avanzadas para usuarios expertos
+  - Documentado con comentarios descriptivos
+
+- **📊 Dashboard HTML Interactivo** - `docs/dashboard.html`
+  - Panel de control visual del sistema
+  - Monitoreo en tiempo real: CPU, RAM, Disco
+  - Estado de seguridad: Defender, Firewall, Updates
+  - Botones de acción rápida para cada script
+  - Registro de actividad con logs en tiempo real
+  - Barras de progreso animadas
+  - Diseño responsive (móvil, tablet, desktop)
+  - Gradientes modernos y efectos visuales
+  - Estadísticas de optimizaciones realizadas
+
+### 🔧 Mejorado
+- Menú principal actualizado con opción [9] Modo Gaming
+- README con sección completa de nuevas funcionalidades v2.4
+- Versión actualizada en todos los archivos principales
+- Documentación de uso de config.json y dashboard
+
+### 📝 Documentación
+- Guía de uso del sistema de configuración JSON
+- Instrucciones para abrir y usar el dashboard HTML
+- Recomendaciones de uso del modo gaming
+- Explicación de parámetros configurables
+
 ## [2.3.0] - 2025-01-12
 
 ### ✨ Agregado

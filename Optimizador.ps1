@@ -14,7 +14,7 @@ $ErrorActionPreference = 'SilentlyContinue'
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
 Set-Location -Path $scriptPath
 
-$title = "OPTIMIZADOR DE COMPUTADORA v2.3"
+$title = "OPTIMIZADOR DE COMPUTADORA v2.4"
 
 # --- Funciones Auxiliares ---
 
@@ -71,6 +71,9 @@ do {
     Write-Host ""
     Write-Host "  [8] 🔄 REVERTIR CAMBIOS (Deshacer optimizaciones)" -ForegroundColor DarkYellow
     Write-Host "      (Reactiva servicios, limpia logs, muestra restore points)"
+    Write-Host ""
+    Write-Host "  [9] 🎮 MODO GAMING (Alto Rendimiento)" -ForegroundColor Magenta
+    Write-Host "      (Pausar updates, optimizar RAM, deshabilitar notificaciones)"
     Write-Host ""
     Write-Host "  [0] SALIR" -ForegroundColor Gray
     Write-Host ""
@@ -148,6 +151,18 @@ do {
                 if (Test-Path ".\Revertir-Cambios.ps1") { 
                     & ".\Revertir-Cambios.ps1" 
                 } else { Write-Host "Error: No se encuentra Revertir-Cambios.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '9' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Modo Gaming." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Optimizar-ModoGaming.ps1") { 
+                    & ".\Optimizar-ModoGaming.ps1" 
+                } else { Write-Host "Error: No se encuentra Optimizar-ModoGaming.ps1" -ForegroundColor Red }
                 Wait-Key
             }
         }
