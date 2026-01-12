@@ -45,8 +45,7 @@ Write-Log "RAM detectada: $([math]::Round($ramGB, 2)) GB" -Level "INFO"
 
 if ($ramGB -lt 4) {
     Write-Log "RAM insuficiente detectada (< 4 GB)" -Level "WARNING"
-}
-else {
+} else {
     Write-Log "RAM suficiente para operaciones" -Level "SUCCESS"
 }
 
@@ -61,8 +60,7 @@ foreach ($servicio in $servicios) {
     if ($service) {
         if ($service.Status -eq "Running") {
             Write-Log "Servicio $servicio está activo y puede optimizarse" -Level "INFO"
-        }
-        else {
+        } else {
             Write-Log "Servicio $servicio ya está detenido" -Level "SUCCESS"
         }
     } else {
@@ -144,8 +142,7 @@ function Invoke-ServiceOptimization {
         if ($service.Status -eq "Running") {
             Stop-Service -Name $NombreServicio -Force -ErrorAction Stop
             Write-Log "Servicio $NombreServicio detenido exitosamente" -Level "SUCCESS"
-        }
-        else {
+        } else {
             Write-Log "Servicio $NombreServicio ya estaba detenido" -Level "INFO"
         }
         
@@ -153,8 +150,7 @@ function Invoke-ServiceOptimization {
         Write-Log "Servicio $NombreServicio deshabilitado correctamente" -Level "SUCCESS"
         return $true
         
-    }
-    catch {
+    } catch {
         Write-Log "ERROR al optimizar $NombreServicio : $($_.Exception.Message)" -Level "ERROR"
         return $false
     }
@@ -162,7 +158,7 @@ function Invoke-ServiceOptimization {
 
 # Usar la función (ejemplo con servicio de prueba)
 # NOTA: Esto requiere permisos de administrador
-# Optimizar-Servicio -NombreServicio "DiagTrack"
+# Invoke-ServiceOptimization -NombreServicio "DiagTrack"
 
 Write-Host ""
 

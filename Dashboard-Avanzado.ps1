@@ -136,8 +136,7 @@ function Get-SystemMetricsDetailed {
     }
 }
 
-function New-BarChart {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+function Show-BarChart {
     <#
     .SYNOPSIS
         Dibuja un gráfico de barras ASCII
@@ -160,8 +159,7 @@ function New-BarChart {
     Write-Host " $([math]::Round($Percentage, 1))%" -ForegroundColor $color
 }
 
-function New-SparkLine {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+function Show-SparkLine {
     <#
     .SYNOPSIS
         Dibuja un gráfico de línea ASCII (sparkline)
@@ -242,8 +240,8 @@ function Show-LiveDashboard {
         Write-ColoredText "┌─ CPU ─────────────────────────────────────────────────────────┐" "Cyan"
         Write-Host "│ $($metrics.CPU.Name)"
         Write-Host "│ $($metrics.CPU.Cores) núcleos, $($metrics.CPU.Threads) hilos"
-        New-BarChart -Percentage $metrics.CPU.Usage -Width 50 -Label "Uso:"
-        Write-Host "│ Histórico: $(New-SparkLine -Data $history.CPU -Width 50)"
+        Show-BarChart -Percentage $metrics.CPU.Usage -Width 50 -Label "Uso:"
+        Write-Host "│ Histórico: $(Show-SparkLine -Data $history.CPU -Width 50)"
         if ($metrics.CPU.Temperature -ne "N/A") {
             Write-Host "│ Temperatura: $($metrics.CPU.Temperature)°C"
         }
@@ -253,16 +251,16 @@ function Show-LiveDashboard {
         # RAM
         Write-ColoredText "┌─ MEMORIA RAM ─────────────────────────────────────────────────┐" "Cyan"
         Write-Host "│ Total: $($metrics.RAM.Total) GB | Usado: $($metrics.RAM.Used) GB | Libre: $($metrics.RAM.Free) GB"
-        New-BarChart -Percentage $metrics.RAM.Percent -Width 50 -Label "Uso:"
-        Write-Host "│ Histórico: $(New-SparkLine -Data $history.RAM -Width 50)"
+        Show-BarChart -Percentage $metrics.RAM.Percent -Width 50 -Label "Uso:"
+        Write-Host "│ Histórico: $(Show-SparkLine -Data $history.RAM -Width 50)"
         Write-ColoredText "└───────────────────────────────────────────────────────────────┘" "Cyan"
         Write-Host ""
         
         # Disco
         Write-ColoredText "┌─ DISCO C: ────────────────────────────────────────────────────┐" "Cyan"
         Write-Host "│ Total: $($metrics.Disk.Total) GB | Usado: $($metrics.Disk.Used) GB | Libre: $($metrics.Disk.Free) GB"
-        New-BarChart -Percentage $metrics.Disk.Percent -Width 50 -Label "Uso:"
-        Write-Host "│ Histórico: $(New-SparkLine -Data $history.Disk -Width 50)"
+        Show-BarChart -Percentage $metrics.Disk.Percent -Width 50 -Label "Uso:"
+        Write-Host "│ Histórico: $(Show-SparkLine -Data $history.Disk -Width 50)"
         Write-ColoredText "└───────────────────────────────────────────────────────────────┘" "Cyan"
         Write-Host ""
         
