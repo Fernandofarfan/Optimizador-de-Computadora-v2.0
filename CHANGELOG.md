@@ -1,6 +1,54 @@
 # Changelog
 
 Todos los cambios notables en este proyecto se documentan en este archivo.
+
+## [2.3.0] - 2026-01-13
+
+### ✨ Agregado
+- **🔄 Script de Reversión** - `Revertir-Cambios.ps1`
+  - Detecta y reactiva servicios deshabilitados por el optimizador
+  - Permite reactivar servicios selectivamente o en bloque
+  - Opción de iniciar servicios reactivados inmediatamente
+  - Lista puntos de restauración creados por el optimizador
+  - Limpieza de logs antiguos y reportes generados
+  - Muestra estadísticas de espacio ocupado por logs
+  - Información del estado actual del sistema (RAM, disco, programas en inicio)
+  - Recomendaciones sobre cuándo usar reversión vs puntos de restauración
+
+- **🔒 Módulo de Seguridad** - `Analizar-Seguridad.ps1`
+  - Análisis completo de Windows Defender (protección en tiempo real, cloud, definiciones)
+  - Verificación de Firewall de Windows (todos los perfiles)
+  - Detección de actualizaciones pendientes de Windows Update
+  - Comprobación de UAC (Control de Cuentas de Usuario)
+  - Estado de BitLocker (cifrado de disco)
+  - Análisis de cuentas de usuario y permisos de administrador
+  - Verificación de cuenta de invitado
+  - Estado de servicios críticos de seguridad (WinDefend, Firewall, Update, etc.)
+  - Generación de reporte detallado en `Reporte-Seguridad-[fecha].txt`
+  - Sistema de puntuación: ✅ Correcto, ⚠️ Warning, ❌ Crítico
+  - Resumen ejecutivo con estadísticas
+
+- **📸 Documentación Visual** - `docs/SCREENSHOTS.md`
+  - Guía completa para capturar screenshots del proyecto
+  - Instrucciones para 6 capturas principales (menú, análisis, optimización, reportes, etc.)
+  - Especificaciones técnicas (resolución, formato, compresión)
+  - Herramientas recomendadas (Recorte Windows, ShareX)
+  - Mejores prácticas y checklist de calidad
+  - Plantillas para integración en README.md
+  - Estructura de directorios `docs/screenshots/`
+
+### 🔧 Mejorado
+- README actualizado con información de nuevas funcionalidades
+- Menú principal expandido con opciones [7] Analizar Seguridad y [8] Revertir Cambios
+- Mejor organización de estructura de archivos
+- Documentación de comandos de mantenimiento
+
+### 📝 Documentación
+- Sección "Nuevas Funciones en v2.3" agregada al README
+- Guía de uso para Revertir-Cambios.ps1 y Analizar-Seguridad.ps1
+- Documentación visual con instrucciones de captura
+- Actualización de estructura de archivos con nuevos módulos
+
 ## [2.2.0] - 2026-01-12
 
 ### ✨ Agregado

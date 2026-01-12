@@ -1,4 +1,4 @@
-# PC Optimizer Suite v2.2
+# PC Optimizer Suite v2.3
 
 > **Herramienta profesional de optimización y mantenimiento para Windows 10/11**
 
@@ -11,7 +11,7 @@
 
 Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediante limpieza inteligente, gestión de servicios y reparación de componentes de sistema.
 
-**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.2.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.2.0)**
+**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.3.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.3.0)**
 
 ## ✨ Características
 
@@ -54,6 +54,22 @@ Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediant
 - **Puntos de restauración**: Creación automática antes de cambios críticos
 - **Reversibilidad garantizada**: Restaura tu sistema si algo sale mal
 - **Integración en módulos**: Sugerencia automática en operaciones de riesgo
+
+### 🔄 **Script de Reversión**
+- **Revertir optimizaciones**: Reactiva servicios deshabilitados por el optimizador
+- **Limpieza de logs**: Elimina logs antiguos y reportes para liberar espacio
+- **Guía de restauración**: Instrucciones para usar puntos de restauración de Windows
+- **Análisis de estado**: Muestra qué cambios están activos y cuáles se pueden revertir
+
+### 🔒 **Análisis de Seguridad Completo**
+- **Windows Defender**: Verifica protección en tiempo real, cloud y actualizaciones de definiciones
+- **Firewall**: Comprueba estado de todos los perfiles (Dominio, Privado, Público)
+- **Windows Update**: Detecta actualizaciones pendientes y críticas
+- **UAC**: Verifica Control de Cuentas de Usuario
+- **BitLocker**: Estado de cifrado de disco
+- **Cuentas**: Análisis de cuentas de administrador y cuenta de invitado
+- **Servicios críticos**: Comprueba que servicios de seguridad estén ejecutándose
+- **Reporte detallado**: Genera informe de seguridad con puntuación y recomendaciones
 
 ## 📋 Requisitos del Sistema
 
@@ -103,7 +119,30 @@ Una vez ejecutado, verás las siguientes opciones:
 | **[4]** | Optimizar Servicios | **Sí** | 1 min |
 | **[5]** | Gestionar Inicio | No | 1-2 min |
 | **[6]** | Reparar y Red | **Sí** | 10-30 min |
+| **[7]** | **🔒 Analizar Seguridad** | No | 3-5 min |
+| **[8]** | **🔄 Revertir Cambios** | **Sí** | 2-5 min |
 | **[0]** | Salir | - | - |
+
+### Nuevas Funciones en v2.3
+
+#### 🔒 Analizar Seguridad
+Auditoría completa de seguridad que verifica:
+- Estado de Windows Defender y actualizaciones de definiciones
+- Configuración del Firewall de Windows
+- Actualizaciones pendientes del sistema
+- Control de Cuentas de Usuario (UAC)
+- Cifrado BitLocker
+- Cuentas de usuario y permisos de administrador
+- Servicios críticos de seguridad
+
+Genera un reporte detallado en `Reporte-Seguridad-[fecha].txt` con estadísticas y recomendaciones.
+
+#### 🔄 Revertir Cambios
+Permite deshacer optimizaciones realizadas:
+- Reactiva servicios deshabilitados por el optimizador
+- Limpia logs antiguos y reportes generados
+- Muestra puntos de restauración disponibles
+- Proporciona guía para restauración completa del sistema
 
 ## 🔒 Seguridad y Privacidad
 
@@ -118,9 +157,16 @@ Una vez ejecutado, verás las siguientes opciones:
 ```
 PC-Optimizer-Suite/
 ├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.md            # Template para reportar bugs
+│   │   └── feature_request.md       # Template para solicitar funcionalidades
+│   ├── CODE_OF_CONDUCT.md           # Código de conducta de la comunidad
+│   ├── PULL_REQUEST_TEMPLATE.md     # Template para pull requests
 │   └── workflows/
 │       └── powershell-ci.yml        # GitHub Actions para validación automática
 ├── docs/
+│   ├── screenshots/                 # Capturas de pantalla del proyecto
+│   ├── SCREENSHOTS.md               # Guía para capturar documentación visual
 │   ├── index.html                   # Landing page del proyecto
 │   ├── style.css                    # Estilos de la página web
 │   └── README.md                    # Documentación del sitio
@@ -128,11 +174,13 @@ PC-Optimizer-Suite/
 ├── Instalar.ps1                     # Script de instalación inicial
 ├── Optimizador.ps1                  # Menú principal (maestro)
 ├── Analizar-Sistema.ps1             # Módulo de análisis
+├── Analizar-Seguridad.ps1           # 🆕 Auditoría de seguridad completa
 ├── Optimizar-Sistema-Seguro.ps1     # Optimización sin daños
 ├── Limpieza-Profunda.ps1            # Limpieza avanzada (requiere admin)
 ├── Optimizar-Servicios.ps1          # Gestor de servicios del sistema
 ├── Gestionar-Procesos.ps1           # Startup y consumo de RAM
 ├── Reparar-Red-Sistema.ps1          # Herramientas de reparación
+├── Revertir-Cambios.ps1             # 🆕 Script de reversión de optimizaciones
 ├── Logger.ps1                       # Sistema de logging avanzado
 ├── Ejemplo-Logger.ps1               # Ejemplos de uso del logger
 ├── Actualizar.ps1                   # Verificador de actualizaciones
@@ -201,6 +249,27 @@ Consulta `Ejemplo-Logger.ps1` para ver casos prácticos de integración del sist
 ```
 Crea un punto de restauración manual antes de realizar cambios. Los módulos críticos lo sugieren automáticamente.
 
+### Revertir Optimizaciones
+```powershell
+.\Revertir-Cambios.ps1
+```
+Si experimentas problemas después de optimizar, este script te permite:
+- Reactivar servicios deshabilitados
+- Limpiar logs antiguos
+- Ver y restaurar puntos de restauración
+
+### Análisis de Seguridad
+```powershell
+.\Analizar-Seguridad.ps1
+```
+Realiza una auditoría completa de seguridad del sistema y genera un reporte detallado.
+
+## 📸 Documentación Visual
+
+Para ver capturas de pantalla del proyecto y guías de uso visual, consulta:
+- [Guía de Screenshots](docs/SCREENSHOTS.md) - Instrucciones para documentar el proyecto
+- `docs/screenshots/` - Directorio con imágenes de ejemplo
+
 ## 📜 Licencia
 
 MIT License - Libre para uso personal y comercial
@@ -220,7 +289,7 @@ Para reportar vulnerabilidades de seguridad, consulta [SECURITY.md](SECURITY.md)
 
 ---
 
-**Versión**: 2.2.0  
+**Versión**: 2.3.0  
 **Última actualización**: Enero 2026  
 **Compatibilidad**: Windows 10/11 (PowerShell 5.1+)  
 **Licencia**: [MIT](LICENSE)
