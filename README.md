@@ -194,9 +194,9 @@ Una vez ejecutado, verás las siguientes opciones:
 | **[34]** | **🔍 Gestor Duplicados** | No | 5-30 min |
 | **[35]** | **🌐 Dashboard Web** | **Sí** | Continuo |
 | **[36]** | **🤖 Asistente IA** | **Sí** | 2-10 min |
-| **[0]** | Salir | - | - |
+| **[0]** | Salir | - | -|
 
-### Nuevas Funciones en v3.0 - Suite de Red, Análisis y Monitoreo
+### Características Avanzadas v4.0.0
 
 #### 📡 Monitor de Red en Tiempo Real
 Monitoreo y control avanzado de conexiones:
@@ -242,7 +242,7 @@ Análisis de logs y recomendaciones automatizadas:
 - **Reporte HTML completo**: Diagnóstico con score visual, grupos de problemas, tabla de errores
 - Categorización: Hardware, Drivers, Memory, Services, Updates, Performance, Network
 
-### Nuevas Funciones en v2.9 - Privacidad, Aplicaciones y Energía
+### Características Avanzadas v4.0.0 (cont.)
 
 #### 🔐 Centro de Privacidad Avanzada
 Control total sobre privacidad y telemetría:
@@ -277,7 +277,7 @@ Optimización de consumo y planes de energía:
 - Configuración rápida para Desktop/Laptop/Gaming
 - Optimizaciones específicas según tipo de sistema
 
-### Nuevas Funciones en v2.8 - Herramientas Empresariales
+### Características Adicionales v4.0.0
 
 #### 🔙 Gestor de Puntos de Restauración
 Control completo de restore points:
@@ -333,7 +333,7 @@ Panel de control empresarial con exportación:
 - **Exportación HTML**: Dashboard responsivo con CSS gradients, tablas interactivas
 - Diseño profesional para presentaciones
 
-### Nuevas Funciones en v2.7 - Herramientas Profesionales
+### Herramientas Especializadas v4.0.0
 
 #### 📡 Monitor en Tiempo Real
 Dashboard continuo del sistema:
@@ -390,7 +390,7 @@ Control total de Windows Update:
 - Ver historial con fechas
 - Estado actual (pausado/activo)
 
-### Funciones en v2.6
+### Funcionalidades Base v4.0.0 (v2.6)
 
 #### 💾 Backup de Drivers
 Exportación completa de drivers:
@@ -428,7 +428,7 @@ Registro completo con JSON:
 - Limpieza automática de entradas antiguas
 - Registro manual de optimizaciones
 
-### Funciones en v2.5
+### Optimizaciones Iniciales v4.0.0 (v2.5)
 
 #### 💻 Análisis Hardware Detallado
 Diagnóstico completo de componentes con:
@@ -470,7 +470,7 @@ Detección inteligente de problemas:
 - Actualizaciones pendientes
 - Soluciones recomendadas automáticas
 
-### Funciones en v2.4
+### Herramientas de Mantenimiento v4.0.0 (v2.4)
 
 #### 🎮 Modo Gaming
 Optimización extrema para gaming:
@@ -482,7 +482,7 @@ Optimización extrema para gaming:
 - Prioridades CPU para juegos
 - FPS Boost (10-20% mejora)
 
-### Funciones en v2.3
+### Utilidades Base v4.0.0 (v2.3)
 
 #### 🔒 Analizar Seguridad
 Auditoría completa de seguridad que verifica:

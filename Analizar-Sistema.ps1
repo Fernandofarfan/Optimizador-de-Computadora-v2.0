@@ -64,7 +64,7 @@ $ramPorcentaje = [math]::Round(($ramUsadaGB / $ramTotalGB) * 100, 1)
 Write-Host "  Sistema: " -NoNewline; Write-Host $osInfo.Sistema -ForegroundColor Green
 Write-Host "  Procesador: " -NoNewline; Write-Host $cpuInfo.Procesador -ForegroundColor Green
 Write-Host "  RAM Total: " -NoNewline; Write-Host "$ramTotalGB GB" -ForegroundColor Green
-Write-Host "  RAM Usada: " -NoNewline; Write-Host "$ramUsadaGB GB ($ramPorcentaje porciento)" -ForegroundColor $(if($ramPorcentaje -gt 80){"Red"}else{"Green"})
+Write-Host "  RAM Usada: " -NoNewline; Write-Host "$ramUsadaGB GB ($ramPorcentaje%)" -ForegroundColor $(if($ramPorcentaje -gt 80){"Red"}else{"Green"})
 
 "`n[INFORMACIÓN DEL SISTEMA]" | Out-File $reportePath -Append
 "Sistema: $($osInfo.Sistema)" | Out-File $reportePath -Append
@@ -74,7 +74,7 @@ Write-Host "  RAM Usada: " -NoNewline; Write-Host "$ramUsadaGB GB ($ramPorcentaj
 "Procesador: $($cpuInfo.Procesador)" | Out-File $reportePath -Append
 "Núcleos: $($cpuInfo.Nucleos) físicos, $($cpuInfo.NucleosLogicos) lógicos" | Out-File $reportePath -Append
 "RAM Total: $ramTotalGB GB" | Out-File $reportePath -Append
-"RAM Usada: $ramUsadaGB GB ($ramPorcentaje porciento)" | Out-File $reportePath -Append
+"RAM Usada: $ramUsadaGB GB ($ramPorcentaje%)" | Out-File $reportePath -Append
 
 # ========================================
 # 2. ANÁLISIS DE DISCOS
@@ -93,12 +93,12 @@ foreach ($disco in $discos) {
     
     Write-Host "`n  Disco: " -NoNewline; Write-Host "$($disco.DeviceID)" -ForegroundColor Cyan
     Write-Host "    Total: $totalGB GB"
-    Write-Host "    Usado: $usadoGB GB ($porcentajeUsado porciento)" -ForegroundColor $(if($porcentajeUsado -gt 90){"Red"}elseif($porcentajeUsado -gt 75){"Yellow"}else{"Green"})
+    Write-Host "    Usado: $usadoGB GB ($porcentajeUsado%)" -ForegroundColor $(if($porcentajeUsado -gt 90){"Red"}elseif($porcentajeUsado -gt 75){"Yellow"}else{"Green"})
     Write-Host "    Libre: $libreGB GB"
     
     "`nDisco $($disco.DeviceID)" | Out-File $reportePath -Append
     "  Total: $totalGB GB" | Out-File $reportePath -Append
-    "  Usado: $usadoGB GB ($porcentajeUsado porciento)" | Out-File $reportePath -Append
+    "  Usado: $usadoGB GB ($porcentajeUsado%)" | Out-File $reportePath -Append
     "  Libre: $libreGB GB" | Out-File $reportePath -Append
     
     if ($porcentajeUsado -gt 90) {
@@ -238,10 +238,10 @@ $cpuUsage = (Get-Counter '\Processor(_Total)\% Processor Time').CounterSamples.C
 $cpuUsage = [math]::Round($cpuUsage, 1)
 
 Write-Host "  Uso de CPU: " -NoNewline
-Write-Host "$cpuUsage porciento" -ForegroundColor $(if($cpuUsage -gt 80){"Red"}elseif($cpuUsage -gt 60){"Yellow"}else{"Green"})
+Write-Host "$cpuUsage%" -ForegroundColor $(if($cpuUsage -gt 80){"Red"}elseif($cpuUsage -gt 60){"Yellow"}else{"Green"})
 
-"Uso de CPU: $cpuUsage porciento" | Out-File $reportePath -Append
-"Uso de RAM: $ramPorcentaje porciento" | Out-File $reportePath -Append
+"Uso de CPU: $cpuUsage%" | Out-File $reportePath -Append
+"Uso de RAM: $ramPorcentaje%" | Out-File $reportePath -Append
 
 # Tiempo de actividad
 $uptime = (Get-Date) - $osInfo.UltimoInicio
@@ -258,7 +258,7 @@ Write-Seccion "8. RECOMENDACIONES"
 $recomendaciones = @()
 
 if ($ramPorcentaje -gt 80) {
-    $recomendaciones += "RAM: Uso alto ($ramPorcentaje porciento). Considera cerrar programas o agregar más RAM."
+    $recomendaciones += "RAM: Uso alto ($ramPorcentaje%). Considera cerrar programas o agregar más RAM."
 }
 
 if ($totalTempMB -gt 1000) {
@@ -276,9 +276,9 @@ if ($startupItems.Count -gt 10) {
 foreach ($disco in $discos) {
     $porcentaje = [math]::Round((($disco.Size - $disco.FreeSpace) / $disco.Size) * 100, 1)
     if ($porcentaje -gt 90) {
-        $recomendaciones += "Disco $($disco.DeviceID): $porcentaje porciento lleno. Libera espacio urgentemente."
+        $recomendaciones += "Disco $($disco.DeviceID): $porcentaje% lleno. Libera espacio urgentemente."
     } elseif ($porcentaje -gt 75) {
-        $recomendaciones += "Disco $($disco.DeviceID): $porcentaje porciento lleno. Considera liberar espacio."
+        $recomendaciones += "Disco $($disco.DeviceID): $porcentaje% lleno. Considera liberar espacio."
     }
 }
 

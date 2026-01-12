@@ -13,7 +13,7 @@
 #Requires -Version 5.1
 
 $Global:DuplicatesLogPath = "$env:USERPROFILE\OptimizadorPC-Duplicates.json"
-$Global:DuplicatesScriptVersion = "3.0.0"
+$Global:DuplicatesScriptVersion = "4.0.0"
 $Global:ScanResults = @()
 
 # Importar Logger si existe

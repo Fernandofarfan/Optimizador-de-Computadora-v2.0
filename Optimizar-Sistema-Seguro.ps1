@@ -1,7 +1,7 @@
 ﻿<#
 .SYNOPSIS
     Módulo de Optimización Segura (No destructiva)
-    Parte de Optimizador de Computadora v2.0
+    Parte de Optimizador de Computadora v4.0.0
 #>
 
 $ErrorActionPreference = 'SilentlyContinue'
@@ -221,7 +221,7 @@ $ramPorcentaje = [math]::Round(($ramUsadaGB / $ramTotalGB) * 100, 1)
 
 Write-Host "  MEMORIA RAM:" -ForegroundColor Cyan
 Write-Host "     Total: $ramTotalGB GB" -ForegroundColor White
-Write-Host "     En uso: $ramUsadaGB GB ($ramPorcentaje porciento)" -ForegroundColor $(if($ramPorcentaje -gt 80){"Red"}elseif($ramPorcentaje -gt 60){"Yellow"}else{"Green"})
+Write-Host "     En uso: $ramUsadaGB GB ($ramPorcentaje%)" -ForegroundColor $(if($ramPorcentaje -gt 80){"Red"}elseif($ramPorcentaje -gt 60){"Yellow"}else{"Green"})
 Write-Host "     Libre: $ramLibreGB GB" -ForegroundColor White
 
 if ($ramPorcentaje -gt 80) {
@@ -239,7 +239,7 @@ Write-Host "  PROCESADOR:" -ForegroundColor Cyan
 try {
     $cpuUsage = (Get-Counter '\Processor(_Total)\% Processor Time' -ErrorAction SilentlyContinue).CounterSamples.CookedValue
     $cpuUsage = [math]::Round($cpuUsage, 1)
-    Write-Host "     Uso actual: $cpuUsage porciento" -ForegroundColor $(if($cpuUsage -gt 80){"Red"}elseif($cpuUsage -gt 60){"Yellow"}else{"Green"})
+    Write-Host "     Uso actual: $cpuUsage%" -ForegroundColor $(if($cpuUsage -gt 80){"Red"}elseif($cpuUsage -gt 60){"Yellow"}else{"Green"})
 } catch {
     Write-Host "     No disponible" -ForegroundColor Gray
 }
@@ -253,7 +253,7 @@ foreach ($disco in $discos) {
     $libreGB = [math]::Round($disco.FreeSpace / 1GB, 2)
     $usadoPorcentaje = [math]::Round((($disco.Size - $disco.FreeSpace) / $disco.Size) * 100, 1)
     
-    Write-Host "     $($disco.DeviceID) - Usado: $usadoPorcentaje porciento" -ForegroundColor $(if($usadoPorcentaje -gt 90){"Red"}elseif($usadoPorcentaje -gt 75){"Yellow"}else{"White"})
+    Write-Host "     $($disco.DeviceID) - Usado: $usadoPorcentaje%" -ForegroundColor $(if($usadoPorcentaje -gt 90){"Red"}elseif($usadoPorcentaje -gt 75){"Yellow"}else{"White"})
     Write-Host "        Libre: $libreGB GB de $totalGB GB" -ForegroundColor Gray
     
     if ($usadoPorcentaje -gt 90) {

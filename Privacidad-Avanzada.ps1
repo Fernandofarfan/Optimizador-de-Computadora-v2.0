@@ -14,7 +14,7 @@
 #Requires -RunAsAdministrator
 
 $Global:PrivacyReportPath = "$env:USERPROFILE\OptimizadorPC-PrivacyReport.json"
-$Global:PrivacyScriptVersion = "2.9.0"
+$Global:PrivacyScriptVersion = "4.0.0"
 
 # Importar Logger si existe
 if (Test-Path ".\Logger.ps1") {

@@ -14,7 +14,7 @@
 #Requires -RunAsAdministrator
 
 $Global:NetworkLogPath = "$env:USERPROFILE\OptimizadorPC-NetworkLog.json"
-$Global:NetworkScriptVersion = "3.0.0"
+$Global:NetworkScriptVersion = "4.0.0"
 $Global:MonitoringActive = $false
 
 # Importar Logger si existe

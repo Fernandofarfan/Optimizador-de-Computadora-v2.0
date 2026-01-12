@@ -14,7 +14,7 @@
 #Requires -RunAsAdministrator
 
 $Global:EnergyProfilesPath = "$env:USERPROFILE\OptimizadorPC-EnergyProfiles.json"
-$Global:EnergyScriptVersion = "2.9.0"
+$Global:EnergyScriptVersion = "4.0.0"
 
 # Importar Logger si existe
 if (Test-Path ".\Logger.ps1") {

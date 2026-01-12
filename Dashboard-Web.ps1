@@ -13,7 +13,7 @@
 #Requires -Version 5.1
 #Requires -RunAsAdministrator
 
-$Global:DashboardVersion = "3.0.0"
+$Global:DashboardVersion = "4.0.0"
 $Global:HttpListener = $null
 $Global:ServerRunning = $false
 $Global:Port = 8080
@@ -146,8 +146,8 @@ function Get-SystemInfo {
                 ReleaseDate = $bios.ReleaseDate
             }
             Uptime = @{
-                Days = [math]::Round((Get-Date) - $os.LastBootUpTime).TotalDays, 2)
-                Hours = [math]::Round((Get-Date) - $os.LastBootUpTime).TotalHours, 2)
+                Days = [math]::Round(((Get-Date) - $os.LastBootUpTime).TotalDays, 2)
+                Hours = [math]::Round(((Get-Date) - $os.LastBootUpTime).TotalHours, 2)
             }
         }
     }
