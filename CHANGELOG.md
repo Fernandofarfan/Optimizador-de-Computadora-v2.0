@@ -2,6 +2,34 @@
 
 Todos los cambios notables en este proyecto se documentan en este archivo.
 
+## [2.2.0] - 2026-01-12
+
+### ✨ Agregado
+- **Templates de GitHub** - Sistema completo de templates para contribución
+  - Bug report template con secciones estructuradas
+  - Feature request template con casos de uso
+  - Pull request template con checklist completo
+  - Código de conducta (Contributor Covenant 1.4)
+- **Integración de Logger en Módulos** - Logging completo en scripts principales
+  - Analizar-Sistema.ps1 ahora registra todo el análisis
+  - Limpieza-Profunda.ps1 registra archivos eliminados y espacio liberado
+  - Optimizar-Servicios.ps1 registra servicios modificados y estados
+  - Logs con timestamps y niveles de severidad
+- **Sistema de Backup/Restore** - Crear-PuntoRestauracion.ps1
+  - Creación de puntos de restauración de Windows
+  - Verificación automática de System Restore
+  - Habilitación de System Restore si está deshabilitado
+  - Integración en módulos críticos (Limpieza-Profunda, Optimizar-Servicios)
+  - Sugerencia automática antes de operaciones de riesgo
+  - Listado de puntos de restauración recientes
+  - Instrucciones para restaurar el sistema
+
+### 🔧 Mejorado
+- Todos los módulos ahora tienen trazabilidad completa
+- Mejor manejo de errores con logs detallados
+- Transparencia en operaciones de limpieza (MB liberados)
+- Sistema de backup proactivo antes de cambios críticos
+
 ## [2.1.0] - 2026-01-12
 
 ### ✨ Agregado
@@ -79,15 +107,16 @@ Todos los cambios notables en este proyecto se documentan en este archivo.
 - Sin conexión a internet (excepto DISM)
 - Sin colección de datos personales
 
-### 📦 Archivos del Proyecto
+### 📦 Archivos del Proyecto (v2.2.0)
 - `Optimizador.ps1` - Menú maestro
-- `Analizar-Sistema.ps1` - Análisis de sistema
+- `Analizar-Sistema.ps1` - Análisis de sistema (con logging integrado)
 - `Optimizar-Sistema-Seguro.ps1` - Optimización segura
-- `Limpieza-Profunda.ps1` - Limpieza avanzada
-- `Optimizar-Servicios.ps1` - Gestión de servicios
+- `Limpieza-Profunda.ps1` - Limpieza avanzada (con logging y backup)
+- `Optimizar-Servicios.ps1` - Gestión de servicios (con logging y backup)
 - `Gestionar-Procesos.ps1` - Startup y RAM
 - `Reparar-Red-Sistema.ps1` - Reparación avanzada
 - `Logger.ps1` - Sistema de logging avanzado
+- `Crear-PuntoRestauracion.ps1` - Creador de puntos de restauración
 - `Instalar.ps1` - Script de instalación y verificación
 - `Actualizar.ps1` - Verificador de actualizaciones
 - `Ejemplo-Logger.ps1` - Ejemplos de uso del logger
@@ -98,7 +127,11 @@ Todos los cambios notables en este proyecto se documentan en este archivo.
 - `CHANGELOG.md` - Este archivo
 - `.gitignore` - Configuración Git
 - `LICENSE` - MIT License
-- `.github/workflows/powershell-ci.yml` - GitHub Actions
+- `.github/workflows/powershell-ci.yml` - GitHub Actions CI
+- `.github/ISSUE_TEMPLATE/bug_report.md` - Template de bug report
+- `.github/ISSUE_TEMPLATE/feature_request.md` - Template de feature request
+- `.github/PULL_REQUEST_TEMPLATE.md` - Template de pull request
+- `.github/CODE_OF_CONDUCT.md` - Código de conducta
 - `docs/index.html` - Landing page
 - `docs/style.css` - Estilos profesionales
 - `docs/README.md` - Documentación del sitio web
@@ -107,16 +140,17 @@ Todos los cambios notables en este proyecto se documentan en este archivo.
 
 ## Notas Futuras
 
-### Planned [2.2.0]
+### Planned [2.3.0]
+- [ ] Screenshots en README y documentación
+- [ ] Módulo de seguridad (Windows Defender, Firewall, UAC)
+- [ ] Script de desinstalación/reversión completa
+- [ ] Dashboard HTML con gráficos (Chart.js)
+- [ ] Modo Gaming para optimización temporal
+- [ ] Scheduler de limpiezas automáticas
 - [ ] Integración del Logger en todos los módulos
 - [ ] Interfaz gráfica (GUI) en PowerShell
 - [ ] Soporte para Windows 7/8
-- [ ] Backups automáticos antes de cambios
-- [ ] Restore points automáticos
 - [ ] Estadísticas de uso (local, sin cloud)
-- [ ] Programador de limpiezas automáticas
-- [ ] Módulo de actualización de drivers
-- [ ] Modo gaming (optimización para juegos)
 
 ### Contribuciones Bienvenidas
 Se aceptan pull requests, issues y sugerencias.

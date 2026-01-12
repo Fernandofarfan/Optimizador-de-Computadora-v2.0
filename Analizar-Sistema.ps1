@@ -5,10 +5,17 @@
 #>
 
 $ErrorActionPreference = 'SilentlyContinue'
+$scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
+Set-Location -Path $scriptPath
+
+# Importar logger
+. "$scriptPath\Logger.ps1"
+Initialize-Logger
 
 Write-Host "ANALIZADOR DE SISTEMA" -ForegroundColor Cyan
 Write-Host "=====================" -ForegroundColor Cyan
 Write-Host ""
+Write-Log "Iniciando análisis del sistema" -Level "INFO"
 
 $reportePath = Join-Path $PSScriptRoot "Reporte-Sistema.txt"
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -298,6 +305,9 @@ Write-Host "  ✓ Análisis completo guardado en:" -ForegroundColor Green
 Write-Host "    $reportePath" -ForegroundColor White
 Write-Host "═══════════════════════════════════════" -ForegroundColor Cyan
 Write-Host ""
+
+Write-Log "Análisis del sistema completado exitosamente" -Level "SUCCESS"
+Write-Log "Reporte guardado en: $reportePath" -Level "INFO"
 
 # Retornar datos para usar en optimizaciones
 return @{

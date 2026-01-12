@@ -1,4 +1,4 @@
-# PC Optimizer Suite v2.1
+# PC Optimizer Suite v2.2
 
 > **Herramienta profesional de optimización y mantenimiento para Windows 10/11**
 
@@ -11,7 +11,7 @@
 
 Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediante limpieza inteligente, gestión de servicios y reparación de componentes de sistema.
 
-**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.1.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.1.0)**
+**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.2.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.2.0)**
 
 ## ✨ Características
 
@@ -48,6 +48,12 @@ Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediant
 - **Niveles de severidad**: DEBUG, INFO, SUCCESS, WARNING, ERROR, CRITICAL
 - **Reportes de errores**: Exportación de resúmenes de problemas detectados
 - **Persistencia**: Historial completo de operaciones realizadas
+- **Integración completa**: Todos los módulos usan el sistema de logging
+
+### 🛡️ **Sistema de Backup**
+- **Puntos de restauración**: Creación automática antes de cambios críticos
+- **Reversibilidad garantizada**: Restaura tu sistema si algo sale mal
+- **Integración en módulos**: Sugerencia automática en operaciones de riesgo
 
 ## 📋 Requisitos del Sistema
 
@@ -130,6 +136,7 @@ PC-Optimizer-Suite/
 ├── Logger.ps1                       # Sistema de logging avanzado
 ├── Ejemplo-Logger.ps1               # Ejemplos de uso del logger
 ├── Actualizar.ps1                   # Verificador de actualizaciones
+├── Crear-PuntoRestauracion.ps1      # Creador de puntos de restauración
 ├── README.md                        # Este archivo
 ├── CONTRIBUTING.md                  # Guía para contribuidores
 ├── SECURITY.md                      # Política de seguridad
@@ -140,7 +147,8 @@ PC-Optimizer-Suite/
 
 ## ⚠️ Notas Importantes
 
-- **Backup**: Aunque es seguro, se recomienda crear un punto de restauración antes de la Limpieza Profunda
+- **Backup**: Se recomienda crear un punto de restauración antes de la Limpieza Profunda (el sistema lo sugiere automáticamente)
+- **Logging**: Todas las operaciones se registran en `logs/` para auditoría y troubleshooting
 - **Antivirus**: Algunos antivirus pueden bloquear las herramientas SFC/DISM. Permite excepciones si es necesario
 - **GPU/Drivers**: Este software **NO modifica drivers de GPU o configuraciones de hardware**
 - **PC Prestadas**: Usa siempre el modo "Optimización Segura" ([2] o mantén Optimizar-Sistema-Seguro.ps1)
@@ -187,6 +195,12 @@ Los logs se almacenan en la carpeta `logs/` con rotación automática. Para ver 
 ### Ejemplos de Uso
 Consulta `Ejemplo-Logger.ps1` para ver casos prácticos de integración del sistema de logging.
 
+### Crear Punto de Restauración
+```powershell
+.\Crear-PuntoRestauracion.ps1
+```
+Crea un punto de restauración manual antes de realizar cambios. Los módulos críticos lo sugieren automáticamente.
+
 ## 📜 Licencia
 
 MIT License - Libre para uso personal y comercial
@@ -206,7 +220,7 @@ Para reportar vulnerabilidades de seguridad, consulta [SECURITY.md](SECURITY.md)
 
 ---
 
-**Versión**: 2.1.0  
+**Versión**: 2.2.0  
 **Última actualización**: Enero 2026  
 **Compatibilidad**: Windows 10/11 (PowerShell 5.1+)  
 **Licencia**: [MIT](LICENSE)
