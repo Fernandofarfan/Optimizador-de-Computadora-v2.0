@@ -2,7 +2,7 @@
 
 Todos los cambios notables en este proyecto se documentan en este archivo.
 
-## [2.3.0] - 2026-01-13
+## [2.3.0] - 2025-01-12
 
 ### ✨ Agregado
 - **🔄 Script de Reversión** - `Revertir-Cambios.ps1`

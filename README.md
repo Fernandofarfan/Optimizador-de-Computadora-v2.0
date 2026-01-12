@@ -290,6 +290,6 @@ Para reportar vulnerabilidades de seguridad, consulta [SECURITY.md](SECURITY.md)
 ---
 
 **Versión**: 2.3.0  
-**Última actualización**: Enero 2026  
+**Última actualización**: Enero 2025  
 **Compatibilidad**: Windows 10/11 (PowerShell 5.1+)  
 **Licencia**: [MIT](LICENSE)

@@ -14,7 +14,7 @@ $ErrorActionPreference = 'SilentlyContinue'
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
 Set-Location -Path $scriptPath
 
-$title = "OPTIMIZADOR DE COMPUTADORA v2.0"
+$title = "OPTIMIZADOR DE COMPUTADORA v2.3"
 
 # --- Funciones Auxiliares ---
 
@@ -65,6 +65,12 @@ do {
     Write-Host ""
     Write-Host "  [6] REPARAR Y RED (Herramientas Avanzadas)" -ForegroundColor Cyan
     Write-Host "      (Optimizar Internet, Reparar Windows, SFC, Defrag)"
+    Write-Host ""
+    Write-Host "  [7] 🔒 ANALIZAR SEGURIDAD" -ForegroundColor Blue
+    Write-Host "      (Auditoría completa: Defender, Firewall, Updates, UAC)"
+    Write-Host ""
+    Write-Host "  [8] 🔄 REVERTIR CAMBIOS (Deshacer optimizaciones)" -ForegroundColor DarkYellow
+    Write-Host "      (Reactiva servicios, limpia logs, muestra restore points)"
     Write-Host ""
     Write-Host "  [0] SALIR" -ForegroundColor Gray
     Write-Host ""
@@ -126,6 +132,24 @@ do {
                  Write-Host "Se requieren permisos de Administrador para Reparación Avanzada." -ForegroundColor Red
              }
             Wait-Key
+        }
+        '7' {
+            if (Test-Path ".\Analizar-Seguridad.ps1") { 
+                & ".\Analizar-Seguridad.ps1" 
+            } else { Write-Host "Error: No se encuentra Analizar-Seguridad.ps1" -ForegroundColor Red }
+            Wait-Key
+        }
+        '8' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Revertir Cambios." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Revertir-Cambios.ps1") { 
+                    & ".\Revertir-Cambios.ps1" 
+                } else { Write-Host "Error: No se encuentra Revertir-Cambios.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
         }
         '0' {
             Write-Host "Cerrando..." -ForegroundColor Gray
