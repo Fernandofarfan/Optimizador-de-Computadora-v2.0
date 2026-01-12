@@ -58,6 +58,13 @@ Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediant
 
 ## 🚀 Inicio Rápido
 
+### Instalación Inicial (Primera vez)
+```powershell
+# Descarga el proyecto y ejecuta:
+.\Instalar.ps1
+```
+Este script verificará requisitos, configurará permisos y creará directorios necesarios.
+
 ### Opción 1: Modo Administrador (Recomendado)
 ```batch
 Doble clic en: EJECUTAR-COMO-ADMIN.bat
@@ -73,6 +80,8 @@ cd "C:\ruta\al\proyecto"
 ### Opción 3: PowerShell como Administrador
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
+.\Optimizador.ps1
+```
 .\Optimizador.ps1
 ```
 
@@ -107,8 +116,10 @@ PC-Optimizer-Suite/
 │       └── powershell-ci.yml        # GitHub Actions para validación automática
 ├── docs/
 │   ├── index.html                   # Landing page del proyecto
-│   └── style.css                    # Estilos de la página web
+│   ├── style.css                    # Estilos de la página web
+│   └── README.md                    # Documentación del sitio
 ├── EJECUTAR-COMO-ADMIN.bat          # Lanzador con permisos elevados
+├── Instalar.ps1                     # Script de instalación inicial
 ├── Optimizador.ps1                  # Menú principal (maestro)
 ├── Analizar-Sistema.ps1             # Módulo de análisis
 ├── Optimizar-Sistema-Seguro.ps1     # Optimización sin daños
@@ -117,6 +128,7 @@ PC-Optimizer-Suite/
 ├── Gestionar-Procesos.ps1           # Startup y consumo de RAM
 ├── Reparar-Red-Sistema.ps1          # Herramientas de reparación
 ├── Logger.ps1                       # Sistema de logging avanzado
+├── Ejemplo-Logger.ps1               # Ejemplos de uso del logger
 ├── README.md                        # Este archivo
 ├── CONTRIBUTING.md                  # Guía para contribuidores
 ├── SECURITY.md                      # Política de seguridad

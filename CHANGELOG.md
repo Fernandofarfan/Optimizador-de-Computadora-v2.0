@@ -25,6 +25,19 @@ Todos los cambios notables en este proyecto se documentan en este archivo.
   - Proceso para reportar vulnerabilidades
   - Alcance de operaciones sensibles
   - Auditoría de código
+- **Script de Instalación** - Instalar.ps1 para configuración inicial
+  - Verificación de requisitos del sistema
+  - Validación de archivos del proyecto
+  - Configuración automática de permisos
+  - Creación de directorios necesarios
+- **Ejemplo de Logging** - Ejemplo-Logger.ps1 con casos de uso
+  - 8 ejemplos prácticos de uso del logger
+  - Integración en funciones personalizadas
+  - Guía de mejores prácticas
+- **Documentación de docs/** - README.md para GitHub Pages
+  - Guía de modificación del sitio web
+  - Configuración de deployment
+  - Estructura de archivos
 
 ### 🔧 Mejorado
 - README actualizado con sección de logging
@@ -74,6 +87,8 @@ Todos los cambios notables en este proyecto se documentan en este archivo.
 - `Gestionar-Procesos.ps1` - Startup y RAM
 - `Reparar-Red-Sistema.ps1` - Reparación avanzada
 - `Logger.ps1` - Sistema de logging avanzado
+- `Instalar.ps1` - Script de instalación y verificación
+- `Ejemplo-Logger.ps1` - Ejemplos de uso del logger
 - `EJECUTAR-COMO-ADMIN.bat` - Lanzador con permisos
 - `README.md` - Documentación principal
 - `CONTRIBUTING.md` - Guía para contribuidores
@@ -84,6 +99,7 @@ Todos los cambios notables en este proyecto se documentan en este archivo.
 - `.github/workflows/powershell-ci.yml` - GitHub Actions
 - `docs/index.html` - Landing page
 - `docs/style.css` - Estilos profesionales
+- `docs/README.md` - Documentación del sitio web
 
 ---
 
