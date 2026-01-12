@@ -2,6 +2,81 @@
 
 Todos los cambios notables en este proyecto se documentan en este archivo.
 
+## [2.7.0] - 2025-01-12
+
+### ✨ Agregado - Herramientas Profesionales
+- **📡 Monitor en Tiempo Real** - `Monitor-TiempoReal.ps1`
+  - Dashboard continuo con actualización cada 2 segundos
+  - Métricas en tiempo real: CPU, RAM, Disco con porcentajes
+  - Velocidad de red: Descarga y subida en KB/s con deltas
+  - Progress bars con codificación de colores (Verde <60%, Amarillo 60-80%, Rojo >80%)
+  - Top 5 procesos por consumo de RAM con WorkingSet
+  - Interfaz profesional con caracteres Unicode (cajas, barras)
+  - Redibujado in-place con SetCursorPosition (sin scrolling)
+  - Contador de iteraciones y timestamp
+  - Salida con Ctrl+C
+
+- **⚙️ Perfiles de Optimización** - `Perfiles-Optimizacion.ps1`
+  - **🎮 Perfil Gaming**: Plan alto rendimiento, updates pausados 7 días, Game Bar off, prioridad alta, sin notificaciones, GPU rendimiento
+  - **💼 Perfil Trabajo**: Plan equilibrado, notificaciones activas, updates normales, efectos visuales balanceados, prioridad normal
+  - **🔋 Perfil Batería**: Ahorro de energía, CPU limitada 50-70%, brillo 70%, suspensiones 2-5 min, efectos mínimos, +30-50% duración
+  - **⚡ Perfil Máximo Rendimiento**: Ultimate Performance plan, CPU 100%, sin suspensiones, PCI Express máximo, Core Parking off, servicios innecesarios desactivados
+  - Aplicación instantánea con un clic
+  - Recomendaciones post-aplicación
+
+- **🎮 Optimizador de Juegos Específicos** - `Optimizar-Juegos.ps1`
+  - Detección automática multi-plataforma: Steam (libraryfolders.vdf), Epic Games (manifests), Origin (LocalContent), GOG (Registry)
+  - Optimización en tiempo real (mientras el juego corre)
+  - Prioridad alta: PriorityClass = High
+  - CPU Affinity dedicada: Todos los núcleos disponibles
+  - GPU alto rendimiento por juego: DirectX UserGpuPreferences
+  - Pantalla completa exclusiva: Mode=2 (mejor FPS)
+  - Desactivación de overlays: Discord, GeForce Experience, Xbox Game Bar
+  - Lista numerada de juegos detectados
+  - Opción optimizar todos o individual
+  - Mejora esperada: +10-30% FPS
+
+- **🗂️ Limpieza Segura de Registro** - `Limpiar-Registro.ps1`
+  - Backup automático en .reg antes de cualquier cambio
+  - Limpieza de 5 áreas seguras: MUICache (caché iconos), SharedDLLs huérfanas, FileExts inválidas, Uninstall keys huérfanas, Documentos recientes
+  - Exportación completa con reg export
+  - Contadores: Analizadas, eliminadas, errores
+  - Estimación de espacio liberado (~2KB por entrada)
+  - Sin tocar áreas críticas: HKLM\SYSTEM, Run, Drivers
+  - Instrucciones de restauración incluidas
+
+- **💿 Desfragmentador Inteligente** - `Desfragmentar-Inteligente.ps1`
+  - Detección automática tipo disco: Get-PhysicalDisk MediaType (HDD vs SSD)
+  - Para HDD: Análisis de fragmentación con Optimize-Volume -Analyze, defrag solo si >10%, progress reporting, análisis before/after
+  - Para SSD: TRIM con Optimize-Volume -ReTrim (sin defrag, previene desgaste), explicación automática
+  - Soporte multi-unidad o selección individual
+  - Cálculo de tiempo y mejora
+  - Información educativa (HDD cada 1-3 meses, SSD automático Windows)
+
+- **🔄 Gestor de Actualizaciones Avanzado** - `Gestor-Actualizaciones.ps1`
+  - Pausar actualizaciones: 1-35 días con PauseUpdatesExpiryTime
+  - Reanudar: Eliminar registry keys (Quality, Feature)
+  - Ver estado actual: Pausado/Activo con días restantes
+  - Historial: Win32_QuickFixEngineering últimas 20 actualizaciones
+  - Buscar disponibles: Microsoft.Update.Session search IsInstalled=0
+  - Instalación selectiva: Todas o elegir específicas por número
+  - Información de severidad: Critical, Important, Moderate, Low
+  - Tamaño de cada update en MB
+  - Descarga e instalación con UpdateCollection
+  - Detección de reinicio requerido
+
+### 🔧 Mejorado
+- **Menú Principal**: Añadidas opciones 19-24 (6 herramientas profesionales)
+- **README.md**: Documentación completa v2.7 con 6 nuevas secciones detalladas
+- **CHANGELOG.md**: Actualizado con todas las características técnicas de v2.7
+
+### 📝 Documentación
+- Guías detalladas de uso para cada perfil de optimización
+- Explicaciones de detección de juegos multi-plataforma
+- Instrucciones de restauración de registro
+- Información sobre HDD vs SSD y cuándo desfragmentar
+- Tutorial de control de Windows Update
+
 ## [2.6.0] - 2025-01-12
 
 ### ✨ Agregado

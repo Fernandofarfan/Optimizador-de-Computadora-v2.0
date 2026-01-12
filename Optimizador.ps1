@@ -14,7 +14,7 @@ $ErrorActionPreference = 'SilentlyContinue'
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
 Set-Location -Path $scriptPath
 
-$title = "OPTIMIZADOR DE COMPUTADORA v2.6"
+$title = "OPTIMIZADOR DE COMPUTADORA v2.7"
 
 # --- Funciones Auxiliares ---
 
@@ -101,6 +101,24 @@ do {
     Write-Host ""
     Write-Host "  [18] 📊 HISTORIAL" -ForegroundColor Blue
     Write-Host "       (Ver historial de optimizaciones)"
+    Write-Host ""
+    Write-Host "  [19] 📡 MONITOR TIEMPO REAL" -ForegroundColor Cyan
+    Write-Host "       (Dashboard continuo de CPU, RAM, Red, Procesos)"
+    Write-Host ""
+    Write-Host "  [20] ⚙️  PERFILES OPTIMIZACIÓN" -ForegroundColor Magenta
+    Write-Host "       (Gaming, Trabajo, Batería, Máximo Rendimiento)"
+    Write-Host ""
+    Write-Host "  [21] 🎮 OPTIMIZAR JUEGOS" -ForegroundColor Green
+    Write-Host "       (Detectar y optimizar juegos instalados)"
+    Write-Host ""
+    Write-Host "  [22] 🗂️  LIMPIAR REGISTRO" -ForegroundColor Yellow
+    Write-Host "       (Limpieza segura con backup automático)"
+    Write-Host ""
+    Write-Host "  [23] 💿 DESFRAGMENTAR" -ForegroundColor Blue
+    Write-Host "       (Inteligente: HDD defrag / SSD TRIM)"
+    Write-Host ""
+    Write-Host "  [24] 🔄 GESTOR UPDATES" -ForegroundColor DarkYellow
+    Write-Host "       (Control completo de Windows Update)"
     Write-Host ""
     Write-Host "  [0] SALIR" -ForegroundColor Gray
     Write-Host ""
@@ -269,7 +287,69 @@ do {
             } else { Write-Host "Error: No se encuentra Historico-Optimizaciones.ps1" -ForegroundColor Red }
             Wait-Key
         }
-        '0' {
+        '19' {
+            if (Test-Path ".\Monitor-TiempoReal.ps1") { 
+                & ".\Monitor-TiempoReal.ps1" 
+            } else { Write-Host "Error: No se encuentra Monitor-TiempoReal.ps1" -ForegroundColor Red }
+            Wait-Key
+        }
+        '20' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Perfiles de Optimización." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Perfiles-Optimizacion.ps1") { 
+                    & ".\Perfiles-Optimizacion.ps1" 
+                } else { Write-Host "Error: No se encuentra Perfiles-Optimizacion.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '21' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Optimizar Juegos." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Optimizar-Juegos.ps1") { 
+                    & ".\Optimizar-Juegos.ps1" 
+                } else { Write-Host "Error: No se encuentra Optimizar-Juegos.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '22' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Limpiar Registro." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Limpiar-Registro.ps1") { 
+                    & ".\Limpiar-Registro.ps1" 
+                } else { Write-Host "Error: No se encuentra Limpiar-Registro.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '23' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Desfragmentar." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Desfragmentar-Inteligente.ps1") { 
+                    & ".\Desfragmentar-Inteligente.ps1" 
+                } else { Write-Host "Error: No se encuentra Desfragmentar-Inteligente.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '24' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Gestor de Updates." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Gestor-Actualizaciones.ps1") { 
+                    & ".\Gestor-Actualizaciones.ps1" 
+                } else { Write-Host "Error: No se encuentra Gestor-Actualizaciones.ps1" -ForegroundColor Red }
                 Wait-Key
             }
         }

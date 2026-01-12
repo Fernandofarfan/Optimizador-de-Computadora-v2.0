@@ -1,4 +1,4 @@
-# PC Optimizer Suite v2.6
+# PC Optimizer Suite v2.7
 
 > **Herramienta profesional de optimización y mantenimiento para Windows 10/11**
 
@@ -11,7 +11,7 @@
 
 Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediante limpieza inteligente, gestión de servicios y reparación de componentes de sistema.
 
-**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.6.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.6.0)**
+**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.7.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.7.0)**
 
 ## ✨ Características
 
@@ -148,6 +148,21 @@ Una vez ejecutado, verás las siguientes opciones:
 | **[7]** | **🔒 Analizar Seguridad** | No | 3-5 min |
 | **[8]** | **🔄 Revertir Cambios** | **Sí** | 2-5 min |
 | **[9]** | **🎮 Modo Gaming** | **Sí** | 2-3 min |
+| **[10]** | Ver Logs | No | Inmediato |
+| **[11]** | Análisis Hardware | No | 2-3 min |
+| **[12]** | Tareas Programadas | **Sí** | 2-4 min |
+| **[13]** | Optimizar Red | **Sí** | 3-5 min |
+| **[14]** | Comparación Sistema | No | 1-2 min |
+| **[15]** | **💾 Backup Drivers** | **Sí** | 5-10 min |
+| **[16]** | **🦠 Limpiar Malware** | **Sí** | 10-20 min |
+| **[17]** | **📄 Reporte PDF** | No | 2-3 min |
+| **[18]** | **📊 Historial** | No | 1-2 min |
+| **[19]** | **📡 Monitor Tiempo Real** | No | Continuo |
+| **[20]** | **⚙️ Perfiles Optimización** | **Sí** | 1-2 min |
+| **[21]** | **🎮 Optimizar Juegos** | **Sí** | 2-5 min |
+| **[22]** | **🗂️ Limpiar Registro** | **Sí** | 3-5 min |
+| **[23]** | **💿 Defragmentar** | **Sí** | 10-60 min |
+| **[24]** | **🔄 Gestor Updates** | **Sí** | 2-10 min |
 | **[10]** | **💻 Análisis Hardware** | No | 3-4 min |
 | **[11]** | **⏰ Tareas Programadas** | **Sí** | 1-2 min |
 | **[12]** | **🌐 Red Avanzada** | **Sí** | 5-10 min |
@@ -157,9 +172,72 @@ Una vez ejecutado, verás las siguientes opciones:
 | **[16]** | **🦠 Limpiar Malware** | **Sí** | 3-5 min |
 | **[17]** | **📄 Generar Reporte PDF** | No | 1-2 min |
 | **[18]** | **📊 Historial** | No | 1 min |
+| **[19]** | **📡 Monitor Tiempo Real** | No | Continuo |
+| **[20]** | **⚙️ Perfiles Optimización** | **Sí** | 1-2 min |
+| **[21]** | **🎮 Optimizar Juegos** | **Sí** | 2-5 min |
+| **[22]** | **🗂️ Limpiar Registro** | **Sí** | 3-5 min |
+| **[23]** | **💿 Defragmentar** | **Sí** | 10-60 min |
+| **[24]** | **🔄 Gestor Updates** | **Sí** | 2-10 min |
 | **[0]** | Salir | - | - |
 
-### Nuevas Funciones en v2.6
+### Nuevas Funciones en v2.7 - Herramientas Profesionales
+
+#### 📡 Monitor en Tiempo Real
+Dashboard continuo del sistema:
+- CPU, RAM y Disco con progress bars de colores
+- Velocidad de red (descarga/subida en KB/s)
+- Top 5 procesos por consumo de RAM
+- Actualización automática cada 2 segundos
+- Interfaz con caracteres Unicode (cajas, barras)
+- Salida con Ctrl+C
+
+#### ⚙️ Perfiles de Optimización
+4 perfiles predefinidos para diferentes usos:
+- **🎮 Gaming**: Alto rendimiento, updates pausados, sin interrupciones, +10-25% FPS
+- **💼 Trabajo**: Equilibrado, notificaciones activas, multitarea optimizada
+- **🔋 Batería**: CPU limitada 50-70%, suspensiones rápidas, +30-50% duración
+- **⚡ Máximo**: Ultimate Performance, CPU 100%, Core Parking off, workstation mode
+- Cambio instantáneo entre perfiles
+
+#### 🎮 Optimizador de Juegos
+Detección y optimización específica por juego:
+- Auto-detección: Steam, Epic Games, Origin, GOG
+- Prioridad alta y CPU affinity dedicada
+- GPU alto rendimiento por juego
+- Pantalla completa exclusiva (mejor FPS)
+- Desactivar overlays (Discord, GeForce, Xbox)
+- Optimización mientras el juego corre
+- Mejora esperada: +10-30% FPS
+
+#### 🗂️ Limpieza de Registro
+Limpieza segura con backup automático:
+- MUICache (caché de iconos y menús)
+- SharedDLLs huérfanas (referencias rotas)
+- Extensiones de archivo inválidas
+- Claves de desinstalación huérfanas
+- Documentos recientes
+- Backup automático en .reg antes de cambios
+- Sin tocar áreas críticas (SYSTEM, Run, Drivers)
+
+#### 💿 Desfragmentador Inteligente
+Optimización según tipo de disco:
+- Detección automática HDD vs SSD
+- HDD: Defrag solo si >10% fragmentación
+- SSD: TRIM (sin defrag, previene desgaste)
+- Análisis before/after
+- Soporte multi-unidad o individual
+- Reporte de mejoras
+
+#### 🔄 Gestor de Actualizaciones
+Control total de Windows Update:
+- Pausar updates 1-35 días
+- Reanudar actualizaciones
+- Buscar actualizaciones disponibles
+- Instalar todas o seleccionar específicas
+- Ver historial con fechas
+- Estado actual (pausado/activo)
+
+### Funciones en v2.6
 
 #### 💾 Backup de Drivers
 Exportación completa de drivers:
