@@ -34,10 +34,11 @@ Todos los cambios notables en este proyecto se documentan en este archivo.
   - 8 ejemplos prácticos de uso del logger
   - Integración en funciones personalizadas
   - Guía de mejores prácticas
-- **Documentación de docs/** - README.md para GitHub Pages
-  - Guía de modificación del sitio web
-  - Configuración de deployment
-  - Estructura de archivos
+- **Script de Actualización** - Actualizar.ps1 para verificar nuevas versiones
+  - Consulta API de GitHub para obtener última release
+  - Compara versión instalada con disponible
+  - Muestra changelog de nuevas versiones
+  - Abre navegador automáticamente para descargar
 
 ### 🔧 Mejorado
 - README actualizado con sección de logging
@@ -88,6 +89,7 @@ Todos los cambios notables en este proyecto se documentan en este archivo.
 - `Reparar-Red-Sistema.ps1` - Reparación avanzada
 - `Logger.ps1` - Sistema de logging avanzado
 - `Instalar.ps1` - Script de instalación y verificación
+- `Actualizar.ps1` - Verificador de actualizaciones
 - `Ejemplo-Logger.ps1` - Ejemplos de uso del logger
 - `EJECUTAR-COMO-ADMIN.bat` - Lanzador con permisos
 - `README.md` - Documentación principal
