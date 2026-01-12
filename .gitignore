@@ -36,10 +36,10 @@ desktop.ini
 config.json
 settings.json
 
-# === Archivos de prueba ===
-test/
-tests/
-*.test.ps1
+# === Archivos de prueba generados ===
+# Permitir tests/ en el repo, pero ignorar archivos generados
+*.test.log
+TestResults/
 
 # === Dependencias (si se usan módulos externos) ===
 Modules/
