@@ -156,7 +156,7 @@ function Get-CloudProvider {
 }
 
 function New-BackupProfile {
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess=$true)]
     param()
     <#
     .SYNOPSIS
@@ -309,7 +309,7 @@ function New-BackupProfile {
 }
 
 function Start-Backup {
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess=$true)]
     param(
         [object]$BackupConfig
     )

@@ -137,7 +137,7 @@ function Get-SystemMetricsDetailed {
 }
 
 function New-BarChart {
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess=$true)]
     <#
     .SYNOPSIS
         Dibuja un gráfico de barras ASCII
@@ -161,7 +161,7 @@ function New-BarChart {
 }
 
 function New-SparkLine {
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess=$true)]
     <#
     .SYNOPSIS
         Dibuja un gráfico de línea ASCII (sparkline)
