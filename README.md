@@ -1,4 +1,4 @@
-# PC Optimizer Suite v2.8
+# PC Optimizer Suite v2.9
 
 > **Herramienta profesional de optimización y mantenimiento para Windows 10/11**
 
@@ -11,7 +11,7 @@
 
 Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediante limpieza inteligente, gestión de servicios y reparación de componentes de sistema.
 
-**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.8.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.8.0)**
+**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v2.9.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v2.9.0)**
 
 ## ✨ Características
 
@@ -168,6 +168,9 @@ Una vez ejecutado, verás las siguientes opciones:
 | **[27]** | **📊 Benchmark Sistema** | **Sí** | 5-10 min |
 | **[28]** | **☁️ Backup Nube** | **Sí** | 5-30 min |
 | **[29]** | **🖥️ Dashboard Avanzado** | **Sí** | Continuo |
+| **[30]** | **🔐 Privacidad Avanzada** | **Sí** | 3-10 min |
+| **[31]** | **📦 Gestor Aplicaciones** | **Sí** | 5-20 min |
+| **[32]** | **🔋 Gestor Energía** | **Sí** | 2-5 min |
 | **[0]** | Salir | - | - |
 
 ### Nuevas Funciones en v2.8 - Herramientas Empresariales

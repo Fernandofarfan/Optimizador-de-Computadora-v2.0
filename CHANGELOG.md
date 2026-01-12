@@ -2,6 +2,60 @@
 
 Todos los cambios notables en este proyecto se documentan en este archivo.
 
+## [2.9.0] - 2026-01-12
+
+### ✨ Agregado - Privacidad, Aplicaciones y Energía
+
+- **🔐 Centro de Privacidad Avanzada** - `Privacidad-Avanzada.ps1`
+  - Función `Get-AppPermissions`: Analiza permisos de cámara, micrófono, ubicación, contactos y calendario
+  - Función `Set-AppPermission`: Permite/deniega permisos individualmente por tipo
+  - Función `Disable-TelemetryAdvanced`: 30+ claves de registro para desactivar telemetría completa
+  - Desactiva servicios DiagTrack, dmwappushservice, Cortana, timeline, advertising
+  - Función `Clear-ActivityHistory`: Limpia carpeta ConnectedDevicesPlatform y ActivitiesCache.db
+  - Función `Get-ActiveConnections`: Analiza conexiones TCP activas, detecta IPs sospechosas
+  - Función `Export-PrivacyReport`: Genera JSON + HTML responsive con puntuación 0-100
+  - **Modo Máxima Privacidad**: Ejecuta todas las acciones automáticamente
+  - Reporte HTML con CSS gradientes, círculo de puntuación, tablas de conexiones
+  - Menú interactivo con 8 opciones + confirmaciones de seguridad
+
+- **📦 Gestor Inteligente de Aplicaciones** - `Gestor-Aplicaciones.ps1`
+  - Función `Get-InstalledApplications`: Escanea Registry (3 paths) + Get-AppxPackage para UWP
+  - Calcula tamaños reales: EstimatedSize (Win32) + Get-ChildItem recursivo (UWP)
+  - Detección de bloatware: 25+ patrones (CandyCrush, Xbox, Bing*, McAfee, Norton, etc.)
+  - Función `Uninstall-Application`: Soporta MSI (msiexec /x), EXE (argumentos /S /silent /q)
+  - Función `Uninstall-BulkApplications`: Desinstalación masiva con rangos (1-10) o listas (1,3,5)
+  - Función `Export-ApplicationList`/`Import-ApplicationList`: JSON con metadata de PC
+  - Función `Test-PackageManager`: Detecta winget y chocolatey disponibles
+  - Función `Update-ApplicationsWithWinget`: Actualiza todas las apps con winget upgrade --all
+  - Función `Get-UnusedApplications`: Detecta apps instaladas hace >90 días
+  - Menú con 9 opciones: listar, bloatware, desinstalar individual/masivo, exportar, actualizar
+
+- **🔋 Gestor Inteligente de Energía** - `Gestor-Energia.ps1`
+  - Función `Get-PowerPlan`: Obtiene plan activo con powercfg /getactivescheme
+  - Función `Get-AvailablePowerPlans`: Lista todos los planes con GUID y estado activo
+  - Función `Set-PowerPlan`: Cambia plan activo con validación
+  - Función `New-CustomPowerPlan`: Crea planes desde base (MaxPerformance, Balanced, PowerSaver, Gaming)
+  - Configuraciones Gaming: Suspension 0, USB no suspende, CPU 100%, monitor siempre encendido
+  - Función `Get-BatteryStatus`: WMI Win32_Battery con estado, carga%, tiempo restante, química
+  - Función `Get-BatteryHealth`: Genera battery-report.html con powercfg /batteryreport
+  - Función `Get-PowerConsumption`: CPU load, GPU info, brillo pantalla, top 5 procesos
+  - Función `Get-SleepBlockers`: Detecta drivers/servicios que bloquean suspensión con powercfg /requests
+  - Función `Set-PowerSettings`: Presets para Desktop, Laptop (CA/batería), Gaming
+  - Menú con 9 opciones: planes, batería, consumo, bloqueadores, reporte completo
+
+### 🔧 Mejorado
+
+- **Optimizador.ps1** actualizado a v2.9
+- Menú expandido de 29 a 32 opciones totales
+- Todas las nuevas herramientas con verificación de permisos de admin
+- Integración completa con Logger.ps1 (opcional)
+
+### 📝 Documentación
+
+- README.md actualizado con v2.9 y tabla de 32 opciones
+- Sección "Nuevas Funciones en v2.9" con 3 subsecciones detalladas
+- CHANGELOG.md con detalles técnicos completos de todas las funciones
+
 ## [2.8.0] - 2025-01-13
 
 ### ✨ Agregado - Herramientas Empresariales

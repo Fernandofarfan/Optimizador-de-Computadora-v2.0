@@ -14,7 +14,7 @@ $ErrorActionPreference = 'SilentlyContinue'
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
 Set-Location -Path $scriptPath
 
-$title = "OPTIMIZADOR DE COMPUTADORA v2.8"
+$title = "OPTIMIZADOR DE COMPUTADORA v2.9"
 
 # --- Funciones Auxiliares ---
 
@@ -134,6 +134,15 @@ do {
     Write-Host ""
     Write-Host "  [29] 🖥️  DASHBOARD AVANZADO" -ForegroundColor Yellow
     Write-Host "       (Métricas 30 días, gráficos, exportar HTML/PDF)"
+    Write-Host ""
+    Write-Host "  [30] 🔐 PRIVACIDAD AVANZADA" -ForegroundColor Cyan
+    Write-Host "       (Permisos apps, telemetría, historial, reporte)"
+    Write-Host ""
+    Write-Host "  [31] 📦 GESTOR APLICACIONES" -ForegroundColor Green
+    Write-Host "       (Bloatware, desinstalación masiva, winget)"
+    Write-Host ""
+    Write-Host "  [32] 🔋 GESTOR ENERGÍA" -ForegroundColor Yellow
+    Write-Host "       (Planes, batería, consumo, bloqueadores)"
     Write-Host ""
     Write-Host "  [0] SALIR" -ForegroundColor Gray
     Write-Host ""
@@ -425,6 +434,42 @@ do {
                 if (Test-Path ".\Dashboard-Avanzado.ps1") { 
                     & ".\Dashboard-Avanzado.ps1" 
                 } else { Write-Host "Error: No se encuentra Dashboard-Avanzado.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '30' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Privacidad Avanzada." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Privacidad-Avanzada.ps1") { 
+                    & ".\Privacidad-Avanzada.ps1" 
+                } else { Write-Host "Error: No se encuentra Privacidad-Avanzada.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '31' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Gestor de Aplicaciones." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Gestor-Aplicaciones.ps1") { 
+                    & ".\Gestor-Aplicaciones.ps1" 
+                } else { Write-Host "Error: No se encuentra Gestor-Aplicaciones.ps1" -ForegroundColor Red }
+                Wait-Key
+            }
+        }
+        '32' {
+            $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+            if (-not $isAdmin) {
+                Write-Host "`nError: Necesitas permisos de Administrador para Gestor de Energía." -ForegroundColor Red
+                Wait-Key
+            } else {
+                if (Test-Path ".\Gestor-Energia.ps1") { 
+                    & ".\Gestor-Energia.ps1" 
+                } else { Write-Host "Error: No se encuentra Gestor-Energia.ps1" -ForegroundColor Red }
                 Wait-Key
             }
         }
