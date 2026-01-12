@@ -12,7 +12,7 @@ Esta carpeta contiene la página web del proyecto alojada en GitHub Pages.
 ## 🌐 Sitio Web
 
 El sitio está disponible en:
-**https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/**
+**https://fernandofarfan.github.io/Optimizador-de-Computadora/**
 
 ## 🎨 Características del Sitio v3.0
 
@@ -47,7 +47,7 @@ Para actualizar el sitio:
 
 GitHub Pages está configurado para:
 - **Source**: rama `main`, carpeta `/docs`
-- **URL**: https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/
+- **URL**: https://fernandofarfan.github.io/Optimizador-de-Computadora/
 - **Custom domain**: No configurado
 - **Versión**: v3.0.0
 

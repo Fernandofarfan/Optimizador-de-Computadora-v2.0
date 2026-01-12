@@ -36,7 +36,7 @@ function Write-ColoredText {
 function Show-Header {
     Clear-Host
     Write-ColoredText "╔══════════════════════════════════════════════════════════════╗" "Cyan"
-    Write-ColoredText "║          DASHBOARD AVANZADO DEL SISTEMA v2.8.0             ║" "Cyan"
+    Write-ColoredText "║          DASHBOARD AVANZADO DEL SISTEMA v4.0.0             ║" "Cyan"
     Write-ColoredText "╚══════════════════════════════════════════════════════════════╝" "Cyan"
     Write-Host ""
 }
@@ -640,7 +640,7 @@ function Export-DashboardHTML {
         </div>
         
         <div class="footer">
-            <p>Generado por Optimizador de Computadora v2.8.0</p>
+            <p>Generado por Optimizador de Computadora v4.0.0</p>
             <p>© 2025 - Dashboard Avanzado del Sistema</p>
         </div>
     </div>

@@ -1,7 +1,7 @@
 <#
 .SYNOPSIS
     Módulo de Análisis de Sistema
-    Parte de Optimizador de Computadora v2.0
+    Parte de Optimizador de Computadora v4.0.0
 #>
 
 $ErrorActionPreference = 'SilentlyContinue'

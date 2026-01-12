@@ -32,7 +32,7 @@ function Write-ColoredText {
 function Show-Header {
     Clear-Host
     Write-ColoredText "╔══════════════════════════════════════════════════════════════╗" "Cyan"
-    Write-ColoredText "║         GESTOR DE PUNTOS DE RESTAURACIÓN v2.8.0            ║" "Cyan"
+    Write-ColoredText "║         GESTOR DE PUNTOS DE RESTAURACIÓN v4.0.0            ║" "Cyan"
     Write-ColoredText "╚══════════════════════════════════════════════════════════════╝" "Cyan"
     Write-Host ""
 }
@@ -118,7 +118,7 @@ function New-RestorePointAdvanced {
         Crea un nuevo punto de restauración con verificaciones
     #>
     param(
-        [string]$Description = "Punto de restauración manual - Optimizador v2.8"
+        [string]$Description = "Punto de restauración manual - Optimizador v4.0"
     )
     
     Write-ColoredText "`n🔧 Creando punto de restauración..." "Cyan"
@@ -467,7 +467,7 @@ do {
             $desc = Read-Host "Descripción"
             
             if ([string]::IsNullOrWhiteSpace($desc)) {
-                $desc = "Punto de restauración manual - Optimizador v2.8"
+                $desc = "Punto de restauración manual - Optimizador v4.0"
             }
             
             New-RestorePointAdvanced -Description $desc

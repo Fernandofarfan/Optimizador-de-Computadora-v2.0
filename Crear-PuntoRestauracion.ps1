@@ -85,7 +85,7 @@ Write-Host "(Esto puede tomar 1-3 minutos)" -ForegroundColor Gray
 Write-Host ""
 
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm"
-$description = "PC Optimizer v2.1 - Backup antes de optimización ($timestamp)"
+$description = "PC Optimizer v4.0.0 - Backup antes de optimización ($timestamp)"
 
 try {
     Write-Log "Iniciando creación de punto de restauración: $description" -Level "INFO"

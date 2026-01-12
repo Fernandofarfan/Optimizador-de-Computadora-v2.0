@@ -32,7 +32,7 @@ function Write-ColoredText {
 function Show-Header {
     Clear-Host
     Write-ColoredText "╔══════════════════════════════════════════════════════════════╗" "Cyan"
-    Write-ColoredText "║      MANTENIMIENTO AUTOMÁTICO DEL SISTEMA v2.8.0           ║" "Cyan"
+    Write-ColoredText "║      MANTENIMIENTO AUTOMÁTICO DEL SISTEMA v4.0.0           ║" "Cyan"
     Write-ColoredText "╚══════════════════════════════════════════════════════════════╝" "Cyan"
     Write-Host ""
 }

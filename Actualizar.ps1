@@ -22,7 +22,7 @@ Write-Host "Verificando actualizaciones en GitHub..." -ForegroundColor Yellow
 
 try {
     # Obtener la última release de GitHub
-    $repoUrl = "https://api.github.com/repos/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/latest"
+    $repoUrl = "https://api.github.com/repos/Fernandofarfan/Optimizador-de-Computadora/releases/latest"
     
     # Intentar obtener información de la última release
     $response = Invoke-RestMethod -Uri $repoUrl -Method Get -ErrorAction Stop
@@ -65,8 +65,8 @@ try {
         Write-Host ""
     }
     
-    Write-Host "Repositorio: https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0" -ForegroundColor Gray
-    Write-Host "Releases: https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases" -ForegroundColor Gray
+    Write-Host "Repositorio: https://github.com/Fernandofarfan/Optimizador-de-Computadora" -ForegroundColor Gray
+    Write-Host "Releases: https://github.com/Fernandofarfan/Optimizador-de-Computadora/releases" -ForegroundColor Gray
     
 } catch {
     Write-Host "❌ No se pudo verificar actualizaciones" -ForegroundColor Red
@@ -78,7 +78,7 @@ try {
     Write-Host "  - Firewall bloqueando la conexión" -ForegroundColor Gray
     Write-Host ""
     Write-Host "Verifica manualmente en:" -ForegroundColor White
-    Write-Host "  https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases" -ForegroundColor Cyan
+    Write-Host "  https://github.com/Fernandofarfan/Optimizador-de-Computadora/releases" -ForegroundColor Cyan
 }
 
 Write-Host ""
@@ -89,10 +89,10 @@ Write-Host ""
 Write-Host "📚 Documentación:" -ForegroundColor Yellow
 Write-Host "  - README.md - Guía completa" -ForegroundColor White
 Write-Host "  - CHANGELOG.md - Historial de cambios" -ForegroundColor White
-Write-Host "  - Web: https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/" -ForegroundColor White
+Write-Host "  - Web: https://fernandofarfan.github.io/Optimizador-de-Computadora/" -ForegroundColor White
 Write-Host ""
 Write-Host "💬 Soporte:" -ForegroundColor Yellow
-Write-Host "  - Issues: https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/issues" -ForegroundColor White
+Write-Host "  - Issues: https://github.com/Fernandofarfan/Optimizador-de-Computadora/issues" -ForegroundColor White
 Write-Host "  - Contribuir: Ver CONTRIBUTING.md" -ForegroundColor White
 Write-Host ""
 

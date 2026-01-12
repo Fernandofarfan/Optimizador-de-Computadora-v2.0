@@ -9,8 +9,8 @@
 1. Haz un **fork** de este repositorio
 2. Clona tu fork localmente:
    ```bash
-   git clone https://github.com/TU-USUARIO/Optimizador-de-Computadora-v2.0.git
-   cd Optimizador-de-Computadora-v2.0
+   git clone https://github.com/TU-USUARIO/Optimizador-de-Computadora.git
+   cd Optimizador-de-Computadora
    ```
 
 ### 2. Crea una Rama
@@ -102,7 +102,7 @@ Luego:
 
 ### 🐛 Reportar Bugs
 
-Abre un [Issue](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/issues) con:
+Abre un [Issue](https://github.com/Fernandofarfan/Optimizador-de-Computadora/issues) con:
 - Descripción del problema
 - Pasos para reproducir
 - Comportamiento esperado vs. actual
@@ -148,7 +148,7 @@ Si quieres agregar un nuevo módulo (ej: Gestor de Drivers, Modo Gaming):
 
 ## Preguntas
 
-Si tienes dudas, abre un [Issue](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/issues) o contacta al maintainer.
+Si tienes dudas, abre un [Issue](https://github.com/Fernandofarfan/Optimizador-de-Computadora/issues) o contacta al maintainer.
 
 ---
 

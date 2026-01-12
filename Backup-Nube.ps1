@@ -35,7 +35,7 @@ function Write-ColoredText {
 function Show-Header {
     Clear-Host
     Write-ColoredText "╔══════════════════════════════════════════════════════════════╗" "Cyan"
-    Write-ColoredText "║         SISTEMA DE RESPALDO A LA NUBE v2.8.0               ║" "Cyan"
+    Write-ColoredText "║         SISTEMA DE RESPALDO A LA NUBE v4.0.0               ║" "Cyan"
     Write-ColoredText "╚══════════════════════════════════════════════════════════════╝" "Cyan"
     Write-Host ""
 }

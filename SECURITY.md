@@ -104,4 +104,4 @@ Las actualizaciones de seguridad se publican como **releases de parche** (ej: 2.
 
 **Última actualización**: Enero 2026
 
-Para preguntas generales (no de seguridad), abre un [Issue](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/issues).
+Para preguntas generales (no de seguridad), abre un [Issue](https://github.com/Fernandofarfan/Optimizador-de-Computadora/issues).

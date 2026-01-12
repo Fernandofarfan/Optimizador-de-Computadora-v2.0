@@ -89,7 +89,7 @@ foreach ($file in $requiredFiles) {
 if ($missing.Count -gt 0) {
     Write-Host ""
     Write-Host "  ⚠️  Archivos faltantes detectados. Recomendado descargar versión completa." -ForegroundColor Yellow
-    Write-Host "     https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases" -ForegroundColor Gray
+    Write-Host "     https://github.com/Fernandofarfan/Optimizador-de-Computadora/releases" -ForegroundColor Gray
 }
 
 Write-Host ""
@@ -145,7 +145,7 @@ Write-Host "📚 DOCUMENTACIÓN:" -ForegroundColor Yellow
 Write-Host "  - README.md - Guía completa de uso" -ForegroundColor White
 Write-Host "  - CONTRIBUTING.md - Cómo contribuir" -ForegroundColor White
 Write-Host "  - Ejemplo-Logger.ps1 - Ejemplos de logging" -ForegroundColor White
-Write-Host "  - Web: https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/" -ForegroundColor White
+Write-Host "  - Web: https://fernandofarfan.github.io/Optimizador-de-Computadora/" -ForegroundColor White
 Write-Host ""
 
 Write-Host "⚠️  IMPORTANTE:" -ForegroundColor Yellow

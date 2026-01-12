@@ -2,17 +2,17 @@
 
 > **Herramienta profesional de optimización y mantenimiento para Windows 10/11 con IA, testing y auto-actualización**
 
-[![GitHub Release](https://img.shields.io/github/v/release/Fernandofarfan/Optimizador-de-Computadora-v2.0?style=flat-square&logo=github)](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases)
+[![GitHub Release](https://img.shields.io/github/v/release/Fernandofarfan/Optimizador-de-Computadora?style=flat-square&logo=github)](https://github.com/Fernandofarfan/Optimizador-de-Computadora/releases)
 [![License MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 [![PowerShell 5.1+](https://img.shields.io/badge/PowerShell-5.1%2B-blue.svg?style=flat-square)](https://www.microsoft.com/en-us/download/details.aspx?id=50395)
 [![Windows 10/11](https://img.shields.io/badge/Windows-10%2F11-blue.svg?style=flat-square)](#)
-[![GitHub Stars](https://img.shields.io/github/stars/Fernandofarfan/Optimizador-de-Computadora-v2.0?style=flat-square&logo=github)](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0)
-[![CI Status](https://img.shields.io/github/actions/workflow/status/Fernandofarfan/Optimizador-de-Computadora-v2.0/powershell-ci.yml?style=flat-square&label=CI)](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/actions)
+[![GitHub Stars](https://img.shields.io/github/stars/Fernandofarfan/Optimizador-de-Computadora?style=flat-square&logo=github)](https://github.com/Fernandofarfan/Optimizador-de-Computadora)
+[![CI Status](https://img.shields.io/github/actions/workflow/status/Fernandofarfan/Optimizador-de-Computadora/powershell-ci.yml?style=flat-square&label=CI)](https://github.com/Fernandofarfan/Optimizador-de-Computadora/actions)
 [![Pester Tests](https://img.shields.io/badge/Tests-Pester-green?style=flat-square)](tests/)
 
 Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediante limpieza inteligente, gestión de servicios y reparación de componentes de sistema.
 
-**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/)** | **[Descargar v4.0.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases/tag/v4.0.0)**
+**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora/)** | **[Descargar v4.0.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora/releases/tag/v4.0.0)**
 
 ## 🆕 Novedades en v4.0
 
