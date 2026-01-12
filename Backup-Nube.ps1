@@ -256,7 +256,7 @@ function New-BackupProfile {
     }
     
     # Crear perfil
-    $profile = @{
+    $backupProfile = @{
         Name = $profileName
         Folders = $folders
         Destination = $selectedProvider.Path
@@ -283,7 +283,7 @@ function New-BackupProfile {
         }
     }
     
-    $config.Profiles += $profile
+    $config.Profiles += $backupProfile
     
     try {
         $config | ConvertTo-Json -Depth 10 | Out-File $Global:BackupConfigPath -Encoding UTF8
@@ -310,21 +310,21 @@ function Start-Backup {
         Ejecuta un respaldo según el perfil seleccionado
     #>
     param(
-        [object]$Profile
+        [object]$BackupProfile
     )
     
     Write-ColoredText "`n🔄 EJECUTANDO RESPALDO" "Cyan"
     Write-ColoredText "═══════════════════════════════════════════════════════════════" "Cyan"
     Write-Host ""
     
-    Write-Host "Perfil: $($Profile.Name)"
-    Write-Host "Destino: $($Profile.Destination)"
+    Write-Host "Perfil: $($BackupProfile.Name)"
+    Write-Host "Destino: $($BackupProfile.Destination)"
     Write-Host ""
     
     # Crear carpeta de respaldo
     $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
-    $backupFolderName = "Backup_$($Profile.Name)_$timestamp"
-    $backupPath = Join-Path $Profile.Destination "OptimizadorPC_Backups\$backupFolderName"
+    $backupFolderName = "Backup_$($BackupProfile.Name)_$timestamp"
+    $backupPath = Join-Path $BackupProfile.Destination "OptimizadorPC_Backups\$backupFolderName"
     
     try {
         New-Item -Path $backupPath -ItemType Directory -Force | Out-Null
@@ -342,7 +342,7 @@ function Start-Backup {
     Write-ColoredText "📁 Copiando archivos..." "Yellow"
     Write-Host ""
     
-    foreach ($folder in $Profile.Folders) {
+    foreach ($folder in $BackupProfile.Folders) {
         if (-not (Test-Path $folder)) {
             Write-ColoredText "⚠ Carpeta no encontrada: $folder" "Yellow"
             continue
@@ -387,7 +387,7 @@ function Start-Backup {
     Write-ColoredText "   Tamaño total: $([math]::Round($totalSize / 1MB, 2)) MB" "White"
     
     # Comprimir si está habilitado
-    if ($Profile.Compress) {
+    if ($BackupProfile.Compress) {
         Write-Host ""
         Write-ColoredText "📦 Comprimiendo respaldo..." "Yellow"
         
@@ -413,7 +413,7 @@ function Start-Backup {
     }
     
     # Encriptar si está habilitado
-    if ($Profile.Encrypt -and $Profile.Password) {
+    if ($BackupProfile.Encrypt -and $BackupProfile.Password) {
         Write-Host ""
         Write-ColoredText "🔒 Encriptando respaldo..." "Yellow"
         Write-ColoredText "   (Función de encriptación AES-256 - implementación futura)" "Gray"
@@ -424,7 +424,7 @@ function Start-Backup {
         $config = Get-Content $Global:BackupConfigPath -Raw | ConvertFrom-Json
         $profileIndex = 0
         for ($i = 0; $i -lt $config.Profiles.Count; $i++) {
-            if ($config.Profiles[$i].Name -eq $Profile.Name) {
+            if ($config.Profiles[$i].Name -eq $BackupProfile.Name) {
                 $profileIndex = $i
                 break
             }
@@ -441,7 +441,7 @@ function Start-Backup {
     Write-Host "   Fecha: $(Get-Date -Format 'dd/MM/yyyy HH:mm:ss')"
     
     if (Get-Command Write-Log -ErrorAction SilentlyContinue) {
-        Write-Log "Respaldo completado: $($Profile.Name), $copiedFiles archivos, $([math]::Round($totalSize / 1MB, 2)) MB" "Info"
+        Write-Log "Respaldo completado: $($BackupProfile.Name), $copiedFiles archivos, $([math]::Round($totalSize / 1MB, 2)) MB" "Info"
     }
 }
 
@@ -469,17 +469,17 @@ function Show-BackupProfiles {
         }
         
         for ($i = 0; $i -lt $profiles.Count; $i++) {
-            $profile = $profiles[$i]
+            $backupProfile = $profiles[$i]
             
             Write-ColoredText "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "Gray"
-            Write-Host "[$($i + 1)] $($profile.Name)"
-            Write-Host "    Proveedor: $($profile.Provider)"
-            Write-Host "    Carpetas: $($profile.Folders.Count)"
-            Write-Host "    Compresión: $(if ($profile.Compress) { 'Sí' } else { 'No' })"
-            Write-Host "    Encriptación: $(if ($profile.Encrypt) { 'Sí' } else { 'No' })"
+            Write-Host "[$($i + 1)] $($backupProfile.Name)"
+            Write-Host "    Proveedor: $($backupProfile.Provider)"
+            Write-Host "    Carpetas: $($backupProfile.Folders.Count)"
+            Write-Host "    Compresión: $(if ($backupProfile.Compress) { 'Sí' } else { 'No' })"
+            Write-Host "    Encriptación: $(if ($backupProfile.Encrypt) { 'Sí' } else { 'No' })"
             
-            if ($profile.LastBackup) {
-                Write-Host "    Último respaldo: $($profile.LastBackup)"
+            if ($backupProfile.LastBackup) {
+                Write-Host "    Último respaldo: $($backupProfile.LastBackup)"
             }
             else {
                 Write-Host "    Último respaldo: Nunca"
@@ -535,9 +535,9 @@ function Remove-BackupProfile {
         $config = Get-Content $Global:BackupConfigPath -Raw | ConvertFrom-Json
         $newProfiles = @()
         
-        foreach ($profile in $config.Profiles) {
-            if ($profile.Name -ne $profileToRemove.Name) {
-                $newProfiles += $profile
+        foreach ($backupProfile in $config.Profiles) {
+            if ($backupProfile.Name -ne $profileToRemove.Name) {
+                $newProfiles += $backupProfile
             }
         }
         

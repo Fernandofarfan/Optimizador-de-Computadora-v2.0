@@ -90,7 +90,7 @@ function Show-ScheduledTasks {
         Write-ColoredText "Estado: $status" $color
         Write-Host "Descripción: $($task.Description)"
         
-        if ($info.LastRunTime -ne $null -and $info.LastRunTime.Year -gt 1) {
+        if ($null -ne $info.LastRunTime -and $info.LastRunTime.Year -gt 1) {
             Write-Host "Última ejecución: $($info.LastRunTime.ToString('dd/MM/yyyy HH:mm:ss'))"
             Write-Host "Resultado: $($info.LastTaskResult)"
         }
@@ -98,7 +98,7 @@ function Show-ScheduledTasks {
             Write-Host "Última ejecución: Nunca"
         }
         
-        if ($info.NextRunTime -ne $null -and $info.NextRunTime.Year -gt 1) {
+        if ($null -ne $info.NextRunTime -and $info.NextRunTime.Year -gt 1) {
             Write-Host "Próxima ejecución: $($info.NextRunTime.ToString('dd/MM/yyyy HH:mm:ss'))"
         }
         

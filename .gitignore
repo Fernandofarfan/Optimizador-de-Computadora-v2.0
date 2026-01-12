@@ -1,31 +1,68 @@
 # Git ignore para PC Optimizer Suite
 # Archivos temporales y logs que no deben subirse al repo
 
-# Archivos de sistema y logs
+# === Archivos de sistema y logs ===
 *.log
 *.txt
 *.log.*
 Reporte-*.txt
 Analisis-*.txt
 logs/
+optimizador.log*
 
-# Cache de PowerShell
+# === Cache de PowerShell ===
 *.ps1xml
 
-# Directorios de sistema y backups
+# === Directorios de sistema y backups ===
 backup/
 backups/
 old/
+temp/
 .DS_Store
 Thumbs.db
 $RECYCLE.BIN/
 *.stackdump
 
-# Editor local
+# === Editor local ===
 .vscode/
 .idea/
 *.code-workspace
 
-# Archivos de Windows
+# === Archivos de Windows ===
 desktop.ini
+*.lnk
+
+# === Archivos de configuración local (generados) ===
+config.json
+settings.json
+
+# === Archivos de prueba ===
+test/
+tests/
+*.test.ps1
+
+# === Dependencias (si se usan módulos externos) ===
+Modules/
+node_modules/
+
+# === Archivos de compilación y generados ===
+*.exe
+*.dll
+*.zip
+*.7z
+*.rar
+
+# === Reportes generados ===
+*-report.html
+*-report.json
+battery-report.html
+
+# === Datos sensibles ===
+*.key
+*.pem
+*.pfx
+*.p12
+credentials.txt
+secrets.txt
+password.txt
 *.lnk

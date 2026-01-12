@@ -77,8 +77,8 @@ function Get-NetworkTrafficByProcess {
         }
     }
     
-    # Obtener estadísticas de adaptadores de red
-    $adapters = Get-NetAdapterStatistics -ErrorAction SilentlyContinue
+    # Verificar estadísticas de adaptadores de red disponibles
+    Get-NetAdapterStatistics -ErrorAction SilentlyContinue | Out-Null
     
     Write-Host "`n╔══════════════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
     Write-Host "║              TRÁFICO DE RED POR APLICACIÓN                           ║" -ForegroundColor White
@@ -309,7 +309,7 @@ function Block-ProcessNetwork {
     }
     catch {
         Write-Host "  [✗] Error al bloquear: $_" -ForegroundColor Red
-        Write-Log "Error al bloquear conexiones de $ProcessName: $_" "ERROR"
+        Write-Log "Error al bloquear conexiones de $($ProcessName): $_" "ERROR"
         return $false
     }
 }

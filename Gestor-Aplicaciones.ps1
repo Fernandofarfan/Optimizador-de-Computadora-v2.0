@@ -224,9 +224,9 @@ function Uninstall-Application {
             # Determinar el tipo de desinstalador
             if ($uninstallString -match "msiexec") {
                 # MSI Installer
-                $productCode = ($uninstallString -match "\{.*\}") | Out-Null
-                if ($matches) {
-                    $arguments = "/x $($matches[0]) /qn /norestart"
+                if ($uninstallString -match "\{.*\}") {
+                    $productCode = $matches[0]
+                    $arguments = "/x $productCode /qn /norestart"
                     Start-Process "msiexec.exe" -ArgumentList $arguments -Wait -NoNewWindow
                 }
             }

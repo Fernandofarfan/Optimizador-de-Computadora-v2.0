@@ -252,6 +252,7 @@ function Get-BatteryStatus {
         
         # Calcular salud de batería
         $batteryReport = powercfg /batteryreport /output "$env:TEMP\battery-report.html" 2>&1
+        Write-Log "Battery report generado: $($batteryReport -join ' ')" "INFO"
         
         Write-Host "`n  ╔════════════════════════════════════════════════╗" -ForegroundColor Yellow
         Write-Host "  ║          INFORMACIÓN DE BATERÍA                ║" -ForegroundColor White
@@ -330,7 +331,6 @@ function Get-PowerConsumption {
     
     # CPU
     try {
-        $cpu = Get-WmiObject -Class Win32_Processor
         $cpuLoad = (Get-Counter '\Processor(_Total)\% Processor Time' -ErrorAction SilentlyContinue).CounterSamples.CookedValue
         $consumption.CPU = [math]::Round($cpuLoad, 2)
         
@@ -465,6 +465,7 @@ function Set-PowerSettings {
                 $guid = $matches[1]
                 powercfg /setacvalueindex $guid SUB_USB USBSELECTIVESUSPEND 0
                 powercfg /setactive $guid
+                Write-Log "Plan activado: $activePlan" "INFO"
             }
             
             Write-Host "  [✓] Monitor siempre encendido" -ForegroundColor Green
@@ -490,7 +491,7 @@ function Show-EnergyReport {
     Write-Host "`n[Plan Activo] $currentPlan" -ForegroundColor Green
     
     # Batería
-    $battery = Get-BatteryStatus
+    Get-BatteryStatus | Out-Null
     
     # Consumo
     Get-PowerConsumption | Out-Null

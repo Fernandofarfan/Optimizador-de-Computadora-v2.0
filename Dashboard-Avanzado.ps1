@@ -134,7 +134,7 @@ function Get-SystemMetricsDetailed {
     }
 }
 
-function Draw-BarChart {
+function Show-BarChart {
     <#
     .SYNOPSIS
         Dibuja un gráfico de barras ASCII
@@ -159,7 +159,7 @@ function Draw-BarChart {
     Write-Host " $([math]::Round($Percentage, 1))%" -ForegroundColor $color
 }
 
-function Draw-SparkLine {
+function Show-SparkLine {
     <#
     .SYNOPSIS
         Dibuja un gráfico de línea ASCII (sparkline)
@@ -240,8 +240,8 @@ function Show-LiveDashboard {
         Write-ColoredText "┌─ CPU ─────────────────────────────────────────────────────────┐" "Cyan"
         Write-Host "│ $($metrics.CPU.Name)"
         Write-Host "│ $($metrics.CPU.Cores) núcleos, $($metrics.CPU.Threads) hilos"
-        Draw-BarChart -Percentage $metrics.CPU.Usage -Width 50 -Label "Uso:"
-        Write-Host "│ Histórico: $(Draw-SparkLine -Data $history.CPU -Width 50)"
+        Show-BarChart -Percentage $metrics.CPU.Usage -Width 50 -Label "Uso:"
+        Write-Host "│ Histórico: $(Show-SparkLine -Data $history.CPU -Width 50)"
         if ($metrics.CPU.Temperature -ne "N/A") {
             Write-Host "│ Temperatura: $($metrics.CPU.Temperature)°C"
         }
@@ -251,16 +251,16 @@ function Show-LiveDashboard {
         # RAM
         Write-ColoredText "┌─ MEMORIA RAM ─────────────────────────────────────────────────┐" "Cyan"
         Write-Host "│ Total: $($metrics.RAM.Total) GB | Usado: $($metrics.RAM.Used) GB | Libre: $($metrics.RAM.Free) GB"
-        Draw-BarChart -Percentage $metrics.RAM.Percent -Width 50 -Label "Uso:"
-        Write-Host "│ Histórico: $(Draw-SparkLine -Data $history.RAM -Width 50)"
+        Show-BarChart -Percentage $metrics.RAM.Percent -Width 50 -Label "Uso:"
+        Write-Host "│ Histórico: $(Show-SparkLine -Data $history.RAM -Width 50)"
         Write-ColoredText "└───────────────────────────────────────────────────────────────┘" "Cyan"
         Write-Host ""
         
         # Disco
         Write-ColoredText "┌─ DISCO C: ────────────────────────────────────────────────────┐" "Cyan"
         Write-Host "│ Total: $($metrics.Disk.Total) GB | Usado: $($metrics.Disk.Used) GB | Libre: $($metrics.Disk.Free) GB"
-        Draw-BarChart -Percentage $metrics.Disk.Percent -Width 50 -Label "Uso:"
-        Write-Host "│ Histórico: $(Draw-SparkLine -Data $history.Disk -Width 50)"
+        Show-BarChart -Percentage $metrics.Disk.Percent -Width 50 -Label "Uso:"
+        Write-Host "│ Histórico: $(Show-SparkLine -Data $history.Disk -Width 50)"
         Write-ColoredText "└───────────────────────────────────────────────────────────────┘" "Cyan"
         Write-Host ""
         
@@ -363,7 +363,7 @@ function Show-HistoricalCharts {
         
         # CPU
         Write-ColoredText "CPU (%):" "Cyan"
-        Write-Host "  $(Draw-SparkLine -Data $cpuData -Width 60)"
+        Write-Host "  $(Show-SparkLine -Data $cpuData -Width 60)"
         $avgCPU = [math]::Round(($cpuData | Measure-Object -Average).Average, 2)
         $maxCPU = [math]::Round(($cpuData | Measure-Object -Maximum).Maximum, 2)
         Write-Host "  Promedio: $avgCPU% | Máximo: $maxCPU%"
@@ -371,7 +371,7 @@ function Show-HistoricalCharts {
         
         # RAM
         Write-ColoredText "RAM (%):" "Cyan"
-        Write-Host "  $(Draw-SparkLine -Data $ramData -Width 60)"
+        Write-Host "  $(Show-SparkLine -Data $ramData -Width 60)"
         $avgRAM = [math]::Round(($ramData | Measure-Object -Average).Average, 2)
         $maxRAM = [math]::Round(($ramData | Measure-Object -Maximum).Maximum, 2)
         Write-Host "  Promedio: $avgRAM% | Máximo: $maxRAM%"
@@ -379,7 +379,7 @@ function Show-HistoricalCharts {
         
         # Disco
         Write-ColoredText "Disco (%):" "Cyan"
-        Write-Host "  $(Draw-SparkLine -Data $diskData -Width 60)"
+        Write-Host "  $(Show-SparkLine -Data $diskData -Width 60)"
         $avgDisk = [math]::Round(($diskData | Measure-Object -Average).Average, 2)
         $maxDisk = [math]::Round(($diskData | Measure-Object -Maximum).Maximum, 2)
         Write-Host "  Promedio: $avgDisk% | Máximo: $maxDisk%"

@@ -277,8 +277,8 @@ function Find-ErrorPatterns {
     
     $findings = @()
     
-    foreach ($error in $Errors) {
-        $message = $error.Message
+    foreach ($errorItem in $Errors) {
+        $message = $errorItem.Message
         
         foreach ($pattern in $Global:KnowledgeBase.Keys) {
             if ($message -match $pattern) {
@@ -691,13 +691,13 @@ function Export-DiagnosticReport {
                 <tbody>
 "@
     
-    foreach ($error in ($Errors | Select-Object -First 20)) {
+    foreach ($errorItem in ($Errors | Select-Object -First 20)) {
         $html += @"
                     <tr>
-                        <td>$($error.TimeCreated.ToString('yyyy-MM-dd HH:mm'))</td>
-                        <td>$($error.Level)</td>
-                        <td>$($error.Source)</td>
-                        <td>$($error.Message.Substring(0, [Math]::Min(100, $error.Message.Length)))...</td>
+                        <td>$($errorItem.TimeCreated.ToString('yyyy-MM-dd HH:mm'))</td>
+                        <td>$($errorItem.Level)</td>
+                        <td>$($errorItem.Source)</td>
+                        <td>$($errorItem.Message.Substring(0, [Math]::Min(100, $errorItem.Message.Length)))...</td>
                     </tr>
 "@
     }
