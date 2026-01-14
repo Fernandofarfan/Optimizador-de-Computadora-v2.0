@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Optimizador de Computadora - Suite de Mantenimiento
     Autor: Proyecto de Optimizacion
@@ -38,13 +38,74 @@ function Show-Header {
 }
 
 function Wait-Key {
-    Write-Host "`nPresiona cualquier tecla para continuar..." -ForegroundColor Gray
-    $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+    Write-Host ""
+    $null = Read-Host "Presiona ENTER para continuar"
+}
+
+function Show-MenuSelector {
+    <#
+    Selector visual con Out-GridView para elegir opciones cómodamente
+    Fallback automático a Read-Host si no está disponible
+    #>
+    $options = @(
+        @{ ID = '1'; Opcion = 'ANALIZAR SISTEMA'; Descripcion = 'Ver estado de RAM, CPU, Disco' }
+        @{ ID = '2'; Opcion = 'LIMPIEZA RAPIDA'; Descripcion = 'Borra temporales y cache' }
+        @{ ID = '3'; Opcion = 'LIMPIEZA PROFUNDA'; Descripcion = 'Temporales sistema, logs, papelera' }
+        @{ ID = '4'; Opcion = 'OPTIMIZAR SERVICIOS'; Descripcion = 'Desactiva telemetría y servicios' }
+        @{ ID = '5'; Opcion = 'GESTIONAR INICIO Y PROCESOS'; Descripcion = 'Optimiza arranque' }
+        @{ ID = '6'; Opcion = 'REPARAR Y RED'; Descripcion = 'Herramientas avanzadas' }
+        @{ ID = '7'; Opcion = 'ANALIZAR SEGURIDAD'; Descripcion = 'Auditoría de seguridad' }
+        @{ ID = '8'; Opcion = 'REVERTIR CAMBIOS'; Descripcion = 'Deshacer optimizaciones' }
+        @{ ID = '9'; Opcion = 'MODO GAMING'; Descripcion = 'Optimizaciones para juegos' }
+        @{ ID = '10'; Opcion = 'ANALISIS HARDWARE'; Descripcion = 'Información de componentes' }
+        @{ ID = '11'; Opcion = 'TAREAS PROGRAMADAS'; Descripcion = 'Automatizar mantenimiento' }
+        @{ ID = '12'; Opcion = 'RED AVANZADA'; Descripcion = 'Optimizaciones de red' }
+        @{ ID = '13'; Opcion = 'COMPARAR RENDIMIENTO'; Descripcion = 'Snapshots y métricas' }
+        @{ ID = '14'; Opcion = 'DIAGNOSTICO AUTOMATICO'; Descripcion = 'Detección de problemas' }
+        @{ ID = '15'; Opcion = 'BACKUP DE DRIVERS'; Descripcion = 'Exportar drivers' }
+        @{ ID = '16'; Opcion = 'LIMPIAR MALWARE'; Descripcion = 'Detectar y limpiar malware' }
+        @{ ID = '17'; Opcion = 'GENERAR REPORTE PDF'; Descripcion = 'Reporte profesional' }
+        @{ ID = '18'; Opcion = 'HISTORIAL'; Descripcion = 'Historial de operaciones' }
+        @{ ID = '19'; Opcion = 'MONITOR TIEMPO REAL'; Descripcion = 'Dashboard continuo' }
+        @{ ID = '20'; Opcion = 'PERFILES OPTIMIZACION'; Descripcion = 'Perfiles predefinidos' }
+        @{ ID = '21'; Opcion = 'OPTIMIZAR JUEGOS'; Descripcion = 'Optimizar juegos instalados' }
+        @{ ID = '22'; Opcion = 'LIMPIAR REGISTRO'; Descripcion = 'Limpieza segura' }
+        @{ ID = '23'; Opcion = 'DESFRAGMENTAR'; Descripcion = 'Defrag HDD / TRIM SSD' }
+        @{ ID = '24'; Opcion = 'GESTOR UPDATES'; Descripcion = 'Control de updates' }
+        @{ ID = '25'; Opcion = 'PUNTOS RESTAURACION'; Descripcion = 'Restauración del sistema' }
+        @{ ID = '26'; Opcion = 'MANTENIMIENTO AUTO'; Descripcion = 'Tareas automáticas' }
+        @{ ID = '27'; Opcion = 'BENCHMARK SISTEMA'; Descripcion = 'Pruebas de rendimiento' }
+        @{ ID = '28'; Opcion = 'BACKUP NUBE'; Descripcion = 'Backup en la nube' }
+        @{ ID = '29'; Opcion = 'DASHBOARD AVANZADO'; Descripcion = 'Dashboard con gráficos' }
+        @{ ID = '30'; Opcion = 'PRIVACIDAD AVANZADA'; Descripcion = 'Control de privacidad' }
+        @{ ID = '31'; Opcion = 'GESTOR APLICACIONES'; Descripcion = 'Gestión de apps' }
+        @{ ID = '32'; Opcion = 'GESTOR ENERGIA'; Descripcion = 'Control de energía' }
+        @{ ID = '33'; Opcion = 'MONITOR DE RED'; Descripcion = 'Monitoreo de red' }
+        @{ ID = '34'; Opcion = 'GESTOR DUPLICADOS'; Descripcion = 'Busca duplicados' }
+        @{ ID = '35'; Opcion = 'DASHBOARD WEB'; Descripcion = 'Panel web' }
+        @{ ID = '36'; Opcion = 'ASISTENTE SISTEMA'; Descripcion = 'Asistente del sistema' }
+        @{ ID = '37'; Opcion = 'INTERFAZ GRAFICA'; Descripcion = 'GUI avanzada' }
+        @{ ID = '38'; Opcion = 'SALUD DEL SSD'; Descripcion = 'Monitoreo SMART' }
+        @{ ID = '39'; Opcion = 'OPTIMIZAR GPU'; Descripcion = 'Optimizar gráfica' }
+        @{ ID = '40'; Opcion = 'IDIOMA / LANGUAGE'; Descripcion = 'Cambiar idioma' }
+        @{ ID = '41'; Opcion = 'ESTADISTICAS TELEMETRIA'; Descripcion = 'Datos de telemetría' }
+        @{ ID = '42'; Opcion = 'HISTORIAL DE OPERACIONES'; Descripcion = 'Historial detallado' }
+    )
+    
+    try {
+        $selected = $options | Out-GridView -Title "Selecciona una opción del Optimizador" -OutputMode Single -ErrorAction Stop
+        return $selected.ID
+    } catch {
+        # Fallback a Read-Host
+        return $null
+    }
 }
 
 # --- Menú Principal ---
 
 do {
+    # Intentar usar GUI si está disponible; si no, usar consola
+    $useGUI = $PSBoundParameters.ContainsKey('USE_GUI') -or ($env:USE_GUI -eq '$true')
     Show-Header
     Write-Host "SELECCIONA UNA OPCION:" -ForegroundColor White
     Write-Host ""
@@ -143,7 +204,8 @@ do {
     Write-Host ""
     Write-Host "  [32] 🔋 GESTOR ENERGÍA" -ForegroundColor Yellow
     Write-Host "       (Planes, batería, consumo, bloqueadores)"
-    Write-Host ""    Write-Host "  [33] 📡 MONITOR DE RED" -ForegroundColor Magenta
+    Write-Host ""
+    Write-Host "  [33] 📡 MONITOR DE RED" -ForegroundColor Magenta
     Write-Host "       (Tráfico, conexiones, bloqueo, test velocidad)"
     Write-Host ""
     Write-Host "  [34] 🔍 GESTOR DUPLICADOS" -ForegroundColor Yellow
@@ -152,7 +214,7 @@ do {
     Write-Host "  [35] 🌐 DASHBOARD WEB" -ForegroundColor Blue
     Write-Host "       (API REST, servidor HTTP, métricas)"
     Write-Host ""
-    Write-Host "  [36] 🤖 ASISTENTE IA" -ForegroundColor Green
+    Write-Host "  [36] 🤖 ASISTENTE SISTEMA" -ForegroundColor Green
     Write-Host "       (Diagnóstico, logs, recomendaciones)"
     Write-Host ""
     Write-Host "  [37] 🎨 INTERFAZ GRÁFICA" -ForegroundColor Cyan
@@ -176,10 +238,20 @@ do {
     Write-Host "  [0] SALIR" -ForegroundColor Gray
     Write-Host ""
     
-    $input = Read-Host "  Ingrese numero > "
+    # Intentar usar selector GUI
+    if ($useGUI) {
+        $choice = Show-MenuSelector
+        if ($null -eq $choice) {
+            Write-Host "  Modo consola activado (fallback)" -ForegroundColor DarkGray
+            $choice = Read-Host "  Ingrese numero > "
+        }
+    } else {
+        $choice = Read-Host "  Ingrese numero > "
+    }
 
-    switch ($input) {
+    switch ($choice) {
         '1' {
+            Write-Host "`nEjecutando Analizar-Sistema..." -ForegroundColor Cyan
             if (Test-Path ".\Analizar-Sistema.ps1") { 
                 & ".\Analizar-Sistema.ps1" 
             } else { Write-Host "Error: No se encuentra Analizar-Sistema.ps1" -ForegroundColor Red }
@@ -535,12 +607,12 @@ do {
         '36' {
             $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
             if (-not $isAdmin) {
-                Write-Host "`nError: Necesitas permisos de Administrador para Asistente IA." -ForegroundColor Red
+                Write-Host "`nError: Necesitas permisos de Administrador para Asistente del Sistema." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Asistente-IA.ps1") { 
-                    & ".\Asistente-IA.ps1" 
-                } else { Write-Host "Error: No se encuentra Asistente-IA.ps1" -ForegroundColor Red }
+                if (Test-Path ".\Asistente-Sistema.ps1") { 
+                    & ".\Asistente-Sistema.ps1" 
+                } else { Write-Host "Error: No se encuentra Asistente-Sistema.ps1" -ForegroundColor Red }
                 Wait-Key
             }
         }

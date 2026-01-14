@@ -163,11 +163,11 @@ El **Optimizador de PC** es una suite de herramientas PowerShell modular diseña
 - Autenticación básica
 - Endpoints JSON para métricas
 
-### 10. Módulos de Inteligencia Artificial
+### 10. Módulos de Análisis del Sistema
 
-#### Asistente-IA.ps1
+#### Asistente-Sistema.ps1
 **Características** (v3.0):
-- Análisis inteligente de logs de eventos
+- Análisis de logs de eventos
 - Base de conocimiento de 50+ patrones
 - Diagnóstico automatizado
 - Generación de reportes HTML
@@ -251,7 +251,7 @@ Optimizador-de-Computadora/
 │   ├── Monitor-Sistema.ps1
 │   ├── Dashboard-Avanzado.ps1
 │   ├── Dashboard-Web.ps1           # v3.0
-│   └── Asistente-IA.ps1            # v3.0
+│   └── Asistente-Sistema.ps1       # v3.0
 │
 ├── 📁 Módulos de Mantenimiento
 │   └── Mantenimiento-Automatico.ps1
@@ -366,9 +366,9 @@ Cada script tiene una única responsabilidad bien definida.
 - [ ] Sincronización con AWS S3
 - [ ] Telemetría opcional
 
-#### Machine Learning
+#### Análisis Avanzado
 - [ ] Predicción de necesidades de mantenimiento
-- [ ] Detección de anomalías
+- [ ] Detección de anomalías en el rendimiento
 - [ ] Optimización automática basada en patrones de uso
 
 #### UI Mejorada

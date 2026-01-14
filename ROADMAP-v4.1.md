@@ -311,7 +311,7 @@ Low  │     │     │ 10  │
 
 ## 💡 INNOVACIONES FUTURAS (v5.1+)
 
-1. **IA/ML Integration**
+1. **Análisis Avanzado**
    - Predicción de fallos
    - Recomendaciones personalizadas
    - Detección de anomalías

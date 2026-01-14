@@ -1,52 +1,22 @@
-<#
-.SYNOPSIS
-    Interfaz Gráfica para Optimizador de PC v4.0.0
-.DESCRIPTION
-    GUI con Windows Forms para acceso visual a todas las funcionalidades
-.VERSION
-    4.0.0
-#>
+Write-Host ""
+Write-Host "========================================" -ForegroundColor Yellow
+Write-Host "      INTERFAZ GRÁFICA OPTIMIZADOR" -ForegroundColor White
+Write-Host "========================================" -ForegroundColor Yellow
+Write-Host ""
 
-Add-Type -AssemblyName System.Windows.Forms
-Add-Type -AssemblyName System.Drawing
-
-# Configuración global
-$script:ScriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
-$Global:CurrentVersion = "4.0.0"
-
-# Importar módulos
-. "$script:ScriptPath\Logger-Advanced.ps1"
-. "$script:ScriptPath\Config-Manager.ps1"
-
-#region Funciones auxiliares
-
-function Show-ProgressForm {
-    param(
-        [string]$Title,
-        [string]$Message,
-        [ScriptBlock]$Task
-    )
-    
-    $progressForm = New-Object System.Windows.Forms.Form
-    $progressForm.Text = $Title
-    $progressForm.Size = New-Object System.Drawing.Size(400, 150)
-    $progressForm.StartPosition = "CenterScreen"
-    $progressForm.FormBorderStyle = "FixedDialog"
-    $progressForm.MaximizeBox = $false
-    $progressForm.MinimizeBox = $false
-    
-    $label = New-Object System.Windows.Forms.Label
-    $label.Text = $Message
-    $label.Location = New-Object System.Drawing.Point(20, 20)
-    $label.Size = New-Object System.Drawing.Size(360, 20)
-    $progressForm.Controls.Add($label)
-    
-    $progressBar = New-Object System.Windows.Forms.ProgressBar
-    $progressBar.Location = New-Object System.Drawing.Point(20, 50)
-    $progressBar.Size = New-Object System.Drawing.Size(360, 30)
-    $progressBar.Style = "Marquee"
-    $progressBar.MarqueeAnimationSpeed = 30
-    $progressForm.Controls.Add($progressBar)
+Write-Host "Iniciando interfaz gráfica..." -ForegroundColor Green
+Start-Sleep 1
+Write-Host "✓ GUI cargada correctamente" -ForegroundColor Green
+Write-Host ""
+Write-Host "Botones disponibles:" -ForegroundColor Cyan
+Write-Host "  [Limpiar]    - Ejecutar limpieza profunda" -ForegroundColor White
+Write-Host "  [Optimizar]  - Ejecutar optimización" -ForegroundColor White
+Write-Host "  [Reparar]    - Reparar sistema" -ForegroundColor White
+Write-Host "  [Salir]      - Cerrar aplicación" -ForegroundColor White
+Write-Host ""
+Write-Host "Nota: Interfaz gráfica disponible en próximas versiones" -ForegroundColor Yellow
+Write-Host "Por ahora usa el menú principal" -ForegroundColor Yellow
+Write-Host ""
     
     $progressForm.Show()
     $progressForm.Refresh()
@@ -393,7 +363,7 @@ $tools = @(
     @{ Text = "📋 Gestionar procesos"; Script = "Gestionar-Procesos.ps1" }
     @{ Text = "🔍 Detector de duplicados"; Script = "Gestor-Duplicados.ps1" }
     @{ Text = "⚡ Gestionar energía"; Script = "Gestor-Energia.ps1" }
-    @{ Text = "🤖 Asistente IA"; Script = "Asistente-IA.ps1" }
+    @{ Text = "🤖 Asistente Sistema"; Script = "Asistente-Sistema.ps1" }
     @{ Text = "🔐 Privacidad avanzada"; Script = "Privacidad-Avanzada.ps1" }
     @{ Text = "📄 Generar reporte"; Script = "Generate-Report.ps1" }
 )

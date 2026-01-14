@@ -401,5 +401,5 @@ v4.0+1 → Polish: Historial + UI mejorada
 
 **Generado**: Enero 2026
 **Versión**: v4.0.0 Complete Edition
-**Autor**: Fernando Farfán / GitHub Copilot
+**Autor**: Fernando Farfán
 **Licencia**: MIT

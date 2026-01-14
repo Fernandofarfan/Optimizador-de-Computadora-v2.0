@@ -1,25 +1,130 @@
-<#
-.SYNOPSIS
-    Generador de reportes del sistema en formato HTML/PDF
-.DESCRIPTION
-    Crea reportes detallados del estado del sistema con gráficos y métricas
-.NOTES
-    Versión: 4.0.0
-    Autor: Fernando Farfan
-#>
+Write-Host ""
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "      GENERAR REPORTE DEL SISTEMA" -ForegroundColor White
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host ""
 
-#Requires -Version 5.1
+Write-Host "TIPOS DE REPORTE:" -ForegroundColor Yellow
+Write-Host "1. Reporte Completo del Sistema" -ForegroundColor Cyan
+Write-Host "2. Reporte de Hardware" -ForegroundColor Cyan
+Write-Host "3. Reporte de Discos y Almacenamiento" -ForegroundColor Cyan
+Write-Host "4. Reporte de Procesos Activos" -ForegroundColor Cyan
+Write-Host ""
 
-$Global:ReportPath = "$env:USERPROFILE\OptimizadorPC\reports"
+$opcion = Read-Host "Selecciona (1-4)"
+$fecha = Get-Date -Format "yyyyMMdd_HHmmss"
+$rutaReporte = "$env:USERPROFILE\Desktop\Reporte_$fecha.txt"
 
-function Initialize-ReportSystem {
-    <#
-    .SYNOPSIS
-        Inicializa el sistema de reportes
-    #>
+Write-Host ""
+
+switch($opcion) {
+    "1" {
+        Write-Host "Generando reporte completo..." -ForegroundColor Green
+        
+        $os = Get-WmiObject Win32_OperatingSystem
+        $cpu = Get-WmiObject Win32_Processor
+        $ram = Get-WmiObject Win32_ComputerSystem
+        
+        @"
+REPORTE COMPLETO DEL SISTEMA
+========================================
+Generado: $(Get-Date)
+
+--- SISTEMA OPERATIVO ---
+Nombre: $($os.Caption)
+Versión: $($os.Version)
+Arquitectura: $($os.OSArchitecture)
+Instalación: $($os.InstallDate)
+
+--- PROCESADOR ---
+CPU: $($cpu.Name)
+Núcleos: $($cpu.NumberOfCores)
+Hilos: $($cpu.ThreadCount)
+
+--- MEMORIA ---
+RAM Total: $([Math]::Round($ram.TotalPhysicalMemory / 1GB, 2)) GB
+RAM Disponible: $([Math]::Round($os.FreePhysicalMemory / 1MB, 2)) MB
+
+--- DISCOS ---
+$(Get-Volume | Where-Object DriveLetter | ForEach-Object {
+    "Disco $($_.DriveLetter): $([Math]::Round($_.Size / 1GB, 2)) GB (Libre: $([Math]::Round($_.SizeRemaining / 1GB, 2)) GB)"
+})
+
+========================================
+"@ | Out-File $rutaReporte -Encoding UTF8
+        
+        Write-Host "✓ Reporte guardado en: $rutaReporte" -ForegroundColor Green
+    }
     
-    if (-not (Test-Path $Global:ReportPath)) {
-        New-Item -Path $Global:ReportPath -ItemType Directory -Force | Out-Null
+    "2" {
+        Write-Host "Generando reporte de hardware..." -ForegroundColor Green
+        
+        $cpu = Get-WmiObject Win32_Processor
+        $ram = Get-WmiObject Win32_ComputerSystem
+        $gpu = Get-WmiObject Win32_VideoController
+        
+        @"
+REPORTE DE HARDWARE
+========================================
+CPU: $($cpu.Name)
+Núcleos: $($cpu.NumberOfCores)
+Hilos: $($cpu.ThreadCount)
+
+RAM: $([Math]::Round($ram.TotalPhysicalMemory / 1GB, 2)) GB
+
+GPU: $($gpu.Name)
+
+========================================
+"@ | Out-File $rutaReporte -Encoding UTF8
+        
+        Write-Host "✓ Reporte guardado en: $rutaReporte" -ForegroundColor Green
+    }
+    
+    "3" {
+        Write-Host "Generando reporte de discos..." -ForegroundColor Green
+        
+        @"
+REPORTE DE ALMACENAMIENTO
+========================================
+$(Get-Volume | Where-Object DriveLetter | ForEach-Object {
+    $porcentaje = [Math]::Round(($_.Size - $_.SizeRemaining) / $_.Size * 100, 2)
+    "Disco $($_.DriveLetter):"
+    "  Total: $([Math]::Round($_.Size / 1GB, 2)) GB"
+    "  Usado: $([Math]::Round(($_.Size - $_.SizeRemaining) / 1GB, 2)) GB"
+    "  Libre: $([Math]::Round($_.SizeRemaining / 1GB, 2)) GB"
+    "  Uso: $porcentaje%"
+    ""
+})
+
+========================================
+"@ | Out-File $rutaReporte -Encoding UTF8
+        
+        Write-Host "✓ Reporte guardado en: $rutaReporte" -ForegroundColor Green
+    }
+    
+    "4" {
+        Write-Host "Generando reporte de procesos..." -ForegroundColor Green
+        
+        $procesos = Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 15
+        
+        @"
+REPORTE DE PROCESOS PRINCIPALES
+========================================
+$(foreach ($proc in $procesos) {
+    "Proceso: $($proc.Name)"
+    "  Memoria: $([Math]::Round($proc.WorkingSet64 / 1MB, 2)) MB"
+    "  CPU: $($proc.CPU)"
+    ""
+})
+
+========================================
+"@ | Out-File $rutaReporte -Encoding UTF8
+        
+        Write-Host "✓ Reporte guardado en: $rutaReporte" -ForegroundColor Green
+    }
+    
+    default {
+        Write-Host "Opción no válida." -ForegroundColor Red
     }
 }
 

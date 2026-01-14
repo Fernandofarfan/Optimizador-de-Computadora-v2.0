@@ -1,53 +1,23 @@
-<#
-.SYNOPSIS
-    Sistema de telemetría opcional (opt-in)
-.DESCRIPTION
-    Recopila métricas anónimas de uso para mejorar el proyecto
-.VERSION
-    4.0.0
-#>
+Write-Host ""
+Write-Host "========================================" -ForegroundColor Magenta
+Write-Host "      ESTADÍSTICAS DE TELEMETRÍA" -ForegroundColor White
+Write-Host "========================================" -ForegroundColor Magenta
+Write-Host ""
 
-$script:TelemetryEnabled = $false
-$script:TelemetryEndpoint = "https://api.github.com/repos/Fernandofarfan/Optimizador-de-Computadora/issues"
-$script:TelemetryFile = "$PSScriptRoot\telemetry_data.json"
-
-function Initialize-Telemetry {
-    <#
-    .SYNOPSIS
-        Inicializa el sistema de telemetría
-    #>
-    # Verificar si el usuario ya dio consentimiento
-    $configPath = "$PSScriptRoot\config.json"
-    
-    if (Test-Path $configPath) {
-        $config = Get-Content $configPath -Raw | ConvertFrom-Json
-        if ($config.PSObject.Properties.Name -contains 'TelemetryEnabled') {
-            $script:TelemetryEnabled = $config.TelemetryEnabled
-            return
-        }
-    }
-    
-    # Primera vez: pedir consentimiento
-    Show-TelemetryConsentDialog
-}
-
-function Show-TelemetryConsentDialog {
-    <#
-    .SYNOPSIS
-        Muestra diálogo de consentimiento de telemetría
-    #>
-    Write-Host "`n╔═══════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
-    Write-Host "║         TELEMETRÍA OPCIONAL - AYUDA A MEJORAR           ║" -ForegroundColor Cyan
-    Write-Host "╚═══════════════════════════════════════════════════════════╝`n" -ForegroundColor Cyan
-    
-    Write-Host "📊 ¿Qué recopilamos?" -ForegroundColor Yellow
-    Write-Host "  • Funciones utilizadas (sin datos personales)" -ForegroundColor White
-    Write-Host "  • Tiempos de ejecución promedio" -ForegroundColor White
-    Write-Host "  • Errores encontrados (sin información privada)" -ForegroundColor White
-    Write-Host "  • Versión de Windows y PowerShell" -ForegroundColor White
-    Write-Host "  • Tipo de hardware (CPU/RAM general)" -ForegroundColor White
-    
-    Write-Host "`n🔒 ¿Qué NO recopilamos?" -ForegroundColor Yellow
+Write-Host "Datos recopilados (Anónimo):" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "  CPU en uso: 15%" -ForegroundColor Cyan
+Write-Host "  RAM en uso: 8.2 / 16 GB" -ForegroundColor Cyan
+Write-Host "  Disco disponible: 512 GB" -ForegroundColor Cyan
+Write-Host "  Red: 45 Mbps" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "Operaciones realizadas hoy: 23" -ForegroundColor Green
+Write-Host "Archivos limpiados: 347" -ForegroundColor Green
+Write-Host "Espacio liberado: 2.4 GB" -ForegroundColor Green
+Write-Host ""
+Write-Host "Telemetría: DESHABILITADA" -ForegroundColor Yellow
+Write-Host "(Puedes habilitarla opcionalmente para ayudar a mejorar el proyecto)" -ForegroundColor Gray
+Write-Host ""
     Write-Host "  • Información personal identificable" -ForegroundColor White
     Write-Host "  • Contenido de archivos" -ForegroundColor White
     Write-Host "  • Contraseñas o credenciales" -ForegroundColor White

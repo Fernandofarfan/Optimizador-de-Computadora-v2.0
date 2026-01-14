@@ -233,7 +233,7 @@ Todos los cambios notables en este proyecto se documentan en este archivo.
     - Backup: restauración automática, puntos de restauración
     - Gaming: detección automática, procesos monitoreados
     - Network: monitoreo de tráfico, IPs bloqueadas
-    - AI Assistant: diagnóstico automático, sugerencias
+    - Asistente automatizado: diagnóstico, sugerencias
     - Dashboard: puerto web, autenticación, refresh
     - Advanced: debug, verbose, features experimentales
     - UI: colores, animaciones, banner, modo compacto
@@ -429,7 +429,7 @@ Todos los cambios notables en este proyecto se documentan en este archivo.
   - Gestión con PowerShell Jobs para ejecución en segundo plano sin bloqueo
   - Menú con 8 opciones incluyendo test de endpoints y gestión de API Key
 
-- **🤖 Asistente Inteligente de Diagnóstico** - `Asistente-IA.ps1`
+- **🤖 Asistente de Diagnóstico** - `Asistente-Sistema.ps1`
   - Función `Get-EventLogErrors`: Analiza System, Application, Security logs (Critical/Error/Warning)
   - Filtro por últimos N días con Get-WinEvent -FilterHashtable y StartTime
   - Base de conocimiento con 10+ patrones: BSOD (KERNEL_DATA_INPAGE_ERROR, DRIVER_IRQL), memoria, servicios

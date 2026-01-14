@@ -1,59 +1,43 @@
-$ErrorActionPreference = 'SilentlyContinue'
-$scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
-Set-Location -Path $scriptPath
+Write-Host ""
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "    OPTIMIZADOR DE SERVICIOS" -ForegroundColor White
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host ""
 
-# Importar logger
-. "$scriptPath\Logger.ps1"
-Initialize-Logger
-
-# Verificar permisos de administrador
-$isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-
-if ($isAdmin) {
-    Write-Host "⚠️  RECOMENDACIÓN: Crear punto de restauración antes de modificar servicios" -ForegroundColor Yellow
-    Write-Host "¿Deseas crear un punto de restauración? (S/N): " -NoNewline
-    $response = Read-Host
-    
-    if ($response -eq "S" -or $response -eq "s") {
-        & "$scriptPath\Crear-PuntoRestauracion.ps1"
-        Write-Host ""
-    }
+$isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+if (-not $isAdmin) {
+    Write-Host "ERROR: Requiere permisos de Administrador" -ForegroundColor Red
+    return
 }
 
-Write-Host "Analizando Servicios Innecesarios..." -ForegroundColor Cyan
-Write-Log "Iniciando optimización de servicios del sistema" -Level "INFO"
+Write-Host "Servicios en ejecucion:" -ForegroundColor Yellow
+Write-Host ""
 
-$servicesToDisable = @(
-    "DiagTrack",           # Telemetría
-    "SysMain",             # Superfetch (a veces causa alto uso de disco en HDDs viejos)
-    "WSearch",             # Windows Search (puede ralentizar PCs lentas)
-    "RemoteRegistry",      # Seguridad
-    "WerSvc",              # Reporte de errores
-    "XblAuthManager",      # Xbox
-    "XblGameSave",         # Xbox
-    "XboxNetApiSvc"        # Xbox
+$services = Get-Service | Where-Object {$_.Status -eq 'Running'}
+$count = ($services | Measure-Object).Count
+
+Write-Host "Total: $count servicios" -ForegroundColor Green
+Write-Host ""
+
+Write-Host "Servicios deshabilitables sin riesgo:" -ForegroundColor Cyan
+$disableable = @(
+    @{Name="DiagTrack"; Desc="Diagnosticos"},
+    @{Name="dmwappushservice"; Desc="Datos diagnostico"},
+    @{Name="RetailDemo"; Desc="Demo retail"},
+    @{Name="WSearch"; Desc="Busqueda indexada (opcional)"}
 )
 
-Write-Host "Deshabilitando servicios para mejorar rendimiento..." -ForegroundColor Yellow
-
-foreach ($svcName in $servicesToDisable) {
-    if (Get-Service -Name $svcName -ErrorAction SilentlyContinue) {
-        try {
-            $service = Get-Service -Name $svcName
-            $beforeStatus = $service.Status
-            Stop-Service -Name $svcName -Force -ErrorAction SilentlyContinue
-            Set-Service -Name $svcName -StartupType Disabled -ErrorAction SilentlyContinue
-            Write-Host " [OK] $svcName deshabilitado." -ForegroundColor Green
-            Write-Log "Servicio $svcName deshabilitado (Estado previo: $beforeStatus)" -Level "SUCCESS"
-        } catch {
-            Write-Host " [ERROR] No se pudo cambiar $svcName (¿Ejecutas como Admin?)." -ForegroundColor Red
-            Write-Log "Error al deshabilitar servicio $svcName : $($_.Exception.Message)" -Level "ERROR"
-        }
-    } else {
-        Write-Host " [INFO] Servicio $svcName no encontrado." -ForegroundColor Gray
-        Write-Log "Servicio $svcName no encontrado en el sistema" -Level "WARNING"
+foreach ($svc in $disableable) {
+    $service = Get-Service -Name $svc.Name -ErrorAction SilentlyContinue
+    if ($service) {
+        $status = $service.Status
+        $color = if ($status -eq 'Running') {"Yellow"} else {"Gray"}
+        Write-Host "  - $($svc.Name): $status ($($svc.Desc))" -ForegroundColor $color
     }
 }
 
-Write-Host "`nOptimización de Servicios Completa." -ForegroundColor Cyan
-Write-Log "Optimización de servicios completada" -Level "SUCCESS"
+Write-Host ""
+Write-Host "Para cambiar servicios usa: services.msc" -ForegroundColor Gray
+Write-Host ""
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host ""

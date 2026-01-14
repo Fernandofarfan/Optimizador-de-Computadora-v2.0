@@ -381,5 +381,5 @@ Start-Process "$env:USERPROFILE\Desktop\reporte-optimizacion.html"
 
 **Versión**: 4.0.0 Polish Edition
 **Fecha**: Enero 2026
-**Autor**: Fernando Farfán / GitHub Copilot
+**Autor**: Fernando Farfán
 **Licencia**: MIT

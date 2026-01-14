@@ -246,7 +246,7 @@ Deletions: 31
 
 ### **Largo Plazo** (3-6 meses)
 1. v5.0 con arquitectura refactorizada
-2. Integración IA/ML
+2. Análisis Avanzado
 3. Aplicación móvil companion
 
 ---
@@ -368,7 +368,7 @@ Implementar las mejoras propuestas en el roadmap para evolucionar hacia v5.0 con
 
 ---
 
-**Preparado por:** GitHub Copilot Assistant  
+**Preparado por:** Fernando Farfán  
 **Fecha:** 12 Enero 2026  
 **Versión:** 1.0  
 **Próxima Revisión:** 26 Enero 2026

@@ -1,41 +1,57 @@
-<#
-.SYNOPSIS
-    Gestor Inteligente de Aplicaciones para Windows
-.DESCRIPTION
-    Lista, analiza y desinstala aplicaciones con detección de bloatware,
-    exportación de listas y soporte para winget/chocolatey.
-.NOTES
-    Versión: 2.9.0
-    Autor: Fernando Farfan
-    Requiere: PowerShell 5.1+, Windows 10/11, Permisos de Administrador
-#>
+Write-Host ""
+Write-Host "========================================" -ForegroundColor Green
+Write-Host "      GESTOR DE APLICACIONES" -ForegroundColor White
+Write-Host "========================================" -ForegroundColor Green
+Write-Host ""
 
-#Requires -Version 5.1
-#Requires -RunAsAdministrator
+Write-Host "OPCIONES:" -ForegroundColor Yellow
+Write-Host "1. Listar aplicaciones instaladas" -ForegroundColor Cyan
+Write-Host "2. Ver aplicaciones de sistema" -ForegroundColor Cyan
+Write-Host "3. Espacio usado por aplicaciones" -ForegroundColor Cyan
+Write-Host ""
 
-$Global:AppListPath = "$env:USERPROFILE\OptimizadorPC-AppList.json"
-$Global:AppScriptVersion = "4.0.0"
+$opcion = Read-Host "Selecciona (1-3)"
 
-# Importar Logger si existe
-if (Test-Path ".\Logger.ps1") {
-    . ".\Logger.ps1"
-    $Global:UseLogger = $true
-} else {
-    $Global:UseLogger = $false
-    function Write-Log { param($Message, $Level = "INFO") Write-Host "[$Level] $Message" }
+switch($opcion) {
+    "1" {
+        Write-Host ""
+        Write-Host "Aplicaciones instaladas (primeras 15):" -ForegroundColor Green
+        Write-Host ""
+        Get-ChildItem "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\" -ErrorAction SilentlyContinue |
+        ForEach-Object { Get-ItemProperty $_.PSPath -ErrorAction SilentlyContinue } |
+        Where-Object { $_.DisplayName } |
+        Select-Object -First 15 @{N="Aplicación";E={$_.DisplayName}}, @{N="Versión";E={$_.DisplayVersion}} |
+        Format-Table -AutoSize
+    }
+    "2" {
+        Write-Host ""
+        Write-Host "Aplicaciones de sistema:" -ForegroundColor Cyan
+        Write-Host ""
+        Get-AppxPackage -ErrorAction SilentlyContinue |
+        Select-Object -First 10 @{N="Nombre";E={$_.Name}}, @{N="Versión";E={$_.Version}} |
+        Format-Table -AutoSize
+    }
+    "3" {
+        Write-Host ""
+        Write-Host "Tamaño estimado de carpetas importantes:" -ForegroundColor Green
+        $folders = @{
+            "Program Files" = "C:\Program Files"
+            "Program Files (x86)" = "C:\Program Files (x86)"
+            "AppData" = "$env:LOCALAPPDATA"
+        }
+        foreach ($folder in $folders.GetEnumerator()) {
+            if (Test-Path $folder.Value) {
+                $size = (Get-ChildItem -Path $folder.Value -Recurse -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum
+                $sizeGB = [math]::Round($size / 1GB, 2)
+                Write-Host "  $($folder.Name): $sizeGB GB" -ForegroundColor Cyan
+            }
+        }
+    }
 }
 
-function Show-Banner {
-    Clear-Host
-    Write-Host ""
-    Write-Host "  ╔══════════════════════════════════════════════════════════════╗" -ForegroundColor Green
-    Write-Host "  ║                                                              ║" -ForegroundColor Green
-    Write-Host "  ║          📦 GESTOR INTELIGENTE DE APLICACIONES              ║" -ForegroundColor White
-    Write-Host "  ║                      Versión $Global:AppScriptVersion                      ║" -ForegroundColor Green
-    Write-Host "  ║                                                              ║" -ForegroundColor Green
-    Write-Host "  ╚══════════════════════════════════════════════════════════════╝" -ForegroundColor Green
-    Write-Host ""
-}
+Write-Host ""
+Write-Host "========================================" -ForegroundColor Green
+Write-Host ""
 
 function Get-InstalledApplications {
     <#

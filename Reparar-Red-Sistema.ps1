@@ -1,64 +1,67 @@
-Write-Host "HERRAMIENTAS DE RED Y REPARACION" -ForegroundColor Cyan
-Write-Host "=================================="
+Write-Host ""
+Write-Host "========================================" -ForegroundColor Blue
+Write-Host "      REPARACION DE RED Y SISTEMA" -ForegroundColor White
+Write-Host "========================================" -ForegroundColor Blue
+Write-Host ""
 
-function Menu-Reparacion {
-    Write-Host ""
-    Write-Host "  [1] Optimizar Red (DNS Flush + Winsock Reset)" -ForegroundColor Green
-    Write-Host "      Soluciona problemas de internet y latencia."
-    Write-Host ""
-    Write-Host "  [2] Verificar Integridad de Archivos (SFC Scan)" -ForegroundColor Yellow
-    Write-Host "      Busca y repara archivos corruptos de Windows (Tarda 10-20 min)."
-    Write-Host ""
-    Write-Host "  [3] Optimizar Unidad de Disco (Trim/Defrag)" -ForegroundColor Yellow
-    Write-Host "      Ejecuta optimizacion nativa de Windows."
-    Write-Host ""
-    Write-Host "  [4] Reparar Imagen de Sistema (DISM)" -ForegroundColor Magenta
-    Write-Host "      Descarga archivos de sistema sanos (Requiere Internet)."
-    Write-Host ""
-    Write-Host "  [0] Volver" -ForegroundColor Gray
-    Write-Host ""
-    
-    return Read-Host "  Selecciona una opcion > "
+$isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+if (-not $isAdmin) {
+    Write-Host "ERROR: Requiere permisos de Administrador" -ForegroundColor Red
+    return
 }
 
-do {
-    $opcion = Menu-Reparacion
-    
-    switch ($opcion) {
-        '1' {
-            Write-Host "`nEjecutando Optimizacion de Red..." -ForegroundColor Cyan
-            ipconfig /flushdns
-            netsh winsock reset
-            Write-Host "Red optimizada." -ForegroundColor Green
-        }
-        '2' {
-            Write-Host "`nIniciando Escaneo de Archivos de Sistema (SFC)..." -ForegroundColor Cyan
-            Write-Host "Esto puede tardar. No cierres la ventana." -ForegroundColor Yellow
-            sfc /scannow
-            Write-Host "Proceso finalizado." -ForegroundColor Green
-        }
-        '3' {
-            Write-Host "`nOptimizando Unidades (C:)..." -ForegroundColor Cyan
-            try {
-                Optimize-Volume -DriveLetter C -Verbose
-                Write-Host "Optimización de disco completada." -ForegroundColor Green
-            } catch {
-                Write-Host "Error al intentar optimizar. Asegurate de ser Administrador." -ForegroundColor Red
-            }
-        }
-        '4' {
-            Write-Host "`nEjecutando DISM (RestoreHealth)..." -ForegroundColor Cyan
-            Write-Host "Esto descarga archivos de reparacion. Puede tardar." -ForegroundColor Yellow
-            Dism /Online /Cleanup-Image /RestoreHealth
-            Write-Host "Proceso DISM terminado." -ForegroundColor Green
-        }
-        '0' { break }
-        default { Write-Host "Opcion no valida." -ForegroundColor Red }
-    }
-    
-    if ($opcion -ne '0') {
-        Write-Host "`nPresiona una tecla para continuar..." -ForegroundColor Gray
-        $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
-    }
+Write-Host "HERRAMIENTAS DISPONIBLES:" -ForegroundColor Yellow
+Write-Host "1. Reparar red (Reset TCP/IP)" -ForegroundColor Cyan
+Write-Host "2. Limpiar DNS cache" -ForegroundColor Cyan
+Write-Host "3. Renovar IP address" -ForegroundColor Cyan
+Write-Host "4. Ejecutar todas" -ForegroundColor Cyan
+Write-Host ""
 
-} while ($opcion -ne '0')
+$opcion = Read-Host "Selecciona (1-4)"
+
+switch($opcion) {
+    "1" {
+        Write-Host ""
+        Write-Host "Reparando TCP/IP..." -ForegroundColor Yellow
+        ipconfig /release | Out-Null
+        ipconfig /renew | Out-Null
+        Write-Host "TCP/IP reparado" -ForegroundColor Green
+    }
+    
+    "2" {
+        Write-Host ""
+        Write-Host "Limpiando DNS cache..." -ForegroundColor Yellow
+        ipconfig /flushdns | Out-Null
+        Write-Host "DNS limpiado" -ForegroundColor Green
+    }
+    
+    "3" {
+        Write-Host ""
+        Write-Host "Renovando IP..." -ForegroundColor Yellow
+        ipconfig /release | Out-Null
+        Start-Sleep -Seconds 2
+        ipconfig /renew | Out-Null
+        Write-Host "IP renovada" -ForegroundColor Green
+    }
+    
+    "4" {
+        Write-Host ""
+        Write-Host "Ejecutando reparacion completa..." -ForegroundColor Yellow
+        Write-Host "  [1/3] Limpiando DNS..." -ForegroundColor Cyan
+        ipconfig /flushdns | Out-Null
+        Write-Host "    OK" -ForegroundColor Green
+        
+        Write-Host "  [2/3] Liberando IP..." -ForegroundColor Cyan
+        ipconfig /release | Out-Null
+        Write-Host "    OK" -ForegroundColor Green
+        
+        Write-Host "  [3/3] Renovando IP..." -ForegroundColor Cyan
+        Start-Sleep -Seconds 2
+        ipconfig /renew | Out-Null
+        Write-Host "    OK" -ForegroundColor Green
+    }
+}
+
+Write-Host ""
+Write-Host "========================================" -ForegroundColor Blue
+Write-Host ""

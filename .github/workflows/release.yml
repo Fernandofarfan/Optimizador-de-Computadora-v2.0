@@ -17,6 +17,39 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install ps2exe module
+        shell: pwsh
+        run: |
+          Write-Host "Installing ps2exe from PowerShell Gallery..." -ForegroundColor Cyan
+          try {
+            Install-Module -Name ps2exe -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+          } catch {
+            Write-Warning "ps2exe installation warning: $_"
+          }
+
+      - name: Build EXE from Optimizador.ps1
+        shell: pwsh
+        run: |
+          Write-Host "Building Optimizador.exe using ps2exe..." -ForegroundColor Cyan
+          $input = Join-Path $PWD "Optimizador.ps1"
+          $output = Join-Path $PWD "Optimizador.exe"
+          if (Test-Path $input) {
+            # Icon optional
+            $icon = Join-Path $PWD "docs\icon.ico"
+            if (Test-Path $icon) {
+              Invoke-ps2exe -inputFile $input -outputFile $output -title "Optimizador de Computadora" -icon $icon
+            } else {
+              Invoke-ps2exe -inputFile $input -outputFile $output -title "Optimizador de Computadora"
+            }
+            if (Test-Path $output) {
+              Write-Host "Built EXE: $output" -ForegroundColor Green
+            } else {
+              Write-Error "Failed to build EXE"
+            }
+          } else {
+            Write-Error "Optimizador.ps1 not found"
+          }
+
       - name: Get version from tag
         id: get_version
         shell: pwsh
@@ -56,6 +89,7 @@ jobs:
           # Copiar archivos esenciales
           $include = @(
             'Optimizador.ps1',
+            'Optimizador.exe',
             'EJECUTAR-COMO-ADMIN.bat',
             'Instalar.ps1',
             '*.ps1',
@@ -85,6 +119,7 @@ jobs:
           body_path: release_notes.txt
           files: |
             Optimizador-PC-v${{ steps.get_version.outputs.version }}.zip
+            Optimizador.exe
           draft: false
           prerelease: false
         env:

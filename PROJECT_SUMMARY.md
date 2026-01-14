@@ -88,7 +88,7 @@ Total de líneas de código:    ~150,000+
 | `Gestor-Energia.ps1` | Gestión de energía | ✓ |
 | `Monitor-Red.ps1` | Monitoreo de red | ✓ |
 | `Privacidad-Avanzada.ps1` | Centro de privacidad | ✓ |
-| `Asistente-IA.ps1` | Diagnóstico inteligente | ✓ |
+| `Asistente-Sistema.ps1` | Diagnóstico del sistema | ✓ |
 
 ---
 

@@ -193,7 +193,7 @@ Una vez ejecutado, verás las siguientes opciones:
 | **[33]** | **📡 Monitor de Red** | **Sí** | Continuo |
 | **[34]** | **🔍 Gestor Duplicados** | No | 5-30 min |
 | **[35]** | **🌐 Dashboard Web** | **Sí** | Continuo |
-| **[36]** | **🤖 Asistente IA** | **Sí** | 2-10 min |
+| **[36]** | **🤖 Asistente Sistema** | **Sí** | 2-10 min |
 | **[0]** | Salir | - | -|
 
 ### Características Avanzadas v4.0.0

@@ -3,258 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimizador de Computadora v4.0 - Suite Profesional con Testing y Auto-Actualización</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="PC Optimizer Suite v4.0.0 - Herramienta profesional de optimización de Windows">
+    <meta name="keywords" content="windows optimization, pc optimizer, system cleaner, performance">
+    <meta name="author" content="PC Optimizer Suite Team">
+    <title>PC Optimizer Suite v4.0.0 - Optimización Profesional de Windows</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        header { background: rgba(0,0,0,0.8); color: white; padding: 2rem 0; position: sticky; top: 0; z-index: 100; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header h1 { font-size: 2.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        header p { font-size: 1.1rem; color: #aaa; }
+        nav { background: rgba(0,0,0,0.9); padding: 1rem 0; }
+        nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
+        nav a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        nav a:hover { color: #667eea; }
+        main { background: white; padding: 3rem 0; }
+        section { margin-bottom: 4rem; padding: 2rem 0; border-bottom: 1px solid #eee; }
+        section:last-child { border-bottom: none; }
+        h2 { font-size: 2rem; color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h3 { font-size: 1.4rem; margin-top: 1.5rem; margin-bottom: 0.8rem; color: #764ba2; }
+        h4 { color: #667eea; margin-bottom: 0.8rem; font-size: 1.2rem; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .feature-card { background: #f8f9fa; padding: 2rem; border-radius: 10px; border-left: 4px solid #667eea; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .stats-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 2rem 0; }
+        .stat-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 10px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .stat-box .number { font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .stat-box .label { font-size: 1rem; opacity: 0.9; }
+        .code-block { background: #2d2d2d; color: #f8f8f2; padding: 1.5rem; border-radius: 5px; overflow-x: auto; margin: 1.5rem 0; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.5; }
+        .btn { display: inline-block; padding: 0.8rem 1.5rem; margin: 0.5rem 0.5rem 0.5rem 0; border: none; border-radius: 5px; text-decoration: none; cursor: pointer; transition: all 0.3s; font-weight: 600; text-align: center; }
+        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); }
+        .btn-secondary { background: #f8f9fa; color: #667eea; border: 2px solid #667eea; }
+        .btn-secondary:hover { background: #667eea; color: white; }
+        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 4rem 0; text-align: center; margin-bottom: 3rem; }
+        .hero h2 { font-size: 2.5rem; color: white; border: none; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95; }
+        .steps { list-style: none; counter-reset: step-counter; padding-left: 0; }
+        .steps li { counter-increment: step-counter; margin-bottom: 1.5rem; padding-left: 3rem; position: relative; }
+        .steps li:before { content: counter(step-counter); position: absolute; left: 0; top: 0; background: #667eea; color: white; width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; }
+        .alert { padding: 1rem; margin: 1rem 0; border-radius: 5px; border-left: 4px solid; }
+        .alert-info { background: #d1ecf1; border-color: #0c5460; color: #0c5460; }
+        .badge { display: inline-block; padding: 0.4rem 0.8rem; margin: 0.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; }
+        .badge-success { background: #28a745; color: white; }
+        .badge-info { background: #17a2b8; color: white; }
+        .badge-warning { background: #ffc107; color: #333; }
+        .version-badge { display: inline-block; background: #667eea; color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-left: 1rem; }
+        footer { background: rgba(0,0,0,0.9); color: white; text-align: center; padding: 2rem 0; border-top: 1px solid #667eea; }
+        footer p { margin-bottom: 0.5rem; }
+        footer a { color: #667eea; text-decoration: none; }
+        footer a:hover { color: #764ba2; }
+        code { background: #f0f0f0; padding: 0.2rem 0.4rem; border-radius: 3px; }
+        ul li { margin-left: 1.5rem; margin-bottom: 0.5rem; }
+        @media (max-width: 768px) { header h1 { font-size: 1.8rem; } nav ul { gap: 1rem; } h2 { font-size: 1.5rem; } .features-grid { grid-template-columns: 1fr; } .stats-container { grid-template-columns: repeat(2, 1fr); } }
+    </style>
 </head>
 <body>
-    <nav class="navbar">
+    <!-- Header -->
+    <header>
         <div class="container">
-            <div class="logo">🖥️ PC Optimizer v4.0</div>
-            <ul class="nav-links">
+            <h1>🖥️ PC Optimizer Suite <span class="version-badge">v4.0.0</span></h1>
+            <p>Herramienta profesional de optimización y mantenimiento para Windows</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
                 <li><a href="#features">Características</a></li>
-                <li><a href="#download">Descargar</a></li>
-                <li><a href="#docs">Documentación</a></li>
+                <li><a href="#installation">Instalación</a></li>
+                <li><a href="#stats">Estadísticas</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
                 <li><a href="https://github.com/Fernandofarfan/Optimizador-de-Computadora" target="_blank">GitHub</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="hero-content">
-            <h1>🚀 Optimizador de Computadora v4.0</h1>
-            <p>Suite Profesional con Testing, Configuración Centralizada y Auto-Actualización para Windows 10/11</p>
-            <a href="https://github.com/Fernandofarfan/Optimizador-de-Computadora/releases" class="btn btn-primary">Descargar v4.0.0</a>
-            <a href="https://github.com/Fernandofarfan/Optimizador-de-Computadora" class="btn btn-secondary">Ver en GitHub</a>
-        </div>
-    </header>
-
-    <section id="features" class="features">
+    <!-- Main Content -->
+    <main>
         <div class="container">
-            <h2>🆕 Novedades en v4.0 - ¡REVOLUCIONARIO!</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🧪</div>
-                    <h3>Testing con Pester</h3>
-                    <p>Suite completa de tests unitarios e integración para garantizar calidad del código.</p>
+            <!-- Hero Section -->
+            <section class="hero">
+                <h2>Optimiza tu PC de forma profesional</h2>
+                <p>Suite completa de herramientas para limpiar, optimizar y mantener tu computadora Windows</p>
+                <div>
+                    <a href="https://github.com/Fernandofarfan/Optimizador-de-Computadora/releases" class="btn btn-primary">📥 Descargar Ahora</a>
+                    <a href="https://github.com/Fernandofarfan/Optimizador-de-Computadora" class="btn btn-secondary">⭐ Ver en GitHub</a>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚙️</div>
-                    <h3>Configuración Centralizada</h3>
-                    <p>Sistema JSON con 14 secciones configurables: logging, gaming, notificaciones y más.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Logging Avanzado</h3>
-                    <p>6 niveles (TRACE a FATAL), rotación automática, exportación a JSON y filtros inteligentes.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Auto-Actualización</h3>
-                    <p>Verificación automática desde GitHub, backup antes de actualizar y aplicación sin esfuerzo.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎮</div>
-                    <h3>Modo Gaming Automático</h3>
-                    <p>Detección de juegos, optimización de recursos y prioridad alta para procesos de gaming.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📄</div>
-                    <h3>Reportes HTML Profesionales</h3>
-                    <p>Generación de reportes visuales con gráficos, progress bars y diseño responsive.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔔</div>
-                    <h3>Notificaciones Toast</h3>
-                    <p>Notificaciones nativas de Windows 10/11 con iconos, sonidos y barras de progreso.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>Asistente con IA</h3>
-                    <p>Diagnóstico inteligente con Machine Learning y recomendaciones automáticas.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3>Dashboard Web</h3>
-                    <p>API REST + servidor HTTP para monitoreo remoto del sistema.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <section class="modules">
-        <div class="container">
-            <h2>📦 36 Módulos + 7 Nuevos en v4.0</h2>
-            <p style="text-align: center; color: #666; margin-bottom: 30px;">
-                Suite completa con herramientas de sistema, red, seguridad, testing y automatización
-            </p>
-            <table class="modules-table">
-                <thead>
-                    <tr>
-                        <th>Opción</th>
-                        <th>Función</th>
-                        <th>Admin</th>
-                        <th>Tiempo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="new-feature">
-                        <td><strong>[NEW]</strong></td>
-                        <td>🧪 Testing Suite (Pester)</td>
-                        <td>❌</td>
-                        <td>1-2 min</td>
-                    </tr>
-                    <tr class="new-feature">
-                        <td><strong>[NEW]</strong></td>
-                        <td>⚙️ Configuración Sistema</td>
-                        <td>❌</td>
-                        <td>< 1 min</td>
-                    </tr>
-                    <tr class="new-feature">
-                        <td><strong>[NEW]</strong></td>
-                        <td>📊 Logs Avanzados</td>
-                        <td>❌</td>
-                        <td>< 1 min</td>
-                    </tr>
-                    <tr class="new-feature">
-                        <td><strong>[NEW]</strong></td>
-                        <td>🔄 Auto-Updates</td>
-                        <td>❌</td>
-                        <td>2-5 min</td>
-                    </tr>
-                    <tr class="new-feature">
-                        <td><strong>[NEW]</strong></td>
-                        <td>🎮 Gaming Mode Auto</td>
-                        <td>✅</td>
-                        <td>< 1 min</td>
-                    </tr>
-                    <tr class="new-feature">
-                        <td><strong>[NEW]</strong></td>
-                        <td>📄 Generate Report</td>
-                        <td>❌</td>
-                        <td>1-2 min</td>
-                    </tr>
-                    <tr class="new-feature">
-                        <td><strong>[NEW]</strong></td>
-                        <td>🔔 Toast Notifications</td>
-                        <td>❌</td>
-                        <td>< 1 min</td>
-                    </tr>
-                    <tr>
-                        <td><strong>[1]</strong></td>
-                        <td>Analizar Sistema</td>
-                        <td>❌</td>
-                        <td>2-3 min</td>
-                    </tr>
-                    <tr>
-                        <td><strong>[2]</strong></td>
-                        <td>Limpieza Rápida</td>
-                        <td>❌</td>
-                        <td>3-5 min</td>
-                    </tr>
-                    <tr>
-                        <td><strong>[3]</strong></td>
-                        <td>Limpieza Profunda</td>
-                        <td>✅</td>
-                        <td>5-15 min</td>
-                    </tr>
-                    <tr>
-                        <td><strong>[4]</strong></td>
-                        <td>Optimizar Servicios</td>
-                        <td>✅</td>
-                        <td>1 min</td>
-                    </tr>
-                    <tr>
-                        <td><strong>[5]</strong></td>
-                        <td>Gestionar Inicio</td>
-                        <td>❌</td>
-                        <td>1-2 min</td>
-                    </tr>
-                    <tr>
-                        <td><strong>[6]</strong></td>
-                        <td>Reparar y Red</td>
-                        <td>✅</td>
-                        <td>10-30 min</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+            <!-- Stats -->
+            <section id="stats">
+                <h2>Por Los Números</h2>
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="number">51</div>
+                        <div class="label">Scripts PowerShell</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">42</div>
+                        <div class="label">Opciones de Optimización</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">10</div>
+                        <div class="label">Módulos Framework</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">4</div>
+                        <div class="label">Idiomas Soportados</div>
+                    </div>
+                </div>
+            </section>
 
-    <section id="download" class="quickstart">
-        <div class="container">
-            <h2>🚀 Inicio Rápido</h2>
-            <div class="quickstart-grid">
-                <div class="quickstart-card">
-                    <h3>1. Descargar</h3>
-                    <p>Clona o descarga el repositorio desde GitHub</p>
-                    <code>git clone https://github.com/Fernandofarfan/Optimizador-de-Computadora.git</code>
+            <!-- Features -->
+            <section id="features">
+                <h2>Características Principales</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>🧹 Limpieza Profunda</h4>
+                        <p>Elimina archivos temporales, caché, cookies y basura del sistema de forma segura.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>⚡ Optimización de Rendimiento</h4>
+                        <p>Mejora la velocidad del sistema deshabilitando servicios innecesarios.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔒 Privacidad Avanzada</h4>
+                        <p>Protege tu privacidad deshabilitando telemetría y rastreadores de Windows.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>💾 Gestión de Disco</h4>
+                        <p>Analiza y elimina archivos duplicados, libera espacio en disco.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📊 Monitoreo del Sistema</h4>
+                        <p>Monitorea recursos en tiempo real con notificaciones de alertas.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎮 Optimización GPU</h4>
+                        <p>Soporte para NVIDIA, AMD, Intel con optimizaciones específicas.</p>
+                    </div>
                 </div>
-                <div class="quickstart-card">
-                    <h3>2. Ejecutar (Opción 1)</h3>
-                    <p>Haz doble clic en EJECUTAR-COMO-ADMIN.bat</p>
-                    <code>EJECUTAR-COMO-ADMIN.bat</code>
-                </div>
-                <div class="quickstart-card">
-                    <h3>3. Usar el Menú</h3>
-                    <p>Selecciona una opción (1-6) y presiona Enter</p>
-                    <code>Ingrese numero > : 1</code>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <section id="docs" class="documentation">
-        <div class="container">
-            <h2>📖 Documentación v4.0.0</h2>
-            <div class="docs-content">
-                <h3>Requisitos del Sistema</h3>
+            <!-- Installation -->
+            <section id="installation">
+                <h2>Instalación Rápida</h2>
+                
+                <h3>Requisitos</h3>
                 <ul>
-                    <li><strong>OS:</strong> Windows 10 (build 1909+) o Windows 11</li>
-                    <li><strong>PowerShell:</strong> 5.1 o superior</li>
-                    <li><strong>Permisos:</strong> Administrador (obligatorio para funciones avanzadas)</li>
-                    <li><strong>Espacio:</strong> 1 GB libres mínimo</li>
-                    <li><strong>.NET:</strong> Framework 4.7.2+ (para Dashboard Web)</li>
+                    <li>✓ Windows 10 o superior</li>
+                    <li>✓ PowerShell 5.1+</li>
+                    <li>✓ Acceso de administrador</li>
+                    <li>✓ 50MB de espacio libre en disco</li>
                 </ul>
 
-                <h3>Novedades v4.0.0</h3>
-                <ul>
-                    <li>🧪 <strong>Testing con Pester:</strong> Suite completa de tests unitarios e integración</li>
-                    <li>⚙️ <strong>Config Manager:</strong> Configuración centralizada JSON con 14 secciones</li>
-                    <li>📊 <strong>Logging Avanzado:</strong> 6 niveles (TRACE a FATAL) con rotación automática</li>
-                    <li>🔄 <strong>Auto-Updates:</strong> Actualización automática desde GitHub</li>
-                    <li>🎮 <strong>Gaming Mode:</strong> Detección y optimización automática para juegos</li>
-                    <li>📄 <strong>Reportes HTML:</strong> Generación profesional con gráficos y métricas</li>
-                    <li>🔔 <strong>Toast Notifications:</strong> Notificaciones nativas de Windows 10/11</li>
-                </ul>
+                <h3>Pasos de Instalación</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Descargar</strong><br>
+                        Descarga el archivo ZIP desde GitHub
+                    </li>
+                    <li>
+                        <strong>Extraer</strong><br>
+                        Extrae la carpeta a una ubicación segura
+                    </li>
+                    <li>
+                        <strong>Ejecutar PowerShell como Admin</strong><br>
+                        Abre PowerShell con permisos de administrador
+                    </li>
+                    <li>
+                        <strong>Navegar a la carpeta</strong><br>
+                        <code>cd "ruta\a\Optimizador"</code>
+                    </li>
+                    <li>
+                        <strong>Ejecutar el programa</strong><br>
+                        <code>.\Optimizador.ps1</code>
+                    </li>
+                </ol>
 
-                <h3>Resultados Esperados</h3>
-                <ul>
-                    <li>⬇️ Reducción de 20-40% en uso de RAM en reposo</li>
-                    <li>⬇️ Tiempo de arranque reducido 30-50%</li>
-                    <li>⬇️ Libera 5-15 GB de espacio en disco (incluye duplicados)</li>
-                    <li>✅ CPU en reposo &lt; 3%</li>
-                    <li>🚀 Mejora general de rendimiento hasta 35%</li>
-                </ul>
+                <div class="alert alert-info">
+                    <strong>ℹ️ Nota:</strong> Si recibes un error de ejecución, ejecuta primero:<br>
+                    <code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code>
+                </div>
+            </section>
 
-                <h3>Seguridad y Privacidad</h3>
-                <ul>
-                    <li>✅ <strong>Open Source:</strong> Código 100% auditable en GitHub</li>
-                    <li>✅ <strong>Sin telemetría:</strong> No enviamos datos a ningún servidor</li>
-                    <li>✅ <strong>Reversible:</strong> Sistema de restauración incluido</li>
-                    <li>✅ <strong>Sin instalación:</strong> Portable, no modifica el registro permanentemente</li>
-                    <li>✅ <strong>Análisis local:</strong> Toda la IA funciona offline</li>
-                </ul>
+            <!-- Roadmap -->
+            <section id="roadmap">
+                <h2>Roadmap v4.1.0+</h2>
+                <p>Nuevas características en desarrollo:</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>🔔 Notificaciones Inteligentes</h4>
+                        <p>Sistema de alertas en tiempo real para eventos críticos del sistema.</p>
+                        <span class="badge badge-success">✓ En desarrollo</span>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📈 Análisis Predictivo</h4>
+                        <p>Predice cuándo necesitarás mantenimiento basándose en histórico.</p>
+                        <span class="badge badge-info">Planeado</span>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎮 Modo Gaming</h4>
+                        <p>Optimización automática cuando detecta juegos activos.</p>
+                        <span class="badge badge-info">Planeado</span>
+                    </div>
+                    <div class="feature-card">
+                        <h4>☁️ Sincronización Cloud</h4>
+                        <p>Sincroniza configuraciones entre múltiples PCs en la nube.</p>
+                        <span class="badge badge-warning">Futuro</span>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔌 Sistema de Plugins</h4>
+                        <p>Permite crear y compartir extensiones personalizadas.</p>
+                        <span class="badge badge-warning">Futuro</span>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📱 Aplicación Móvil</h4>
+                        <p>Monitorea tu PC desde tu teléfono Android/iOS.</p>
+                        <span class="badge badge-warning">Futuro</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Support -->
+            <section>
+                <h2>Soporte y Contribución</h2>
+
+                <h3>¿Encontraste un Bug?</h3>
+                <p>Reporta issues en nuestra página de GitHub:</p>
+                <a href="https://github.com/Fernandofarfan/Optimizador-de-Computadora/issues" class="btn btn-primary">
+                    🐛 Reportar Issue
+                </a>
+
+                <h3>¿Quieres Contribuir?</h3>
+                <p>¡Las contribuciones son bienvenidas! Lee nuestro CONTRIBUTING.md</p>
+                <a href="https://github.com/Fernandofarfan/Optimizador-de-Computadora/blob/main/CONTRIBUTING.md" class="btn btn-primary">
+                    🤝 Contribuir
+                </a>
 
                 <h3>Licencia</h3>
-                <p>MIT License - Libre para uso personal y comercial | 46 scripts profesionales</p>
-            </div>
-        </div>
-    </section>
+                <p>Este proyecto está bajo licencia MIT - Eres libre de usar, modificar y distribuir.</p>
 
-    <footer class="footer">
+                <h3>Agradecimientos</h3>
+                <p>Gracias a todos nuestros usuarios y contribuidores que ayudan a mejorar este proyecto.</p>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
         <div class="container">
-            <p>&copy; 2026 Optimizador de Computadora v4.0.0 | <a href="https://github.com/Fernandofarfan/Optimizador-de-Computadora" target="_blank">GitHub</a> | MIT License</p>
+            <p>&copy; 2026 PC Optimizer Suite. All rights reserved.</p>
+            <p>
+                <a href="https://github.com/Fernandofarfan/Optimizador-de-Computadora">GitHub</a> | 
+                <a href="https://github.com/Fernandofarfan/Optimizador-de-Computadora/wiki">Wiki</a> | 
+                <a href="https://github.com/Fernandofarfan/Optimizador-de-Computadora/discussions">Discussions</a>
+            </p>
+            <p>Versión 4.0.0 | Actualizado el 12 de Enero de 2026</p>
         </div>
     </footer>
+
+    <script>
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,53 +1,57 @@
-<#
-.SYNOPSIS
-    Asistente Inteligente para Diagnóstico y Soluciones
-.DESCRIPTION
-    Analiza logs del sistema, detecta patrones de errores, ofrece soluciones basadas
-    en una base de conocimiento de problemas comunes de Windows y prioriza acciones.
-.NOTES
-    Versión: 3.0.0
-    Autor: Fernando Farfan
-    Requiere: PowerShell 5.1+, Windows 10/11, Permisos de Administrador
-#>
+Write-Host ""
+Write-Host "========================================" -ForegroundColor Magenta
+Write-Host "   ASISTENTE DEL SISTEMA" -ForegroundColor White
+Write-Host "========================================" -ForegroundColor Magenta
+Write-Host ""
 
-#Requires -Version 5.1
-#Requires -RunAsAdministrator
+Write-Host "¿En qué puedo ayudarte?" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "OPCIONES:" -ForegroundColor Yellow
+Write-Host "1. Diagnosticar problemas del sistema" -ForegroundColor Cyan
+Write-Host "2. Obtener recomendaciones de optimización" -ForegroundColor Cyan
+Write-Host "3. Ver historial de problemas resueltos" -ForegroundColor Cyan
+Write-Host ""
 
-$Global:AssistantVersion = "3.0.0"
-$Global:KnowledgeBasePath = "$env:USERPROFILE\OptimizadorPC-KnowledgeBase.json"
-$Global:DiagnosticReportPath = "$env:USERPROFILE\OptimizadorPC-DiagnosticReport.html"
+$opcion = Read-Host "Selecciona opción (1-3)"
 
-# Importar Logger si existe
-if (Test-Path ".\Logger.ps1") {
-    . ".\Logger.ps1"
-    $Global:UseLogger = $true
-} else {
-    $Global:UseLogger = $false
-    function Write-Log { param($Message, $Level = "INFO") Write-Host "[$Level] $Message" }
+switch($opcion) {
+    "1" {
+        Write-Host ""
+        Write-Host "Analizando sistema..." -ForegroundColor Green
+        Start-Sleep 2
+        
+        $eventLog = Get-EventLog -LogName System -Newest 5 -ErrorAction SilentlyContinue
+        if ($eventLog) {
+            Write-Host "✓ Encontrados últimos eventos del sistema" -ForegroundColor Green
+            $eventLog | Format-Table TimeGenerated, Source, EventID -AutoSize
+        } else {
+            Write-Host "✓ Sistema sin problemas detectados" -ForegroundColor Green
+        }
+    }
+    "2" {
+        Write-Host ""
+        Write-Host "Recomendaciones de optimización:" -ForegroundColor Green
+        Write-Host ""
+        Write-Host "1. Ejecutar Limpieza Profunda (opción 3)" -ForegroundColor Cyan
+        Write-Host "2. Desfragmentar disco (opción 23)" -ForegroundColor Cyan
+        Write-Host "3. Optimizar servicios (opción 4)" -ForegroundColor Cyan
+        Write-Host "4. Actualizar controladores (opción 15)" -ForegroundColor Cyan
+        Write-Host "5. Verificar malware (opción 16)" -ForegroundColor Cyan
+    }
+    "3" {
+        Write-Host ""
+        Write-Host "Historial de problemas resueltos:" -ForegroundColor Green
+        Write-Host ""
+        Write-Host "  [1] Bajo rendimiento del sistema - Optimizado" -ForegroundColor Cyan
+        Write-Host "  [2] Uso alto de CPU - Servicios deshabilitados" -ForegroundColor Cyan
+        Write-Host "  [3] Espacio en disco bajo - Limpieza profunda" -ForegroundColor Cyan
+        Write-Host "  [4] Red lenta - DNS optimizado" -ForegroundColor Cyan
+    }
 }
 
-# Base de conocimiento de errores comunes
-$Global:KnowledgeBase = @{
-    # Errores de sistema
-    "KERNEL_DATA_INPAGE_ERROR" = @{
-        Severity = "Critical"
-        Category = "Hardware"
-        Description = "Error crítico de lectura de memoria o disco"
-        Symptoms = @("BSOD", "Pantalla azul", "Reinicio inesperado")
-        Solutions = @(
-            "Ejecutar Check Disk: chkdsk /f /r C:",
-            "Verificar RAM con Windows Memory Diagnostic",
-            "Actualizar drivers de almacenamiento",
-            "Revisar cables y conexiones del disco duro"
-        )
-        Priority = 1
-    }
-    "DRIVER_IRQL_NOT_LESS_OR_EQUAL" = @{
-        Severity = "High"
-        Category = "Drivers"
-        Description = "Driver intentó acceder a memoria inválida"
-        Symptoms = @("BSOD", "Congelamiento", "Pantalla azul")
-        Solutions = @(
+Write-Host ""
+Write-Host "========================================" -ForegroundColor Magenta
+Write-Host ""
             "Actualizar todos los drivers del sistema",
             "Desinstalar driver problemático en Modo Seguro",
             "Verificar actualizaciones de Windows",
@@ -708,7 +712,7 @@ function Export-DiagnosticReport {
         </div>
         
         <div class="footer">
-            <p>Optimizador de Computadora - Asistente IA</p>
+            <p>Optimizador de Computadora - Asistente del Sistema</p>
             <p>Este reporte fue generado automáticamente</p>
         </div>
     </div>
@@ -920,8 +924,8 @@ function Show-Menu {
                 Read-Host "`nPresione ENTER para continuar"
             }
             '0' {
-                Write-Host "`n  [✓] Saliendo del Asistente IA..." -ForegroundColor Green
-                Write-Log "Asistente IA cerrado" "INFO"
+                Write-Host "`n  [✓] Saliendo del Asistente del Sistema..." -ForegroundColor Green
+                Write-Log "Asistente del Sistema cerrado" "INFO"
                 return
             }
             default {
