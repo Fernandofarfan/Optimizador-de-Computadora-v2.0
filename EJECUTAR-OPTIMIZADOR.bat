@@ -1,123 +1,50 @@
 @echo off
-::==============================================================================
-:: OPTIMIZADOR DE COMPUTADORA v4.0.0 - LAUNCHER UNIFICADO
-::==============================================================================
-:: Descripción: Lanzador único con menú de opciones para ejecutar el optimizador
-::              en diferentes modos: Consola, GUI o Administrador.
-::
-:: Requisitos:  - Windows 10/11
-::              - PowerShell 5.1+
-::
-:: Uso:         1. Doble clic en este archivo
-::              2. Selecciona el modo de ejecución
-::              3. Acepta permisos de administrador si es necesario
-::
-:: Versión:     4.0.0
-:: Fecha:       13/01/2026
-::==============================================================================
-
+title Optimizador de PC - Iniciador
+color 0A
 setlocal enabledelayedexpansion
 cd /d "%~dp0"
 
-:MENU
 cls
 echo.
 echo ================================================================================
-echo                   OPTIMIZADOR DE COMPUTADORA v4.0.0
-echo                         LANZADOR UNIFICADO
+echo                      OPTIMIZADOR DE PC - PROFESIONAL
+echo                           Version 2.0 - 2026
 echo ================================================================================
 echo.
-echo   Selecciona el modo de ejecucion:
-echo.
-echo   [1] Modo Consola Tradicional (Read-Host)
-echo   [2] Modo Interfaz Grafica (Out-GridView)
-echo   [3] Ejecutar como Administrador (RECOMENDADO)
-echo   [4] Ejecutar GUI como Administrador
-echo.
-echo   [0] Salir
-echo.
-echo ================================================================================
+echo  Verificando permisos de administrador...
 echo.
 
-set /p OPCION="  Ingrese numero (1-4, 0=Salir): "
-
-if "%OPCION%"=="1" goto CONSOLA
-if "%OPCION%"=="2" goto GUI
-if "%OPCION%"=="3" goto ADMIN
-if "%OPCION%"=="4" goto GUI_ADMIN
-if "%OPCION%"=="0" goto SALIR
-
-echo.
-echo [!] Opcion invalida. Intente nuevamente.
-timeout /t 2 /nobreak >nul
-goto MENU
-
-:CONSOLA
-cls
-echo.
-echo [+] Modo CONSOLA: Iniciando PowerShell con menu tradicional...
-echo.
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0Optimizador.ps1"
-goto FIN
-
-:GUI
-cls
-echo.
-echo [+] Modo GUI: Iniciando PowerShell con Out-GridView...
-echo.
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$useGUI=$true; & '%~dp0Optimizador.ps1'"
-goto FIN
-
-:ADMIN
-:: Verificar si ya somos admin
+REM Verificar si somos admin
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 if '%errorlevel%' NEQ '0' (
-    echo.
-    echo [!] Solicitando permisos de Administrador...
-    echo.
-    timeout /t 2 /nobreak >nul
-    powershell -Command "Start-Process powershell -Verb RunAs -ArgumentList '-NoExit -NoProfile -ExecutionPolicy Bypass -File \"%~dp0Optimizador.ps1\"'"
-    goto SALIR
-) else (
-    cls
-    echo.
-    echo [+] Ya tienes permisos de Administrador
-    echo [+] Iniciando Optimizador en modo CONSOLA ADMIN...
-    echo.
-    powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0Optimizador.ps1"
-    goto FIN
-)
-
-:GUI_ADMIN
-:: Verificar si ya somos admin
->nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
-if '%errorlevel%' NEQ '0' (
-    echo.
-    echo [!] Solicitando permisos de Administrador para GUI...
+    echo  [!] Se requieren permisos de Administrador
+    echo  [i] Solicitando elevacion de privilegios...
     echo.
     timeout /t 2 /nobreak >nul
-    powershell -Command "Start-Process powershell -Verb RunAs -ArgumentList '-NoExit -NoProfile -ExecutionPolicy Bypass -Command \"$useGUI=$true; & \\\"%~dp0Optimizador.ps1\\\"\"'"
-    goto SALIR
+    
+    REM Crear un batch temporal que levante privilegios
+    (
+        echo @echo off
+        echo title Optimizador de PC
+        echo color 0B
+        echo cd /d "%~dp0"
+        echo powershell -NoExit -NoProfile -ExecutionPolicy Bypass -File "Optimizador.ps1"
+    ) > "%TEMP%\ElevateOptimizador.bat"
+    
+    REM Ejecutar el batch con elevación de privilegios
+    powershell -Command "Start-Process '%TEMP%\ElevateOptimizador.bat' -Verb RunAs"
+    
+    REM Esperar y limpiar
+    timeout /t 2 /nobreak >nul
+    if exist "%TEMP%\ElevateOptimizador.bat" del /q "%TEMP%\ElevateOptimizador.bat"
+    
+    exit /b 0
 ) else (
-    cls
+    echo  [OK] Permisos de Administrador confirmados
+    echo  [OK] Iniciando Optimizador de PC...
     echo.
-    echo [+] Ya tienes permisos de Administrador
-    echo [+] Iniciando Optimizador en modo GUI ADMIN...
-    echo.
-    powershell -NoProfile -ExecutionPolicy Bypass -Command "$useGUI=$true; & '%~dp0Optimizador.ps1'"
-    goto FIN
+    timeout /t 1 /nobreak >nul
+    color 0B
+    powershell -NoExit -NoProfile -ExecutionPolicy Bypass -File "Optimizador.ps1"
+    exit /b 0
 )
-
-:FIN
-echo.
-echo ================================================================================
-echo [+] Optimizador finalizado
-echo.
-pause
-goto MENU
-
-:SALIR
-echo.
-echo [+] Saliendo...
-timeout /t 1 /nobreak >nul
-exit /b 0

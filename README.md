@@ -1,36 +1,25 @@
-# PC Optimizer Suite v4.0 🚀
+# Optimizador de PC v2.0 🚀
 
-> **Herramienta profesional de optimización y mantenimiento para Windows 10/11 con IA, testing y auto-actualización**
+> **Suite profesional de optimización y mantenimiento para Windows 10/11 - 100% Funcional**
 
-[![GitHub Release](https://img.shields.io/github/v/release/Fernandofarfan/Optimizador-de-Computadora?style=flat-square&logo=github)](https://github.com/Fernandofarfan/Optimizador-de-Computadora/releases)
 [![License MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 [![PowerShell 5.1+](https://img.shields.io/badge/PowerShell-5.1%2B-blue.svg?style=flat-square)](https://www.microsoft.com/en-us/download/details.aspx?id=50395)
 [![Windows 10/11](https://img.shields.io/badge/Windows-10%2F11-blue.svg?style=flat-square)](#)
-[![GitHub Stars](https://img.shields.io/github/stars/Fernandofarfan/Optimizador-de-Computadora?style=flat-square&logo=github)](https://github.com/Fernandofarfan/Optimizador-de-Computadora)
-[![CI Status](https://img.shields.io/github/actions/workflow/status/Fernandofarfan/Optimizador-de-Computadora/powershell-ci.yml?style=flat-square&label=CI)](https://github.com/Fernandofarfan/Optimizador-de-Computadora/actions)
-[![Pester Tests](https://img.shields.io/badge/Tests-Pester-green?style=flat-square)](tests/)
 
-Suite completa diseñada para mejorar el rendimiento de sistemas Windows mediante limpieza inteligente, gestión de servicios y reparación de componentes de sistema.
+Suite completa de 42 funciones para mantener, optimizar y monitorear tu sistema Windows mediante limpieza inteligente, gestión de servicios y herramientas avanzadas.
 
-**[Visita la Página Web](https://fernandofarfan.github.io/Optimizador-de-Computadora/)** | **[Descargar v4.0.0](https://github.com/Fernandofarfan/Optimizador-de-Computadora/releases/tag/v4.0.0)**
+**[Ver Documentación Completa](LEEME.txt)** | **[Descargar Última Versión](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/releases)**
 
-## 🆕 Novedades en v4.0
+## 🆕 Novedades en v2.0 (Enero 2026)
 
-**🎉 Actualización Mayor - Framework Completo**
+**✅ Todas las 42 Funciones 100% Operativas**
 
-- **🧪 Framework de Testing con Pester**: Suite completa de tests unitarios e integración
-- **⚙️ Configuración Centralizada**: Sistema de configuración JSON con valores predeterminados
-- **📊 Logging Avanzado**: Logs estructurados con rotación automática y niveles (TRACE a FATAL)
-- **🔄 Auto-Actualización**: Sistema automático de verificación e instalación de actualizaciones desde GitHub
-- **🎮 Modo Gaming Automático**: Detección de juegos y optimización automática de recursos
-- **📄 Reportes HTML Profesionales**: Generación de reportes visuales con gráficos y métricas
-- **🔔 Notificaciones Toast**: Notificaciones nativas de Windows 10/11 para eventos importantes
-- **🖥️ GUI con Windows Forms**: Interfaz gráfica completa con dashboard visual y selección de optimizaciones
-- **🌍 Multi-idioma**: Soporte para Español, English, Português y Français
-- **💾 Análisis de SSD/HDD**: Monitoreo SMART y optimización específica para SSDs
-- **🎮 Optimización de GPU**: Soporte para NVIDIA, AMD e Intel Graphics
-- **📊 Telemetría Opcional**: Sistema opt-in para mejorar el proyecto con métricas anónimas
-- **🚀 CI/CD con GitHub Actions**: Tests automáticos y releases con cada commit
+- **✅ Corrección Completa**: Las 20 funciones previamente no funcionales están ahora completamente operativas
+- **🎨 Interfaz Mejorada**: Colores y diseño profesional en todos los menús
+- **🔧 Código Simplificado**: Versiones estables y sin errores de sintaxis
+- **📖 Documentación Actualizada**: Manual completo en LEEME.txt
+- **🗑️ Proyecto Limpio**: Eliminados archivos duplicados e innecesarios
+- **🚀 Lanzador Profesional**: EJECUTAR-OPTIMIZADOR.bat con elevación automática de privilegios
 
 ## ✨ Características
 

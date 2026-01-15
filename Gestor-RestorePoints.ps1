@@ -1,46 +1,26 @@
-﻿Write-Host ""
-Write-Host "========================================" -ForegroundColor Yellow
-Write-Host "      GESTOR DE PUNTOS DE RESTAURACIÓN" -ForegroundColor White
-Write-Host "========================================" -ForegroundColor Yellow
+﻿$ErrorActionPreference = "Continue"
+Write-Host "GESTOR DE PUNTOS DE RESTAURACION" -ForegroundColor Green
+$isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator")
+if (-not $isAdmin) { Write-Host "ERROR: Requiere admin" -ForegroundColor Red; Read-Host "ENTER"; return }
 Write-Host ""
-
-Write-Host "OPCIONES:" -ForegroundColor Yellow
-Write-Host "1. Ver puntos disponibles" -ForegroundColor Cyan
-Write-Host "2. Crear nuevo punto" -ForegroundColor Cyan
-Write-Host "3. Restaurar sistema" -ForegroundColor Cyan
+Write-Host "[1] Listar puntos de restauracion" -ForegroundColor Cyan
+Write-Host "[2] Crear punto de restauracion" -ForegroundColor Cyan
+Write-Host "[3] Restaurar sistema (abre GUI)" -ForegroundColor Cyan
 Write-Host ""
-
-$opcion = Read-Host "Selecciona (1-3)"
-
-switch($opcion) {
-    "1" { 
-        Write-Host ""
-        Write-Host "Puntos de restauración disponibles:" -ForegroundColor Cyan
-        Write-Host ""
-        $restorePoints = Get-ComputerRestorePoint -ErrorAction SilentlyContinue
-        if ($restorePoints) {
-            $restorePoints | Select-Object -First 5 -Property Description, @{N='Fecha';E={$_.ConvertToDateTime($_.CreationTime)}} | 
-            Format-Table -AutoSize
-        } else {
-            Write-Host "  No hay puntos de restauración disponibles" -ForegroundColor Yellow
+$opt = Read-Host "Opcion"
+if ($opt -eq "1") {
+    $points = Get-ComputerRestorePoint
+    if ($points) {
+        foreach($p in $points) {
+            Write-Host "$($p.SequenceNumber) - $($p.Description) - $($p.CreationTime)" -ForegroundColor White
         }
+    } else {
+        Write-Host "No hay puntos de restauracion" -ForegroundColor Yellow
     }
-    "2" { 
-        Write-Host ""
-        Write-Host "Creando punto de restauración..." -ForegroundColor Green
-        try {
-            Checkpoint-Computer -Description "Punto manual - $(Get-Date -Format 'dd/MM/yyyy HH:mm')" -RestorePointType MODIFY_SETTINGS -ErrorAction Stop
-            Write-Host "✓ Punto de restauración creado exitosamente" -ForegroundColor Green
-        } catch {
-            Write-Host "⚠ Error: Puede que se haya creado un punto recientemente" -ForegroundColor Yellow
-        }
-    }
-    "3" { 
-        Write-Host ""
-        Write-Host "Iniciando restauración del sistema..." -ForegroundColor Green
-        Write-Host "  Ejecuta 'rstrui.exe' para restaurar" -ForegroundColor Cyan
-        Write-Host "✓ Herramienta de restauración del sistema" -ForegroundColor Green
-    }
+} elseif ($opt -eq "2") {
+    Checkpoint-Computer -Description "OptimizadorPC_$(Get-Date -Format 'yyyyMMdd_HHmmss')" -RestorePointType MODIFY_SETTINGS
+    Write-Host "Punto de restauracion creado" -ForegroundColor Green
+} elseif ($opt -eq "3") {
+    rstrui.exe
 }
-
-Write-Host ""
+Read-Host "ENTER"
