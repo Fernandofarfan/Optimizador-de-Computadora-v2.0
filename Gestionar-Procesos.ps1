@@ -27,11 +27,11 @@ function Get-TopProcesses {
     
     foreach ($proc in $processes) {
         $name = $proc.ProcessName
-        $pid = $proc.Id
+        $processId = $proc.Id
         $mem = [math]::Round($proc.WorkingSet / 1MB, 2)
         
         $color = if ($mem -gt 1000) { "Red" } elseif ($mem -gt 500) { "Yellow" } else { "White" }
-        Write-Host ("{0,-30} {1,8} {2,15}" -f $name, $pid, $mem) -ForegroundColor $color
+        Write-Host ("{0,-30} {1,8} {2,15}" -f $name, $processId, $mem) -ForegroundColor $color
     }
     
     Write-Host ("=" * 70) -ForegroundColor Gray

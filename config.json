@@ -1,69 +1,72 @@
-{
-  "version": "2.4.0",
-  "configuracion": {
-    "limpiezaProfunda": {
-      "incluirPrefetch": true,
-      "incluirWindowsUpdate": true,
-      "incluirCacheNavegadores": true,
-      "diasLogsAntiguos": 30,
-      "comentario": "Configuración para limpieza profunda del sistema"
-    },
-    "optimizacionServicios": {
-      "serviciosExcluidos": [],
-      "deshabilitarTelemetria": true,
-      "deshabilitarXbox": true,
-      "deshabilitarSysMain": true,
-      "deshabilitarWindowsSearch": false,
-      "comentario": "Lista servicios a excluir de optimización. Ejemplo: ['WSearch', 'DiagTrack']"
-    },
-    "backup": {
-      "crearPuntosRestauracion": true,
-      "preguntarAntesDeCambios": true,
-      "comentario": "Configuración de sistema de backup"
-    },
-    "logging": {
-      "nivel": "INFO",
-      "rotacionMB": 5,
-      "mantenerHistorial": true,
-      "comentario": "Niveles disponibles: DEBUG, INFO, SUCCESS, WARNING, ERROR, CRITICAL"
-    },
-    "modoGaming": {
-      "pausarWindowsUpdate": true,
-      "diasPausa": 7,
-      "deshabilitarNotificaciones": true,
-      "optimizarEfectosVisuales": true,
-      "limpiarRAMStandby": true,
-      "comentario": "Configuración para modo de alto rendimiento"
-    },
-    "seguridad": {
-      "verificarDefender": true,
-      "verificarFirewall": true,
-      "verificarWindowsUpdate": true,
-      "verificarUAC": true,
-      "verificarBitLocker": false,
-      "comentario": "Configuración de análisis de seguridad. BitLocker opcional."
-    }
-  },
-  "avanzado": {
-    "timeoutComandos": 300,
-    "reinicioAutomatico": false,
-    "modoVerbose": false,
-    "exportarReportes": true,
-    "rutaReportes": "./",
-    "comentario": "Opciones avanzadas para usuarios expertos"
-  },
-  "personalizacion": {
-    "temaColores": "cyan",
-    "mostrarBanner": true,
-    "pausaEntreOperaciones": true,
-    "confirmacionOperacionesCriticas": true,
-    "comentario": "Personalización de la experiencia de usuario"
-  },
-  "notasVersion": {
-    "v2.4.0": "Agregado: Modo Gaming, Config JSON, mejoras menores",
-    "v2.3.0": "Agregado: Script reversión, Análisis seguridad, Screenshots",
-    "v2.2.0": "Agregado: Templates GitHub, Puntos restauración, Logger integrado",
-    "v2.1.0": "Agregado: Sistema de logging avanzado, reportes mejorados",
-    "v2.0.0": "Refactorización completa, múltiples módulos independientes"
-  }
+﻿{
+    "version":  "2.4.0",
+    "configuracion":  {
+                          "limpiezaProfunda":  {
+                                                   "incluirPrefetch":  true,
+                                                   "incluirWindowsUpdate":  true,
+                                                   "incluirCacheNavegadores":  true,
+                                                   "diasLogsAntiguos":  30,
+                                                   "comentario":  "ConfiguraciÃ³n para limpieza profunda del sistema"
+                                               },
+                          "optimizacionServicios":  {
+                                                        "serviciosExcluidos":  [
+
+                                                                               ],
+                                                        "deshabilitarTelemetria":  true,
+                                                        "deshabilitarXbox":  true,
+                                                        "deshabilitarSysMain":  true,
+                                                        "deshabilitarWindowsSearch":  false,
+                                                        "comentario":  "Lista servicios a excluir de optimizaciÃ³n. Ejemplo: [\u0027WSearch\u0027, \u0027DiagTrack\u0027]"
+                                                    },
+                          "backup":  {
+                                         "crearPuntosRestauracion":  true,
+                                         "preguntarAntesDeCambios":  true,
+                                         "comentario":  "ConfiguraciÃ³n de sistema de backup"
+                                     },
+                          "logging":  {
+                                          "nivel":  "INFO",
+                                          "rotacionMB":  5,
+                                          "mantenerHistorial":  true,
+                                          "comentario":  "Niveles disponibles: DEBUG, INFO, SUCCESS, WARNING, ERROR, CRITICAL"
+                                      },
+                          "modoGaming":  {
+                                             "pausarWindowsUpdate":  true,
+                                             "diasPausa":  7,
+                                             "deshabilitarNotificaciones":  true,
+                                             "optimizarEfectosVisuales":  true,
+                                             "limpiarRAMStandby":  true,
+                                             "comentario":  "ConfiguraciÃ³n para modo de alto rendimiento"
+                                         },
+                          "seguridad":  {
+                                            "verificarDefender":  true,
+                                            "verificarFirewall":  true,
+                                            "verificarWindowsUpdate":  true,
+                                            "verificarUAC":  true,
+                                            "verificarBitLocker":  false,
+                                            "comentario":  "ConfiguraciÃ³n de anÃ¡lisis de seguridad. BitLocker opcional."
+                                        }
+                      },
+    "avanzado":  {
+                     "timeoutComandos":  300,
+                     "reinicioAutomatico":  false,
+                     "modoVerbose":  false,
+                     "exportarReportes":  true,
+                     "rutaReportes":  "./",
+                     "comentario":  "Opciones avanzadas para usuarios expertos"
+                 },
+    "personalizacion":  {
+                            "temaColores":  "cyan",
+                            "mostrarBanner":  true,
+                            "pausaEntreOperaciones":  true,
+                            "confirmacionOperacionesCriticas":  true,
+                            "comentario":  "PersonalizaciÃ³n de la experiencia de usuario"
+                        },
+    "notasVersion":  {
+                         "v2.4.0":  "Agregado: Modo Gaming, Config JSON, mejoras menores",
+                         "v2.3.0":  "Agregado: Script reversiÃ³n, AnÃ¡lisis seguridad, Screenshots",
+                         "v2.2.0":  "Agregado: Templates GitHub, Puntos restauraciÃ³n, Logger integrado",
+                         "v2.1.0":  "Agregado: Sistema de logging avanzado, reportes mejorados",
+                         "v2.0.0":  "RefactorizaciÃ³n completa, mÃºltiples mÃ³dulos independientes"
+                     },
+    "language":  "en"
 }

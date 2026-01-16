@@ -330,9 +330,9 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Modo Gaming." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Optimizar-ModoGaming.ps1") { 
-                    & ".\Optimizar-ModoGaming.ps1" 
-                } else { Write-Host "Error: No se encuentra Optimizar-ModoGaming.ps1" -ForegroundColor Red }
+                if (Test-Path ".\Gaming-Mode.ps1") { 
+                    & ".\Gaming-Mode.ps1" 
+                } else { Write-Host "Error: No se encuentra Gaming-Mode.ps1" -ForegroundColor Red }
                 Wait-Key
             }
         }
