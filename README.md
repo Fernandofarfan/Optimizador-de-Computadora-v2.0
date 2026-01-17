@@ -224,7 +224,7 @@ Servidor HTTP para monitoreo remoto del sistema:
 - Gestión en segundo plano con PowerShell Jobs
 - Documentación de endpoints integrada en dashboard
 
-#### 🤖 Asistente Inteligente con IA
+#### 🤖 Asistente del Sistema
 Análisis de logs y recomendaciones automatizadas:
 - **Análisis de Event Logs**: System, Application, Security (Critical/Error/Warning)
 - **Base de conocimiento**: 10+ patrones conocidos (BSOD, drivers, memoria, red, updates)
