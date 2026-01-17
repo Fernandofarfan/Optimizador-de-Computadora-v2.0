@@ -1,6 +1,15 @@
-# Guía de Contribución
+# Guía de Contribución - v2.0
 
-¡Gracias por tu interés en contribuir al **Optimizador de Computadora**! Este documento te ayudará a empezar.
+> **Última actualización**: 16 de Enero de 2026
+
+¡Gracias por tu interés en contribuir al **Optimizador de Computadora v2.0**! Este documento te ayudará a empezar.
+
+## 🎯 Estado del Proyecto
+
+**Versión actual**: v2.0.0  
+**Estado**: ✅ Producción - 42/42 funciones operativas  
+**Repositorio**: https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0.git  
+**GitHub Pages**: https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/
 
 ## Cómo Contribuir
 
@@ -9,8 +18,8 @@
 1. Haz un **fork** de este repositorio
 2. Clona tu fork localmente:
    ```bash
-   git clone https://github.com/TU-USUARIO/Optimizador-de-Computadora.git
-   cd Optimizador-de-Computadora
+   git clone https://github.com/TU-USUARIO/Optimizador-de-Computadora-v2.0.git
+   cd Optimizador-de-Computadora-v2.0
    ```
 
 ### 2. Crea una Rama
@@ -102,7 +111,7 @@ Luego:
 
 ### 🐛 Reportar Bugs
 
-Abre un [Issue](https://github.com/Fernandofarfan/Optimizador-de-Computadora/issues) con:
+Abre un [Issue](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/issues) con:
 - Descripción del problema
 - Pasos para reproducir
 - Comportamiento esperado vs. actual
@@ -128,9 +137,11 @@ Abre un Issue con:
 Si quieres agregar un nuevo módulo (ej: Gestor de Drivers, Modo Gaming):
 
 1. Crea el script en la raíz: `Nombre-Modulo.ps1`
-2. Agrega entrada al menú en `Optimizador.ps1`
-3. Actualiza el README.md con descripción del módulo
-4. Documenta en CHANGELOG.md
+2. **IMPORTANTE v2.0**: NO uses `#Requires -RunAsAdministrator` en módulos (solo en Optimizador.ps1)
+3. **IMPORTANTE v2.0**: Evita variables reservadas como `$pid` (usa `$processId` u otro nombre)
+4. Agrega entrada al menú en `Optimizador.ps1`
+5. Actualiza el README.md con descripción del módulo
+6. Documenta en CHANGELOG.md
 
 ## Proceso de Revisión
 
@@ -148,8 +159,8 @@ Si quieres agregar un nuevo módulo (ej: Gestor de Drivers, Modo Gaming):
 
 ## Preguntas
 
-Si tienes dudas, abre un [Issue](https://github.com/Fernandofarfan/Optimizador-de-Computadora/issues) o contacta al maintainer.
+Si tienes dudas, abre un [Issue](https://github.com/Fernandofarfan/Optimizador-de-Computadora-v2.0/issues) o contacta al maintainer.
 
 ---
 
-**¡Gracias por contribuir!** 🚀
+**¡Gracias por contribuir al Optimizador de Computadora v2.0!** 🚀**¡Gracias por contribuir!** 🚀

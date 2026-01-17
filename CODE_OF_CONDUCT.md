@@ -1,4 +1,6 @@
-# Código de Conducta del Proyecto
+# Código de Conducta del Proyecto - v2.0
+
+> **Última actualización**: 16 de Enero de 2026
 
 ## Nuestro Compromiso
 

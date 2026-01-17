@@ -1,40 +1,39 @@
-# Documentación del Proyecto v4.0.0
+# Documentación del Proyecto v2.0
+
+> **Última actualización**: 16 de Enero de 2026
 
 Esta carpeta contiene la página web del proyecto alojada en GitHub Pages.
 
 ## 📄 Archivos
 
-- **index.html** - Página principal del sitio web (actualizada a v4.0.0)
+- **index.html** - Página principal del sitio web (actualizada v2.0 - 16 Enero 2026)
 - **dashboard.html** - Dashboard interactivo con visualización de métricas
 - **style.css** - Estilos y diseño responsivo
-- **SCREENSHOTS.md** - Capturas de pantalla del proyecto
+- **SCREENSHOTS.md** - Guía para capturas de pantalla del proyecto
 
 ## 🌐 Sitio Web
 
 El sitio está disponible en:
-**https://fernandofarfan.github.io/Optimizador-de-Computadora/**
+**https://fernandofarfan.github.io/Optimizador-de-Computadora-v2.0/**
 
-## 🎨 Características del Sitio v4.0.0
+## 🎨 Características del Sitio v2.0
 
-- Diseño moderno con gradientes actualizados
+- Diseño moderno y limpio con gradientes profesionales
 - Totalmente responsivo (móvil, tablet, desktop)
-- Secciones actualizadas:
-  - Hero con información de v4.0.0
-  - Características principales con Testing, Config Manager y Auto-Updates
-  - Novedades de la versión 4.0.0
-  - 36 módulos profesionales
-  - Guía de inicio rápido
-  - Documentación técnica completa
+- **Correcciones v2.0**:
+  - Header con posición relativa (sin movimiento al hacer scroll)
+  - Nav sticky para mejor navegación
+  - Footer con enlaces correctos (Releases, Issues)
+  - Fecha actualizada: 16 de Enero de 2026
   
-## 🆕 Novedades v4.0.0 en el Sitio
+## 🆕 Novedades v2.0 en el Sitio
 
-- 🧪 Framework de Testing con Pester
-- ⚙️ Configuración Centralizada JSON
-- 📊 Logging Avanzado con 6 niveles
-- 🔄 Auto-Actualización desde GitHub
-- 🎮 Modo Gaming Automático
-- 📄 Reportes HTML Profesionales
-- 🔔 Notificaciones Toast Nativas
+- ✅ **42 funciones operativas** (100% funcional)
+- 🔧 Correcciones de 20 módulos
+- 🧹 Eliminados 4,000+ líneas de código obsoleto
+- 🎯 6 módulos recreados y optimizados
+- 📊 Dashboard Web funcional con CSS corregido
+- 🔗 Enlaces correctos a GitHub (Releases/Issues)
 
 ## 🔧 Modificar el Sitio
 
@@ -48,6 +47,13 @@ Para actualizar el sitio:
 
 GitHub Pages está configurado para:
 - **Source**: rama `main`, carpeta `/docs`
+- **Custom domain**: No configurado
+- **HTTPS**: Habilitado
+
+---
+
+**Versión**: 2.0.0  
+**Fecha**: 16 de Enero de 2026
 - **URL**: https://fernandofarfan.github.io/Optimizador-de-Computadora/
 - **Custom domain**: No configurado
 - **Versión**: v4.0.0

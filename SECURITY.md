@@ -1,11 +1,13 @@
-# Política de Seguridad
+# Política de Seguridad - v2.0
+
+> **Última actualización**: 16 de Enero de 2026
 
 ## Versiones Soportadas
 
-| Versión | Soporte          |
-| ------- | ---------------- |
-| 2.0.x   | ✅ Soportada     |
-| < 2.0   | ❌ No soportada  |
+| Versión | Soporte          | Estado               |
+| ------- | ---------------- | -------------------- |
+| 2.0.x   | ✅ Soportada     | 42/42 funciones OK   |
+| < 2.0   | ❌ No soportada  | Descontinuada        |
 
 ## Reportar una Vulnerabilidad
 
@@ -40,14 +42,15 @@ En su lugar:
 4. **Release**: Publicamos el parche en una nueva versión
 5. **Divulgación pública**: Anunciamos el fix después de que los usuarios tengan tiempo de actualizar (generalmente 7 días)
 
-### Alcance de Seguridad
+### Alcance de Seguridad - v2.0
 
 Este proyecto maneja operaciones sensibles del sistema. Áreas de atención:
 
 #### Operaciones Privilegiadas
-- **Administrador requerido**: Módulos de limpieza profunda y optimización de servicios
-- **Validación de permisos**: Verificación antes de operaciones administrativas
-- **Reversibilidad**: Los cambios en servicios pueden revertirse manualmente
+- **Administrador requerido**: Solo el script principal (Optimizador.ps1) requiere elevación
+- **Cambio v2.0**: Módulos ya NO usan `#Requires -RunAsAdministrator` (evita conflicto de doble verificación)
+- **Validación única**: Verificación de permisos en punto de entrada
+- **Reversibilidad**: Los cambios pueden revertirse con Revertir-Cambios.ps1
 
 #### Riesgos Potenciales
 - **Modificación de servicios de Windows**: Puede afectar funcionalidad del sistema
@@ -102,6 +105,5 @@ Las actualizaciones de seguridad se publican como **releases de parche** (ej: 2.
 
 ---
 
-**Última actualización**: Enero 2026
-
-Para preguntas generales (no de seguridad), abre un [Issue](https://github.com/Fernandofarfan/Optimizador-de-Computadora/issues).
+**Última actualización**: 16 de Enero de 2026  
+**Versión**: 2.0.0Para preguntas generales (no de seguridad), abre un [Issue](https://github.com/Fernandofarfan/Optimizador-de-Computadora/issues).

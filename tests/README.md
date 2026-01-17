@@ -1,4 +1,6 @@
-# Tests para Optimizador de PC
+# Tests para Optimizador de Computadora v2.0
+
+> **Última actualización**: 16 de Enero de 2026
 
 Este directorio contiene las pruebas automatizadas del proyecto usando **Pester** (framework de testing para PowerShell).
 
@@ -6,10 +8,23 @@ Este directorio contiene las pruebas automatizadas del proyecto usando **Pester*
 
 ```
 tests/
-├── Unit/           # Tests unitarios de funciones individuales
-├── Integration/    # Tests de integración end-to-end
-└── README.md       # Este archivo
+├── Unit/                      # Tests unitarios de funciones individuales
+│   ├── Optimizador.Tests.ps1
+│   ├── Monitor-Red.Tests.ps1
+│   └── Extended.Tests.ps1
+├── Integration/               # Tests de integración end-to-end
+│   └── E2E.Tests.ps1
+├── Test-Suite.ps1             # Suite principal de tests
+└── README.md                  # Este archivo
 ```
+
+## ✅ Estado de Testing v2.0
+
+- **Cobertura**: Parcial
+- **Tests Unitarios**: 3 archivos de tests
+- **Tests de Integración**: 1 archivo E2E
+- **Framework**: Pester 5.x
+- **Estado del Proyecto**: 42/42 funciones operativas
 
 ## 🚀 Ejecutar Tests
 

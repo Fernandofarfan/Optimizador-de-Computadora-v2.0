@@ -1,14 +1,16 @@
-# 📸 Guía de Screenshots
+# 📸 Guía de Screenshots - v2.0
 
-Esta guía te ayudará a capturar capturas de pantalla del **PC Optimizer Suite** para la documentación.
+> **Última actualización**: 16 de Enero de 2026
+
+Esta guía te ayudará a capturar capturas de pantalla del **Optimizador de Computadora v2.0** para la documentación.
 
 ## 🎯 Objetivo
 
 Crear documentación visual que ayude a los usuarios a entender:
-- La interfaz del menú principal
+- La interfaz del menú principal (42 opciones funcionales)
 - Los resultados del análisis del sistema
 - El proceso de optimización
-- Los reportes generados
+- Los reportes generados y Dashboard Web
 
 ---
 
@@ -18,15 +20,15 @@ Crear documentación visual que ayude a los usuarios a entender:
 - **Qué capturar:** La ventana de PowerShell mostrando el menú principal del `Optimizador.ps1`
 - **Cómo:** 
   1. Ejecuta `Optimizador.ps1` como administrador
-  2. Espera a que aparezca el menú completo con las 6 opciones
+  2. Espera a que aparezca el menú completo con las 42 opciones
   3. Presiona `Windows + Shift + S` para captura parcial
   4. Selecciona toda la ventana de PowerShell
   5. Guarda como `menu-principal.png` en `docs/screenshots/`
 
 **Debe mostrar:**
-- Banner del PC Optimizer Suite con versión
-- Las 6 opciones del menú numeradas
-- La opción de salida (0)
+- Banner del Optimizador de Computadora v2.0
+- Las 42 opciones del menú numeradas (todas funcionales)
+- La opción de salida
 - El prompt esperando entrada
 
 ---
