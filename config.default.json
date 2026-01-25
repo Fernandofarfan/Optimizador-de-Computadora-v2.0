@@ -66,13 +66,6 @@
     "blocked_ips": [],
     "whitelisted_apps": []
   },
-  "ai_assistant": {
-    "enabled": true,
-    "auto_diagnose": true,
-    "suggest_fixes": true,
-    "apply_fixes_automatically": false,
-    "learning_mode": true
-  },
   "dashboard": {
     "web_enabled": false,
     "port": 8080,
