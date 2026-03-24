@@ -23,8 +23,12 @@ param(
 # CONFIGURACIÓN DE TESTS
 # ============================================================================
 
+$ProjectRoot = Split-Path -Parent $PSScriptRoot
+Write-Host "DEBUG: ProjectRoot  = $ProjectRoot" -ForegroundColor Cyan
+Write-Host "DEBUG: PSScriptRoot = $PSScriptRoot" -ForegroundColor Cyan
+
 $TestConfig = @{
-    ProjectRoot      = Split-Path -Parent $PSScriptRoot
+    ProjectRoot      = $ProjectRoot
     ModulesPath      = $ProjectRoot
     VerbosityLevel   = 'Detailed'
     ExitOnFailure    = $false
