@@ -63,7 +63,7 @@ jobs:
                   }
               }
           }
-          Write-Host "✓ Verificación de versión completada" -ForegroundColor Green
+          Write-Host "OK Verificacion de version completada" -ForegroundColor Green
 
   # ==========================================
   # TESTING - Tests automáticos
@@ -104,14 +104,14 @@ jobs:
           } else {
               Write-Host "Suite de tests no encontrada, saltando..." -ForegroundColor Yellow
           }
-          Write-Host "✓ Tests completados" -ForegroundColor Green
+          Write-Host "OK Tests completados" -ForegroundColor Green
 
       - name: 📊 Generar reporte de cobertura
         shell: powershell
         run: |
           Write-Host "Generando reporte de cobertura..." -ForegroundColor Cyan
           # Simulación: En futuro integrar Pester CodeCoverage
-          Write-Host "✓ Cobertura calculada" -ForegroundColor Green
+          Write-Host "OK Coberura calculada" -ForegroundColor Green
 
   # ==========================================
   # SECURITY - Análisis de seguridad
@@ -146,7 +146,7 @@ jobs:
           }
           
           if (-not $found) {
-              Write-Host "✓ No se encontraron credenciales hardcodeadas" -ForegroundColor Green
+              Write-Host "OK No se encontraron credenciales hardcodeadas" -ForegroundColor Green
           }
 
       - name: 🛡️ Verificar seguridad de módulos
@@ -160,7 +160,7 @@ jobs:
               
               # Verificar que tenga validación de parámetros
               if ($content -match 'param\(') {
-                  Write-Host "✓ $($module.Name): Tiene parámetros definidos" -ForegroundColor Green
+                  Write-Host "OK $($module.Name): Tiene parametros definidos" -ForegroundColor Green
               }
           }
 
@@ -194,7 +194,7 @@ jobs:
           Copy-Item -Path "./CHANGELOG.md" -Destination "$buildDir/"
           Copy-Item -Path "./LICENSE" -Destination "$buildDir/"
           
-          Write-Host "✓ Build preparado en $buildDir" -ForegroundColor Green
+          Write-Host "OK Build preparado en $buildDir" -ForegroundColor Green
 
       - name: 📝 Generar Release Notes
         shell: powershell
@@ -221,7 +221,7 @@ jobs:
           }
           
           Write-Host $releaseNotes
-          Write-Host "✓ Release Notes generadas" -ForegroundColor Green
+          Write-Host "OK Release Notes generadas" -ForegroundColor Green
 
   # ==========================================
   # NOTIFICATION - Notificaciones finales
@@ -235,15 +235,15 @@ jobs:
       - name: ✅ Resumen de Pipeline
         shell: powershell
         run: |
-          Write-Host "╔════════════════════════════════════════╗" -ForegroundColor Cyan
-          Write-Host "║    CI/CD PIPELINE SUMMARY v4.0.0       ║" -ForegroundColor Cyan
-          Write-Host "╚════════════════════════════════════════╝" -ForegroundColor Cyan
+          Write-Host "------------------------------------------" -ForegroundColor Cyan
+          Write-Host "     CI/CD PIPELINE SUMMARY v4.0.0       " -ForegroundColor Cyan
+          Write-Host "------------------------------------------" -ForegroundColor Cyan
           Write-Host ""
-          Write-Host "📋 Validación:   ✓ Completada" -ForegroundColor Green
-          Write-Host "🧪 Testing:      ✓ Completado" -ForegroundColor Green
-          Write-Host "🔒 Seguridad:    ✓ Completado" -ForegroundColor Green
+          Write-Host "VALIDACION:   OK Completada" -ForegroundColor Green
+          Write-Host "TESTING:      OK Completado" -ForegroundColor Green
+          Write-Host "SEGURIDAD:    OK Completado" -ForegroundColor Green
           Write-Host ""
-          Write-Host "✅ Pipeline exitoso - Código listo para producción" -ForegroundColor Green
+          Write-Host "OK Pipeline exitoso - Codigo listo para produccion" -ForegroundColor Green
           Write-Host ""
           Write-Host "Rama:    ${{ github.ref }}" -ForegroundColor Blue
           Write-Host "Commit:  ${{ github.sha }}" -ForegroundColor Blue

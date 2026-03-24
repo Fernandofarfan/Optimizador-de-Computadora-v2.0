@@ -28,7 +28,7 @@ jobs:
           $errors = $results | Where-Object { $_.Severity -eq 'Error' }
           $warnings = $results | Where-Object { $_.Severity -eq 'Warning' }
           
-          Write-Host "✅ Analysis complete"
+          Write-Host "OK Analysis complete"
           Write-Host "Errors: $($errors.Count)"
           Write-Host "Warnings: $($warnings.Count)"
           
@@ -66,12 +66,12 @@ jobs:
           $result = Invoke-Pester -Configuration $config
           
           if ($result.FailedCount -gt 0) {
-            Write-Host "❌ $($result.FailedCount) tests failed"
+            Write-Host "ERROR $($result.FailedCount) tests failed"
             exit 1
           }
           
-          Write-Host "✅ All $($result.PassedCount) tests passed"
-          Write-Host "📊 Code Coverage: $($result.CodeCoverage.CoveragePercent)%"
+          Write-Host "OK All $($result.PassedCount) tests passed"
+          Write-Host "STATS Code Coverage: $($result.CodeCoverage.CoveragePercent)%"
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
@@ -131,7 +131,7 @@ jobs:
             $content = Get-Content -Path $script.FullName -Raw -ErrorAction SilentlyContinue
             
             if (-not $content) {
-                Write-Host "  ⚠️  Advertencia: Archivo vacío" -ForegroundColor Yellow
+                Write-Host "  WARNING Advertencia: Archivo vacio" -ForegroundColor Yellow
                 continue
             }
             
@@ -139,22 +139,22 @@ jobs:
             $null = [System.Management.Automation.PSParser]::Tokenize($content, [ref]$syntaxErrors)
             
             if ($syntaxErrors.Count -gt 0) {
-                Write-Host "  ❌ ERROR: Sintaxis inválida" -ForegroundColor Red
+                Write-Host "  ERROR ERROR: Sintaxis invalida" -ForegroundColor Red
                 foreach ($error in $syntaxErrors) {
                     Write-Host "    Línea $($error.Token.StartLine): $($error.Message)" -ForegroundColor Red
                 }
                 $errors++
             } else {
-                Write-Host "  ✅ Sintaxis válida" -ForegroundColor Green
+                Write-Host "  OK Sintaxis valida" -ForegroundColor Green
             }
         }
         
         Write-Host "`n========================================" -ForegroundColor Cyan
         if ($errors -eq 0) {
-            Write-Host "✅ Todos los scripts pasaron la validación" -ForegroundColor Green
+            Write-Host "OK Todos los scripts pasaron la validacion" -ForegroundColor Green
             exit 0
         } else {
-            Write-Host "❌ $errors script(s) con errores de sintaxis" -ForegroundColor Red
+            Write-Host "ERROR $errors script(s) con errores de sintaxis" -ForegroundColor Red
             exit 1
         }
     
@@ -185,11 +185,11 @@ jobs:
         }
         
         if ($missing.Count -gt 0) {
-            Write-Host "❌ Archivos faltantes:" -ForegroundColor Red
+            Write-Host "ERROR Archivos faltantes:" -ForegroundColor Red
             $missing | ForEach-Object { Write-Host "  - $_" -ForegroundColor Red }
             exit 1
         } else {
-            Write-Host "✅ Todos los archivos requeridos están presentes" -ForegroundColor Green
+            Write-Host "OK Todos los archivos requeridos estan presentes" -ForegroundColor Green
         }
     
     - name: Verificar formato del código
@@ -205,13 +205,13 @@ jobs:
             
             # Verificar BOM UTF-8
             if ($content -match '^\xEF\xBB\xBF') {
-                Write-Host "⚠️  $($script.Name): Contiene BOM UTF-8" -ForegroundColor Yellow
+                Write-Host "WARNING $($script.Name): Contiene BOM UTF-8" -ForegroundColor Yellow
                 $warnings++
             }
             
             # Verificar tabs vs espacios
             if ($content -match '\t') {
-                Write-Host "⚠️  $($script.Name): Usa tabs en lugar de espacios" -ForegroundColor Yellow
+                Write-Host "WARNING $($script.Name): Usa tabs en lugar de espacios" -ForegroundColor Yellow
                 $warnings++
             }
             
@@ -219,14 +219,14 @@ jobs:
             $lines = $content -split "`n"
             $longLines = $lines | Where-Object { $_.Length -gt 150 }
             if ($longLines.Count -gt 0) {
-                Write-Host "⚠️  $($script.Name): $($longLines.Count) línea(s) mayor(es) a 150 caracteres" -ForegroundColor Yellow
+                Write-Host "WARNING $($script.Name): $($longLines.Count) linea(s) mayor(es) a 150 caracteres" -ForegroundColor Yellow
                 $warnings++
             }
         }
         
         Write-Host "`n========================================" -ForegroundColor Cyan
         if ($warnings -eq 0) {
-            Write-Host "✅ Formato del código correcto" -ForegroundColor Green
+            Write-Host "OK Formato del codigo correcto" -ForegroundColor Green
         } else {
-            Write-Host "⚠️  $warnings advertencia(s) de formato encontradas" -ForegroundColor Yellow
+            Write-Host "WARNING $warnings advertencia(s) de formato encontradas" -ForegroundColor Yellow
         }
