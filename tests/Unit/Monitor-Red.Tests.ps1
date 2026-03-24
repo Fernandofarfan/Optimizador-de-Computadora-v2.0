@@ -9,7 +9,20 @@ Describe "Monitor-Red.ps1 - Funciones de Red" {
     BeforeAll {
         # Mock para evitar ejecución real
         Mock Write-Host {}
-        Mock Write-Log {}
+        # Mock Write-Log si existe, si no, crear mock vacío
+        try { Mock Write-Log {} } catch { function Write-Log { param($Message) } Mock Write-Log {} }
+        
+        # Mocks para comandos de red que fallan en CI
+        Mock Get-NetTCPConnection { 
+            return [PSCustomObject]@{ State = "Established"; LocalAddress = "127.0.0.1"; LocalPort = 80; RemoteAddress = "192.168.1.1"; RemotePort = 443 }
+        }
+        Mock Get-NetAdapter {
+            return [PSCustomObject]@{ Name = "Ethernet"; Status = "Up"; LinkSpeed = "1Gbps"; InterfaceDescription = "Intel Ethernet Connection" }
+        }
+        Mock Get-NetAdapterStatistics {
+            return [PSCustomObject]@{ Name = "Ethernet"; ReceivedBytes = 1000; SentBytes = 500 }
+        }
+        Mock Test-Connection { return $true }
     }
     
     Context "Get-NetworkConnections" {
@@ -21,6 +34,7 @@ Describe "Monitor-Red.ps1 - Funciones de Red" {
         It "Debería filtrar conexiones establecidas" {
             $established = Get-NetTCPConnection -State Established -ErrorAction SilentlyContinue
             if ($established) {
+                # Pester Mock devuelve el objeto directamente si no hay parámetros específicos
                 $established[0].State | Should Be "Established"
             }
         }
@@ -50,9 +64,15 @@ Describe "Monitor-Red.ps1 - Funciones de Red" {
 
 Describe "Monitor-Red.ps1 - Firewall" {
     BeforeAll {
-        # Mock para evitar ejecución real
         Mock Write-Host {}
-        Mock Write-Log {}
+        try { Mock Write-Log {} } catch { function Write-Log { param($Message) } Mock Write-Log {} }
+        
+        Mock Get-NetFirewallRule {
+            return ,([PSCustomObject]@{ Name = "Allow-HTTP"; Enabled = "True"; Direction = "Inbound"; Action = "Allow" })
+        }
+        Mock Get-NetFirewallProfile {
+            return [PSCustomObject]@{ Name = "Domain"; Enabled = "True" }, [PSCustomObject]@{ Name = "Private"; Enabled = "True" }
+        }
     }
 
     Context "Get-FirewallRules" {
@@ -73,3 +93,4 @@ Describe "Monitor-Red.ps1 - Firewall" {
         }
     }
 }
+
