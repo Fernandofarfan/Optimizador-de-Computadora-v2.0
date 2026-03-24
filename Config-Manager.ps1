@@ -19,25 +19,45 @@ function Initialize-Config {
         Inicializa el archivo de configuracion
     #>
     
+    # DEBUG: Log paths
+    Write-Host "DEBUG: ConfigPath=$Global:ConfigPath" -ForegroundColor Cyan
+    Write-Host "DEBUG: DefaultPath=$Global:DefaultConfigPath" -ForegroundColor Cyan
+
     # Crear carpeta si no existe
     $configDir = Split-Path $Global:ConfigPath -Parent
-    if (-not (Test-Path $configDir)) {
-        New-Item -Path $configDir -ItemType Directory -Force | Out-Null
+    try {
+        if (-not (Test-Path $configDir)) {
+            New-Item -Path $configDir -ItemType Directory -Force | Out-Null
+            Write-Host "DEBUG: Creado directorio $configDir" -ForegroundColor Gray
+        }
+    } catch {
+        Write-Host "[ERROR] No se pudo crear directorio $configDir: $_" -ForegroundColor Red
     }
     
     # Si no existe config, copiar default
     if (-not (Test-Path $Global:ConfigPath)) {
         if (Test-Path $Global:DefaultConfigPath) {
-            Copy-Item -Path $Global:DefaultConfigPath -Destination $Global:ConfigPath -Force
-            Write-Host "[OK] Configuracion inicializada: $Global:ConfigPath" -ForegroundColor Green
+            try {
+                Copy-Item -Path $Global:DefaultConfigPath -Destination $Global:ConfigPath -Force
+                Write-Host "[OK] Configuracion inicializada: $Global:ConfigPath" -ForegroundColor Green
+            } catch {
+                Write-Host "[ERROR] Fallo Copy-Item: $_" -ForegroundColor Red
+                return @{ "Error" = "CopyFailed" }
+            }
         }
         else {
             Write-Host "[WARN] No se encontro config.default.json" -ForegroundColor Yellow
-            return @{}
+            return @{ "Error" = "DefaultMissing" }
         }
     }
     
-    return Get-Config
+    # Evitar recursion infinita: solo llamar a Get-Config si el archivo ya existe
+    if (Test-Path $Global:ConfigPath) {
+        return Get-Config
+    }
+    else {
+        return @{ "Error" = "InitFailed" }
+    }
 }
 
 function Get-Config {
@@ -47,11 +67,20 @@ function Get-Config {
     #>
     
     if (-not (Test-Path $Global:ConfigPath)) {
-        return Initialize-Config
+        # Si no existe, intentar inicializar pero evitar recursion infinita
+        if ($MyInvocation.ScriptName -match "Config-Manager.ps1" -and $Global:InInit) {
+             return @{}
+        }
+        $Global:InInit = $true
+        $conf = Initialize-Config
+        $Global:InInit = $false
+        return $conf
     }
     
     try {
-        $config = Get-Content -Path $Global:ConfigPath -Raw | ConvertFrom-Json
+        $content = Get-Content -Path $Global:ConfigPath -Raw
+        if ([string]::IsNullOrWhiteSpace($content)) { return @{} }
+        $config = $content | ConvertFrom-Json
         return $config
     }
     catch {
@@ -72,20 +101,32 @@ function Set-ConfigValue {
     )
     
     $config = Get-Config
+    if ($null -eq $config) { $config = @{} }
     
     $target = $config
     if ($null -ne $Section -and '' -ne $Section) {
         if ($null -eq $config.$Section) {
-            $config | Add-Member -MemberType NoteProperty -Name $Section -Value @{} -Force
+            # Asegurarse de que el objeto sea un PSCustomObject para poder usar Add-Member
+            if ($config -is [Hashtable]) {
+                $config = [PSCustomObject]$config
+            }
+            if ($null -eq $config.$Section) {
+                $config | Add-Member -MemberType NoteProperty -Name $Section -Value @{} -Force
+            }
         }
         $target = $config.$Section
     }
 
-    if ($null -eq $target.$Key) {
-        $target | Add-Member -MemberType NoteProperty -Name $Key -Value $Value -Force
+    if ($target -is [Hashtable]) {
+        $target.$Key = $Value
     }
     else {
-        $target.$Key = $Value
+        if ($null -eq $target.$Key) {
+            $target | Add-Member -MemberType NoteProperty -Name $Key -Value $Value -Force
+        }
+        else {
+            $target.$Key = $Value
+        }
     }
     
     try {
@@ -112,6 +153,7 @@ function Get-ConfigValue {
     )
     
     $config = Get-Config
+    if ($null -eq $config) { return $Default }
     
     $target = $config
     if ($null -ne $Section -and '' -ne $Section) {
@@ -137,16 +179,12 @@ function Reset-Config {
         Restaura la configuracion por defecto
     #>
     
-    $confirmation = Read-Host "[CONFIRM] ¿Restaurar configuracion por defecto? (S/N)"
-    
-    if ($confirmation -eq "S" -or $confirmation -eq "s") {
-        if (Test-Path $Global:ConfigPath) {
-            Remove-Item -Path $Global:ConfigPath -Force
-        }
-        
-        Initialize-Config
-        Write-Host "[OK] Configuracion restaurada" -ForegroundColor Green
+    if (Test-Path $Global:ConfigPath) {
+        Remove-Item -Path $Global:ConfigPath -Force
     }
+    
+    Initialize-Config
+    Write-Host "[OK] Configuracion restaurada" -ForegroundColor Green
 }
 
 function Show-Config {
@@ -180,5 +218,3 @@ function Edit-Config {
         Write-Host "[ERROR] Archivo de configuracion no encontrado" -ForegroundColor Red
     }
 }
-
-# Script finalizado
