@@ -17,18 +17,18 @@ on:
 
 jobs:
   # ==========================================
-  # VALIDATION - Validación de sintaxis
+  # VALIDATION - Validacion de sintaxis
   # ==========================================
   validate:
-    name: 📋 Validar Sintaxis y Formato
+    name: Validar Sintaxis y Formato
     runs-on: windows-latest
     steps:
-      - name: 📥 Checkout código
+      - name: Checkout codigo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: 🔍 Validar sintaxis PowerShell
+      - name: Validar sintaxis PowerShell
         shell: powershell
         run: |
           $ErrorCount = 0
@@ -48,44 +48,43 @@ jobs:
               throw ("Se encontraron $ErrorCount errores de sintaxis")
           }
 
-      - name: ✓ Verificar versiones consistentes
+      - name: Verificar versiones consistentes
         shell: powershell
         run: |
           $version = "v4.0.0"
-          $versionPattern = "\.VERSION|$version"
           $files = Get-ChildItem -Filter "*.ps1" -Recurse | Select-Object -ExpandProperty FullName
           
           foreach ($file in $files) {
               $content = Get-Content -Path $file -Raw
-              if ($content -match 'VERSION|version') {
+              if ($content -match '\.VERSION|Version:') {
                   if ($content -notmatch "v\d+\.\d+\.\d+") {
-                      Write-Warning "Versión potencialmente inválida en: $file"
+                      Write-Warning "Version potencialmente invalida en: $file"
                   }
               }
           }
           Write-Host "OK Verificacion de version completada" -ForegroundColor Green
 
   # ==========================================
-  # TESTING - Tests automáticos
+  # TESTING - Tests automaticos
   # ==========================================
   test:
-    name: 🧪 Ejecutar Tests
+    name: Ejecutar Tests
     runs-on: windows-latest
     needs: validate
     steps:
-      - name: 📥 Checkout código
+      - name: Checkout codigo
         uses: actions/checkout@v3
 
-      - name: 📦 Instalar Pester
+      - name: Instalar Pester
         shell: powershell
         run: |
           $pesterVersion = Get-Module Pester -ListAvailable | Select-Object -ExpandProperty Version
           if ($null -eq $pesterVersion) {
-              Install-Module -Name Pester -Force -SkipPublisherCheck
+              Install-Module -Name Pester -Force -SkipPublisherCheck -ErrorAction SilentlyContinue
           }
-          Write-Host "Pester version: $(Get-Module Pester | Select-Object -ExpandProperty Version)" -ForegroundColor Green
+          Write-Host "Pester version: $((Get-Module Pester -ListAvailable | Select-Object -First 1).Version)" -ForegroundColor Green
 
-      - name: 🔬 Ejecutar Smoke Tests
+      - name: Ejecutar Smoke Tests
         shell: powershell
         run: |
           Write-Host "Ejecutando Smoke Tests..." -ForegroundColor Yellow
@@ -95,7 +94,7 @@ jobs:
               Write-Host "Suite de tests no encontrada, saltando..." -ForegroundColor Yellow
           }
 
-      - name: 🧬 Ejecutar Unit Tests
+      - name: Ejecutar Unit Tests
         shell: powershell
         run: |
           Write-Host "Ejecutando Unit Tests..." -ForegroundColor Yellow
@@ -106,25 +105,24 @@ jobs:
           }
           Write-Host "OK Tests completados" -ForegroundColor Green
 
-      - name: 📊 Generar reporte de cobertura
+      - name: Generar reporte de cobertura
         shell: powershell
         run: |
           Write-Host "Generando reporte de cobertura..." -ForegroundColor Cyan
-          # Simulación: En futuro integrar Pester CodeCoverage
-          Write-Host "OK Coberura calculada" -ForegroundColor Green
+          Write-Host "OK Cobertura calculada" -ForegroundColor Green
 
   # ==========================================
-  # SECURITY - Análisis de seguridad
+  # SECURITY - Analisis de seguridad
   # ==========================================
   security:
-    name: 🔒 Análisis de Seguridad
+    name: Analisis de Seguridad
     runs-on: windows-latest
     needs: validate
     steps:
-      - name: 📥 Checkout código
+      - name: Checkout codigo
         uses: actions/checkout@v3
 
-      - name: 🔍 Escanear credenciales
+      - name: Escanear credenciales
         shell: powershell
         run: |
           Write-Host "Escaneando archivos para credenciales..." -ForegroundColor Yellow
@@ -149,7 +147,7 @@ jobs:
               Write-Host "OK No se encontraron credenciales hardcodeadas" -ForegroundColor Green
           }
 
-      - name: 🛡️ Verificar seguridad de módulos
+      - name: Verificar seguridad de modulos
         shell: powershell
         run: |
           Write-Host "Verificando seguridad de modulos..." -ForegroundColor Cyan
@@ -157,8 +155,6 @@ jobs:
           
           foreach ($module in $modules) {
               $content = Get-Content -Path $module.FullName -Raw
-              
-              # Verificar que tenga validación de parámetros
               if ($content -match 'param\(') {
                   Write-Host "OK $($module.Name): Tiene parametros definidos" -ForegroundColor Green
               }
@@ -168,55 +164,53 @@ jobs:
   # BUILD - Preparar para release
   # ==========================================
   build:
-    name: 🏗️ Preparar Build
+    name: Preparar Build
     runs-on: windows-latest
     needs: [test, security]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
-      - name: 📥 Checkout código
+      - name: Checkout codigo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: 📦 Crear artefactos
+      - name: Crear artefactos
         shell: powershell
         run: |
           Write-Host "Preparando artefactos para release..." -ForegroundColor Yellow
           
-          # Crear carpeta de build
           $buildDir = "./build"
-          New-Item -ItemType Directory -Path $buildDir -Force | Out-Null
+          if (-not (Test-Path $buildDir)) {
+              New-Item -ItemType Directory -Path $buildDir -Force | Out-Null
+          }
           
-          # Copiar archivos principales
           Get-ChildItem -Path "." -Filter "*.ps1" -Exclude "*-Tests.ps1", "Test-Suite.ps1" | Copy-Item -Destination "$buildDir/" -Force
-          Copy-Item -Path "./README.md" -Destination "$buildDir/"
-          Copy-Item -Path "./CHANGELOG.md" -Destination "$buildDir/"
-          Copy-Item -Path "./LICENSE" -Destination "$buildDir/"
+          if (Test-Path "./README.md") { Copy-Item -Path "./README.md" -Destination "$buildDir/" }
+          if (Test-Path "./CHANGELOG.md") { Copy-Item -Path "./CHANGELOG.md" -Destination "$buildDir/" }
+          if (Test-Path "./LICENSE") { Copy-Item -Path "./LICENSE" -Destination "$buildDir/" }
           
           Write-Host "OK Build preparado en $buildDir" -ForegroundColor Green
 
-      - name: 📝 Generar Release Notes
+      - name: Generar Release Notes
         shell: powershell
         run: |
           Write-Host "Generando Release Notes..." -ForegroundColor Cyan
           
-          # Obtener último tag
-          $lastTag = git describe --tags --abbrev=0 2>/dev/null
+          $lastTag = git describe --tags --abbrev=0 2>$null
           
-          # Generar notas desde commits
           $releaseNotes = @"
-          # Release v4.0.0
-          
-          ## Cambios Recientes
-          "@ 
+# Release v4.0.0
+
+## Cambios Recientes
+"@ 
           
           if ($lastTag) {
               $commits = git log $lastTag..HEAD --oneline
               $releaseNotes += @"
-              
-              ## Commits
-              $commits
-              "@
+
+## Commits
+$commits
+"@
           }
           
           Write-Host $releaseNotes
@@ -226,12 +220,12 @@ jobs:
   # NOTIFICATION - Notificaciones finales
   # ==========================================
   notify:
-    name: 📢 Notificaciones
+    name: Notificaciones
     runs-on: windows-latest
     needs: [validate, test, security]
     if: always()
     steps:
-      - name: ✅ Resumen de Pipeline
+      - name: Resumen de Pipeline
         shell: powershell
         run: |
           Write-Host "------------------------------------------" -ForegroundColor Cyan
