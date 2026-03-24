@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     Optimizador de Computadora - Suite de Mantenimiento
     Autor: Proyecto de Optimizacion
@@ -252,14 +252,14 @@ do {
     switch ($choice) {
         '1' {
             Write-Host "`nEjecutando Analizar-Sistema..." -ForegroundColor Cyan
-            if (Test-Path ".\Analizar-Sistema.ps1") { 
-                & ".\Analizar-Sistema.ps1" 
+            if (Test-Path ".\src\Analizar-Sistema.ps1") { 
+                & ".\src\Analizar-Sistema.ps1" 
             } else { Write-Host "Error: No se encuentra Analizar-Sistema.ps1" -ForegroundColor Red }
             Wait-Key
         }
         '2' {
-             if (Test-Path ".\Optimizar-Sistema-Seguro.ps1") { 
-                & ".\Optimizar-Sistema-Seguro.ps1" 
+             if (Test-Path ".\src\Optimizar-Sistema-Seguro.ps1") { 
+                & ".\src\Optimizar-Sistema-Seguro.ps1" 
             } else { Write-Host "Error: No se encuentra Optimizar-Sistema-Seguro.ps1" -ForegroundColor Red }
             Wait-Key
         }
@@ -270,8 +270,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Limpieza Profunda." -ForegroundColor Red
                 Wait-Key
             } else {
-                 if (Test-Path ".\Limpieza-Profunda.ps1") { 
-                    & ".\Limpieza-Profunda.ps1" 
+                 if (Test-Path ".\src\Limpieza-Profunda.ps1") { 
+                    & ".\src\Limpieza-Profunda.ps1" 
                 } else { Write-Host "Error: No se encuentra Limpieza-Profunda.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -283,23 +283,23 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Optimizar Servicios." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Optimizar-Servicios.ps1") { 
-                    & ".\Optimizar-Servicios.ps1" 
+                if (Test-Path ".\src\Optimizar-Servicios.ps1") { 
+                    & ".\src\Optimizar-Servicios.ps1" 
                 } else { Write-Host "Error: No se encuentra Optimizar-Servicios.ps1" -ForegroundColor Red }
                 Wait-Key
             }
         }
         '5' {
-             if (Test-Path ".\Gestionar-Procesos.ps1") { 
-                & ".\Gestionar-Procesos.ps1" 
+             if (Test-Path ".\src\Gestionar-Procesos.ps1") { 
+                & ".\src\Gestionar-Procesos.ps1" 
             } else { Write-Host "Error: No se encuentra Gestionar-Procesos.ps1" -ForegroundColor Red }
             Wait-Key
         }
         '6' {
              $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
              if ($isAdmin) {
-                if (Test-Path ".\Reparar-Red-Sistema.ps1") { 
-                    & ".\Reparar-Red-Sistema.ps1" 
+                if (Test-Path ".\src\Reparar-Red-Sistema.ps1") { 
+                    & ".\src\Reparar-Red-Sistema.ps1" 
                 } else { Write-Host "Error: No se encuentra Reparar-Red-Sistema.ps1" -ForegroundColor Red }
              } else {
                  Write-Host "Se requieren permisos de Administrador para Reparación Avanzada." -ForegroundColor Red
@@ -307,8 +307,8 @@ do {
             Wait-Key
         }
         '7' {
-            if (Test-Path ".\Analizar-Seguridad.ps1") { 
-                & ".\Analizar-Seguridad.ps1" 
+            if (Test-Path ".\src\Analizar-Seguridad.ps1") { 
+                & ".\src\Analizar-Seguridad.ps1" 
             } else { Write-Host "Error: No se encuentra Analizar-Seguridad.ps1" -ForegroundColor Red }
             Wait-Key
         }
@@ -318,8 +318,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Revertir Cambios." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Revertir-Cambios.ps1") { 
-                    & ".\Revertir-Cambios.ps1" 
+                if (Test-Path ".\src\Revertir-Cambios.ps1") { 
+                    & ".\src\Revertir-Cambios.ps1" 
                 } else { Write-Host "Error: No se encuentra Revertir-Cambios.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -330,15 +330,15 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Modo Gaming." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Gaming-Mode.ps1") { 
-                    & ".\Gaming-Mode.ps1" 
+                if (Test-Path ".\src\Gaming-Mode.ps1") { 
+                    & ".\src\Gaming-Mode.ps1" 
                 } else { Write-Host "Error: No se encuentra Gaming-Mode.ps1" -ForegroundColor Red }
                 Wait-Key
             }
         }
         '10' {
-            if (Test-Path ".\Analizar-Hardware.ps1") { 
-                & ".\Analizar-Hardware.ps1" 
+            if (Test-Path ".\src\Analizar-Hardware.ps1") { 
+                & ".\src\Analizar-Hardware.ps1" 
             } else { Write-Host "Error: No se encuentra Analizar-Hardware.ps1" -ForegroundColor Red }
             Wait-Key
         }
@@ -348,8 +348,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Tareas Programadas." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Crear-TareasProgramadas.ps1") { 
-                    & ".\Crear-TareasProgramadas.ps1" 
+                if (Test-Path ".\src\Crear-TareasProgramadas.ps1") { 
+                    & ".\src\Crear-TareasProgramadas.ps1" 
                 } else { Write-Host "Error: No se encuentra Crear-TareasProgramadas.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -360,21 +360,21 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Red Avanzada." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Optimizar-Red-Avanzada.ps1") { 
-                    & ".\Optimizar-Red-Avanzada.ps1" 
+                if (Test-Path ".\src\Optimizar-Red-Avanzada.ps1") { 
+                    & ".\src\Optimizar-Red-Avanzada.ps1" 
                 } else { Write-Host "Error: No se encuentra Optimizar-Red-Avanzada.ps1" -ForegroundColor Red }
                 Wait-Key
             }
         }
         '13' {
-            if (Test-Path ".\Comparar-Rendimiento.ps1") { 
-                & ".\Comparar-Rendimiento.ps1" 
+            if (Test-Path ".\src\Comparar-Rendimiento.ps1") { 
+                & ".\src\Comparar-Rendimiento.ps1" 
             } else { Write-Host "Error: No se encuentra Comparar-Rendimiento.ps1" -ForegroundColor Red }
             Wait-Key
         }
         '14' {
-            if (Test-Path ".\Diagnostico-Automatico.ps1") { 
-                & ".\Diagnostico-Automatico.ps1" 
+            if (Test-Path ".\src\Diagnostico-Automatico.ps1") { 
+                & ".\src\Diagnostico-Automatico.ps1" 
             } else { Write-Host "Error: No se encuentra Diagnostico-Automatico.ps1" -ForegroundColor Red }
             Wait-Key
         }
@@ -384,8 +384,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Backup de Drivers." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Backup-Drivers.ps1") { 
-                    & ".\Backup-Drivers.ps1" 
+                if (Test-Path ".\src\Backup-Drivers.ps1") { 
+                    & ".\src\Backup-Drivers.ps1" 
                 } else { Write-Host "Error: No se encuentra Backup-Drivers.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -395,26 +395,26 @@ do {
             if (-not $isAdmin) {
                 Write-Host "`nAdvertencia: Se recomienda ejecutar como Administrador para mejores resultados." -ForegroundColor Yellow
             }
-            if (Test-Path ".\Limpiar-Malware.ps1") { 
-                & ".\Limpiar-Malware.ps1" 
+            if (Test-Path ".\src\Limpiar-Malware.ps1") { 
+                & ".\src\Limpiar-Malware.ps1" 
             } else { Write-Host "Error: No se encuentra Limpiar-Malware.ps1" -ForegroundColor Red }
             Wait-Key
         }
         '17' {
-            if (Test-Path ".\Generar-Reporte-PDF.ps1") { 
-                & ".\Generar-Reporte-PDF.ps1" 
+            if (Test-Path ".\src\Generar-Reporte-PDF.ps1") { 
+                & ".\src\Generar-Reporte-PDF.ps1" 
             } else { Write-Host "Error: No se encuentra Generar-Reporte-PDF.ps1" -ForegroundColor Red }
             Wait-Key
         }
         '18' {
-            if (Test-Path ".\Historico-Optimizaciones.ps1") { 
-                & ".\Historico-Optimizaciones.ps1" 
+            if (Test-Path ".\src\Historico-Optimizaciones.ps1") { 
+                & ".\src\Historico-Optimizaciones.ps1" 
             } else { Write-Host "Error: No se encuentra Historico-Optimizaciones.ps1" -ForegroundColor Red }
             Wait-Key
         }
         '19' {
-            if (Test-Path ".\Monitor-TiempoReal.ps1") { 
-                & ".\Monitor-TiempoReal.ps1" 
+            if (Test-Path ".\src\Monitor-TiempoReal.ps1") { 
+                & ".\src\Monitor-TiempoReal.ps1" 
             } else { Write-Host "Error: No se encuentra Monitor-TiempoReal.ps1" -ForegroundColor Red }
             Wait-Key
         }
@@ -424,8 +424,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Perfiles de Optimización." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Perfiles-Optimizacion.ps1") { 
-                    & ".\Perfiles-Optimizacion.ps1" 
+                if (Test-Path ".\src\Perfiles-Optimizacion.ps1") { 
+                    & ".\src\Perfiles-Optimizacion.ps1" 
                 } else { Write-Host "Error: No se encuentra Perfiles-Optimizacion.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -436,8 +436,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Optimizar Juegos." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Optimizar-Juegos.ps1") { 
-                    & ".\Optimizar-Juegos.ps1" 
+                if (Test-Path ".\src\Optimizar-Juegos.ps1") { 
+                    & ".\src\Optimizar-Juegos.ps1" 
                 } else { Write-Host "Error: No se encuentra Optimizar-Juegos.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -448,8 +448,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Limpiar Registro." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Limpiar-Registro.ps1") { 
-                    & ".\Limpiar-Registro.ps1" 
+                if (Test-Path ".\src\Limpiar-Registro.ps1") { 
+                    & ".\src\Limpiar-Registro.ps1" 
                 } else { Write-Host "Error: No se encuentra Limpiar-Registro.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -460,8 +460,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Desfragmentar." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Desfragmentar-Inteligente.ps1") { 
-                    & ".\Desfragmentar-Inteligente.ps1" 
+                if (Test-Path ".\src\Desfragmentar-Inteligente.ps1") { 
+                    & ".\src\Desfragmentar-Inteligente.ps1" 
                 } else { Write-Host "Error: No se encuentra Desfragmentar-Inteligente.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -472,8 +472,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Gestor de Updates." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Gestor-Actualizaciones.ps1") { 
-                    & ".\Gestor-Actualizaciones.ps1" 
+                if (Test-Path ".\src\Gestor-Actualizaciones.ps1") { 
+                    & ".\src\Gestor-Actualizaciones.ps1" 
                 } else { Write-Host "Error: No se encuentra Gestor-Actualizaciones.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -484,8 +484,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Puntos de Restauración." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Gestor-RestorePoints.ps1") { 
-                    & ".\Gestor-RestorePoints.ps1" 
+                if (Test-Path ".\src\Gestor-RestorePoints.ps1") { 
+                    & ".\src\Gestor-RestorePoints.ps1" 
                 } else { Write-Host "Error: No se encuentra Gestor-RestorePoints.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -496,8 +496,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Mantenimiento Automático." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Mantenimiento-Automatico.ps1") { 
-                    & ".\Mantenimiento-Automatico.ps1" 
+                if (Test-Path ".\src\Mantenimiento-Automatico.ps1") { 
+                    & ".\src\Mantenimiento-Automatico.ps1" 
                 } else { Write-Host "Error: No se encuentra Mantenimiento-Automatico.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -508,8 +508,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Benchmark del Sistema." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Benchmark-Sistema.ps1") { 
-                    & ".\Benchmark-Sistema.ps1" 
+                if (Test-Path ".\src\Benchmark-Sistema.ps1") { 
+                    & ".\src\Benchmark-Sistema.ps1" 
                 } else { Write-Host "Error: No se encuentra Benchmark-Sistema.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -520,8 +520,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Backup a la Nube." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Backup-Nube.ps1") { 
-                    & ".\Backup-Nube.ps1" 
+                if (Test-Path ".\src\Backup-Nube.ps1") { 
+                    & ".\src\Backup-Nube.ps1" 
                 } else { Write-Host "Error: No se encuentra Backup-Nube.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -532,8 +532,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Dashboard Avanzado." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Dashboard-Avanzado.ps1") { 
-                    & ".\Dashboard-Avanzado.ps1" 
+                if (Test-Path ".\src\Dashboard-Avanzado.ps1") { 
+                    & ".\src\Dashboard-Avanzado.ps1" 
                 } else { Write-Host "Error: No se encuentra Dashboard-Avanzado.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -544,8 +544,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Privacidad Avanzada." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Privacidad-Avanzada.ps1") { 
-                    & ".\Privacidad-Avanzada.ps1" 
+                if (Test-Path ".\src\Privacidad-Avanzada.ps1") { 
+                    & ".\src\Privacidad-Avanzada.ps1" 
                 } else { Write-Host "Error: No se encuentra Privacidad-Avanzada.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -556,8 +556,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Gestor de Aplicaciones." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Gestor-Aplicaciones.ps1") { 
-                    & ".\Gestor-Aplicaciones.ps1" 
+                if (Test-Path ".\src\Gestor-Aplicaciones.ps1") { 
+                    & ".\src\Gestor-Aplicaciones.ps1" 
                 } else { Write-Host "Error: No se encuentra Gestor-Aplicaciones.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -568,8 +568,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Gestor de Energía." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Gestor-Energia.ps1") { 
-                    & ".\Gestor-Energia.ps1" 
+                if (Test-Path ".\src\Gestor-Energia.ps1") { 
+                    & ".\src\Gestor-Energia.ps1" 
                 } else { Write-Host "Error: No se encuentra Gestor-Energia.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -580,15 +580,15 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Monitor de Red." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Monitor-Red.ps1") { 
-                    & ".\Monitor-Red.ps1" 
+                if (Test-Path ".\src\Monitor-Red.ps1") { 
+                    & ".\src\Monitor-Red.ps1" 
                 } else { Write-Host "Error: No se encuentra Monitor-Red.ps1" -ForegroundColor Red }
                 Wait-Key
             }
         }
         '34' {
-            if (Test-Path ".\Gestor-Duplicados.ps1") { 
-                & ".\Gestor-Duplicados.ps1" 
+            if (Test-Path ".\src\Gestor-Duplicados.ps1") { 
+                & ".\src\Gestor-Duplicados.ps1" 
             } else { Write-Host "Error: No se encuentra Gestor-Duplicados.ps1" -ForegroundColor Red }
             Wait-Key
         }
@@ -598,8 +598,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Dashboard Web." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Dashboard-Web.ps1") { 
-                    & ".\Dashboard-Web.ps1" 
+                if (Test-Path ".\src\Dashboard-Web.ps1") { 
+                    & ".\src\Dashboard-Web.ps1" 
                 } else { Write-Host "Error: No se encuentra Dashboard-Web.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -610,15 +610,15 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Asistente del Sistema." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\Asistente-Sistema.ps1") { 
-                    & ".\Asistente-Sistema.ps1" 
+                if (Test-Path ".\src\Asistente-Sistema.ps1") { 
+                    & ".\src\Asistente-Sistema.ps1" 
                 } else { Write-Host "Error: No se encuentra Asistente-Sistema.ps1" -ForegroundColor Red }
                 Wait-Key
             }
         }
         '37' {
-            if (Test-Path ".\GUI-Optimizador.ps1") { 
-                & ".\GUI-Optimizador.ps1" 
+            if (Test-Path ".\src\GUI-Optimizador.ps1") { 
+                & ".\src\GUI-Optimizador.ps1" 
             } else { Write-Host "Error: No se encuentra GUI-Optimizador.ps1" -ForegroundColor Red }
             Wait-Key
         }
@@ -628,8 +628,8 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Salud del SSD." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\SSD-Health.ps1") { 
-                    & ".\SSD-Health.ps1" 
+                if (Test-Path ".\src\SSD-Health.ps1") { 
+                    & ".\src\SSD-Health.ps1" 
                 } else { Write-Host "Error: No se encuentra SSD-Health.ps1" -ForegroundColor Red }
                 Wait-Key
             }
@@ -640,27 +640,27 @@ do {
                 Write-Host "`nError: Necesitas permisos de Administrador para Optimizar GPU." -ForegroundColor Red
                 Wait-Key
             } else {
-                if (Test-Path ".\GPU-Optimization.ps1") { 
-                    & ".\GPU-Optimization.ps1" 
+                if (Test-Path ".\src\GPU-Optimization.ps1") { 
+                    & ".\src\GPU-Optimization.ps1" 
                 } else { Write-Host "Error: No se encuentra GPU-Optimization.ps1" -ForegroundColor Red }
                 Wait-Key
             }
         }
         '40' {
-            if (Test-Path ".\Localization.ps1") { 
-                & ".\Localization.ps1" 
+            if (Test-Path ".\modules\Localization.ps1") { 
+                & ".\modules\Localization.ps1" 
             } else { Write-Host "Error: No se encuentra Localization.ps1" -ForegroundColor Red }
             Wait-Key
         }
         '41' {
-            if (Test-Path ".\Telemetry.ps1") { 
-                & ".\Telemetry.ps1" 
+            if (Test-Path ".\modules\Telemetry.ps1") { 
+                & ".\modules\Telemetry.ps1" 
             } else { Write-Host "Error: No se encuentra Telemetry.ps1" -ForegroundColor Red }
             Wait-Key
         }
         '42' {
-            if (Test-Path ".\Operations-History.ps1") { 
-                & ".\Operations-History.ps1" 
+            if (Test-Path ".\modules\Operations-History.ps1") { 
+                & ".\modules\Operations-History.ps1" 
             } else { Write-Host "Error: No se encuentra Operations-History.ps1" -ForegroundColor Red }
             Wait-Key
         }

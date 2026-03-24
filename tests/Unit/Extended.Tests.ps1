@@ -6,7 +6,7 @@ Describe "Config-Manager Tests" {
         $script:projectRoot = Split-Path -Parent -Path (Split-Path -Parent -Path $PSScriptRoot)
         Write-Host "DEBUG: [Config-Manager Tests] ProjectRoot=$script:projectRoot" -ForegroundColor Cyan
         
-        $modulePath = Join-Path $script:projectRoot "Config-Manager.ps1"
+        $modulePath = Join-Path $script:projectRoot "modules\Config-Manager.ps1"
         try {
             if (Test-Path $modulePath) {
                 . $modulePath
@@ -61,7 +61,7 @@ Describe "Config-Manager Tests" {
 Describe "Logger-Advanced Tests" {
     BeforeAll {
         $script:projectRoot = Split-Path -Parent -Path (Split-Path -Parent -Path $PSScriptRoot)
-        $modulePath = Join-Path $script:projectRoot "Logger-Advanced.ps1"
+        $modulePath = Join-Path $script:projectRoot "modules\Logger-Advanced.ps1"
         if (Test-Path $modulePath) { . $modulePath }
     }
     
@@ -81,7 +81,7 @@ Describe "Logger-Advanced Tests" {
 Describe "Toast-Notifications Tests" {
     BeforeAll {
         $script:projectRoot = Split-Path -Parent -Path (Split-Path -Parent -Path $PSScriptRoot)
-        $modulePath = Join-Path $script:projectRoot "Toast-Notifications.ps1"
+        $modulePath = Join-Path $script:projectRoot "modules\Toast-Notifications.ps1"
         if (Test-Path $modulePath) { . $modulePath }
     }
     
@@ -112,7 +112,7 @@ Describe "Gaming-Mode Tests" {
     Context "Script Existence" {
         It "Should have Gaming-Mode.ps1 available" {
             $basePath = (Get-Item $PSScriptRoot).Parent.Parent.FullName
-            $modulePath = Join-Path $basePath "Gaming-Mode.ps1"
+            $modulePath = Join-Path $basePath "src\Gaming-Mode.ps1"
             Write-Host "DEBUG: Checking existence of $modulePath"
             Test-Path $modulePath | Should -Be $true
         }
