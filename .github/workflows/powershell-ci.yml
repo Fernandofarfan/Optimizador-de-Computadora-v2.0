@@ -140,8 +140,8 @@ jobs:
             
             if ($syntaxErrors.Count -gt 0) {
                 Write-Host "  ERROR ERROR: Sintaxis invalida" -ForegroundColor Red
-                foreach ($error in $syntaxErrors) {
-                    Write-Host "    Línea $($error.Token.StartLine): $($error.Message)" -ForegroundColor Red
+                foreach ($err in $syntaxErrors) {
+                    Write-Host "    Line $($err.Token.StartLine): $($err.Message)" -ForegroundColor Red
                 }
                 $errors++
             } else {
