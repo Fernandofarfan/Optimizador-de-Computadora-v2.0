@@ -28,14 +28,14 @@ Describe "Monitor-Red.ps1 - Funciones de Red" {
     Context "Get-NetworkConnections" {
         It "Debería obtener conexiones TCP activas" {
             $connections = Get-NetTCPConnection -ErrorAction SilentlyContinue
-            $connections | Should Not BeNullOrEmpty
+            $connections | Should -Not -BeNullOrEmpty
         }
         
         It "Debería filtrar conexiones establecidas" {
             $established = Get-NetTCPConnection -State Established -ErrorAction SilentlyContinue
             if ($established) {
                 # Pester Mock devuelve el objeto directamente si no hay parámetros específicos
-                $established[0].State | Should Be "Established"
+                $established[0].State | Should -Be "Established"
             }
         }
     }
@@ -43,13 +43,13 @@ Describe "Monitor-Red.ps1 - Funciones de Red" {
     Context "Get-NetworkAdapters" {
         It "Debería listar adaptadores de red" {
             $adapters = Get-NetAdapter -ErrorAction SilentlyContinue
-            $adapters | Should Not BeNullOrEmpty
+            $adapters | Should -Not -BeNullOrEmpty
         }
         
         It "Debería obtener estadísticas de red" {
             $stats = Get-NetAdapterStatistics -ErrorAction SilentlyContinue
             if ($stats) {
-                $stats | Should Not BeNullOrEmpty
+                $stats | Should -Not -BeNullOrEmpty
             }
         }
     }
@@ -57,7 +57,7 @@ Describe "Monitor-Red.ps1 - Funciones de Red" {
     Context "Test-InternetConnection" {
         It "Debería poder hacer ping a DNS público" {
             $ping = Test-Connection -ComputerName "8.8.8.8" -Count 1 -Quiet -ErrorAction SilentlyContinue
-            $ping | Should BeOfType [bool]
+            $ping | Should -BeOfType [bool]
         }
     }
 }
@@ -79,7 +79,7 @@ Describe "Monitor-Red.ps1 - Firewall" {
         It "Debería listar reglas de firewall" {
             $rules = Get-NetFirewallRule -ErrorAction SilentlyContinue | Select-Object -First 10
             if ($rules) {
-                $rules | Should Not BeNullOrEmpty
+                $rules | Should -Not -BeNullOrEmpty
             }
         }
     }
@@ -88,9 +88,10 @@ Describe "Monitor-Red.ps1 - Firewall" {
         It "Debería verificar perfiles de firewall" {
             $profiles = Get-NetFirewallProfile -ErrorAction SilentlyContinue
             if ($profiles) {
-                $profiles.Name | Should Contain "Domain"
+                $profiles.Name | Should -Contain "Domain"
             }
         }
     }
 }
+
 

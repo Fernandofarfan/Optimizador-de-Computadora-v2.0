@@ -94,7 +94,9 @@ Describe "Toast-Notifications Tests" {
 
 Describe "Gaming-Mode Tests" {
     BeforeAll {
-        $script:projectRoot = Split-Path -Parent -Path (Split-Path -Parent -Path $PSScriptRoot)
+        $script:projectRoot = (Get-Item $PSScriptRoot).Parent.Parent.FullName
+        Write-Host "DEBUG: [Gaming-Mode Tests] ProjectRoot=$script:projectRoot" -ForegroundColor Cyan
+        
         # Solo probar si el modulo existe
         $modulePath = Join-Path $script:projectRoot "Gaming-Mode.ps1"
         if (Test-Path $modulePath) { 
@@ -104,18 +106,17 @@ Describe "Gaming-Mode Tests" {
             Mock Set-ItemProperty {}
             Mock Read-Host { return "0" }
             Mock Write-Host {}
-            
-            # Nota: Gaming-Mode.ps1 es un script procedimental, no un modulo.
-            # Dot-sourcerlo lo ejecutaria. Mejor probar si existe por ahora o refactorizar.
         }
     }
     
     Context "Script Existence" {
         It "Should have Gaming-Mode.ps1 available" {
-            $script:projectRoot = Split-Path -Parent -Path (Split-Path -Parent -Path $PSScriptRoot)
-            $modulePath = Join-Path $script:projectRoot "Gaming-Mode.ps1"
-            Test-Path $modulePath | Should Be $true
+            $basePath = (Get-Item $PSScriptRoot).Parent.Parent.FullName
+            $modulePath = Join-Path $basePath "Gaming-Mode.ps1"
+            Write-Host "DEBUG: Checking existence of $modulePath"
+            Test-Path $modulePath | Should -Be $true
         }
     }
 }
+
 
