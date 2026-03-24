@@ -31,7 +31,7 @@ function Initialize-Config {
             Write-Host "DEBUG: Creado directorio $configDir" -ForegroundColor Gray
         }
     } catch {
-        Write-Host "[ERROR] No se pudo crear directorio $configDir: $_" -ForegroundColor Red
+        Write-Host "[ERROR] No se pudo crear directorio ${configDir}: $_" -ForegroundColor Red
     }
     
     # Si no existe config, copiar default
