@@ -25,7 +25,7 @@ Write-Host "  Disponible: $ramLibreGB GB" -ForegroundColor Green
 Write-Host ""
 Write-Host "SISTEMA OPERATIVO:" -ForegroundColor Yellow
 Write-Host "  SO: $($os.Caption)" -ForegroundColor Green
-Write-Host "  Version: $($os.Version)" -ForegroundColor Green
+Write-Host "  Version del SO: $($os.Version)" -ForegroundColor Green
 Write-Host "  Arquitectura: $($os.OSArchitecture)" -ForegroundColor Green
 
 Write-Host ""

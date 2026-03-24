@@ -1,10 +1,10 @@
 <#
 .SYNOPSIS
-    Gestor de configuración centralizada para Optimizador de PC
+    Gestor de configuracion centralizada para Optimizador de PC
 .DESCRIPTION
-    Maneja la lectura y escritura de configuración del usuario
+    Maneja la lectura y escritura de configuracion del usuario
 .NOTES
-    Versión: 4.0.0
+    Version: 4.0.0
     Autor: Fernando Farfan
 #>
 
@@ -16,7 +16,7 @@ $Global:DefaultConfigPath = "$PSScriptRoot\config.default.json"
 function Initialize-Config {
     <#
     .SYNOPSIS
-        Inicializa el archivo de configuración
+        Inicializa el archivo de configuracion
     #>
     
     # Crear carpeta si no existe
@@ -29,10 +29,10 @@ function Initialize-Config {
     if (-not (Test-Path $Global:ConfigPath)) {
         if (Test-Path $Global:DefaultConfigPath) {
             Copy-Item -Path $Global:DefaultConfigPath -Destination $Global:ConfigPath -Force
-            Write-Host "✅ Configuración inicializada: $Global:ConfigPath" -ForegroundColor Green
+            Write-Host "[OK] Configuracion inicializada: $Global:ConfigPath" -ForegroundColor Green
         }
         else {
-            Write-Host "⚠️  No se encontró config.default.json" -ForegroundColor Yellow
+            Write-Host "[WARN] No se encontro config.default.json" -ForegroundColor Yellow
             return @{}
         }
     }
@@ -43,7 +43,7 @@ function Initialize-Config {
 function Get-Config {
     <#
     .SYNOPSIS
-        Obtiene la configuración actual
+        Obtiene la configuracion actual
     #>
     
     if (-not (Test-Path $Global:ConfigPath)) {
@@ -55,7 +55,7 @@ function Get-Config {
         return $config
     }
     catch {
-        Write-Host "❌ Error al leer configuración: $_" -ForegroundColor Red
+        Write-Host "[ERROR] Error al leer configuracion: $_" -ForegroundColor Red
         return $null
     }
 }
@@ -63,16 +63,12 @@ function Get-Config {
 function Set-ConfigValue {
     <#
     .SYNOPSIS
-        Establece un valor en la configuración
+        Establece un valor en la configuracion
     #>
     param(
         [string]$Section,
-        
-        [Parameter(Mandatory=$true)]
-        [string]$Key,
-        
-        [Parameter(Mandatory=$true)]
-        $Value
+        [Parameter(Mandatory=$true)][string]$Key,
+        [Parameter(Mandatory=$true)]$Value
     )
     
     $config = Get-Config
@@ -95,11 +91,11 @@ function Set-ConfigValue {
     try {
         $config | ConvertTo-Json -Depth 10 | Out-File -FilePath $Global:ConfigPath -Encoding UTF8 -Force
         $displayPath = if ($Section) { "$Section.$Key" } else { $Key }
-        Write-Host "✅ Configuración actualizada: $displayPath = $Value" -ForegroundColor Green
+        Write-Host "[OK] Configuracion actualizada: $displayPath = $Value" -ForegroundColor Green
         return $true
     }
     catch {
-        Write-Host "❌ Error al guardar configuración: $_" -ForegroundColor Red
+        Write-Host "[ERROR] Error al guardar configuracion: $_" -ForegroundColor Red
         return $false
     }
 }
@@ -107,18 +103,13 @@ function Set-ConfigValue {
 function Get-ConfigValue {
     <#
     .SYNOPSIS
-        Obtiene un valor específico de la configuración
+        Obtiene un valor especifico de la configuracion
     #>
     param(
         [string]$Section,
-        
-        [Parameter(Mandatory=$true)]
-        [string]$Key,
-        
+        [Parameter(Mandatory=$true)][string]$Key,
         [string]$Default = $null
     )
-    
-    $config = Get-Config
     
     $config = Get-Config
     
@@ -135,7 +126,7 @@ function Get-ConfigValue {
     }
     else {
         $displayPath = if ($Section) { "$Section.$Key" } else { $Key }
-        Write-Host "⚠️  No se encontró: $displayPath" -ForegroundColor Yellow
+        Write-Host "[WARN] No se encontro: $displayPath" -ForegroundColor Yellow
         return $null
     }
 }
@@ -143,10 +134,10 @@ function Get-ConfigValue {
 function Reset-Config {
     <#
     .SYNOPSIS
-        Restaura la configuración por defecto
+        Restaura la configuracion por defecto
     #>
     
-    $confirmation = Read-Host "¿Restaurar configuración por defecto? (S/N)"
+    $confirmation = Read-Host "[CONFIRM] ¿Restaurar configuracion por defecto? (S/N)"
     
     if ($confirmation -eq "S" -or $confirmation -eq "s") {
         if (Test-Path $Global:ConfigPath) {
@@ -154,22 +145,22 @@ function Reset-Config {
         }
         
         Initialize-Config
-        Write-Host "✅ Configuración restaurada" -ForegroundColor Green
+        Write-Host "[OK] Configuracion restaurada" -ForegroundColor Green
     }
 }
 
 function Show-Config {
     <#
     .SYNOPSIS
-        Muestra la configuración actual
+        Muestra la configuracion actual
     #>
     
     $config = Get-Config
     
     if ($config) {
-        Write-Host "`n╔════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
-        Write-Host "║          CONFIGURACIÓN ACTUAL                          ║" -ForegroundColor White
-        Write-Host "╚════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+        Write-Host "`n+--------------------------------------------------------+" -ForegroundColor Cyan
+        Write-Host "|          [CONFIG] CONFIGURACION ACTUAL                 |" -ForegroundColor White
+        Write-Host "+--------------------------------------------------------+" -ForegroundColor Cyan
         Write-Host ""
         
         $config | ConvertTo-Json -Depth 10 | Write-Host -ForegroundColor Gray
@@ -179,16 +170,18 @@ function Show-Config {
 function Edit-Config {
     <#
     .SYNOPSIS
-        Abre el editor de configuración
+        Abre el editor de configuracion
     #>
     
     if (Test-Path $Global:ConfigPath) {
         notepad.exe $Global:ConfigPath
     }
     else {
-        Write-Host "❌ Archivo de configuración no encontrado" -ForegroundColor Red
+        Write-Host "[ERROR] Archivo de configuracion no encontrado" -ForegroundColor Red
     }
 }
 
-# Exportar funciones
-Export-ModuleMember -Function Initialize-Config, Get-Config, Set-ConfigValue, Get-ConfigValue, Reset-Config, Show-Config, Edit-Config
+# Exportar funciones (solo si se carga como modulo)
+if ($MyInvocation.InvocationName -ne '.') {
+    Export-ModuleMember -Function Initialize-Config, Get-Config, Set-ConfigValue, Get-ConfigValue, Reset-Config, Show-Config, Edit-Config
+}
