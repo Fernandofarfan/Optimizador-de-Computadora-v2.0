@@ -556,7 +556,7 @@ PC-Optimizer-Suite/
 ## 🐛 Troubleshooting
 
 ### "Access Denied" al ejecutar
-→ Usa `EJECUTAR-COMO-ADMIN.bat` o abre PowerShell como Administrador
+→ Usa `EJECUTAR-OPTIMIZADOR.bat` o abre PowerShell como Administrador
 
 ### La ventana se cierra sin hacer nada
 → Verifica que PowerShell 5.1+ esté instalado:  

@@ -171,7 +171,7 @@ jobs:
             "Optimizar-Servicios.ps1",
             "Gestionar-Procesos.ps1",
             "Reparar-Red-Sistema.ps1",
-            "EJECUTAR-COMO-ADMIN.bat",
+            "EJECUTAR-OPTIMIZADOR.bat",
             "README.md",
             "LICENSE",
             "CHANGELOG.md"

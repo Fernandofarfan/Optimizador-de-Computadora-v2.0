@@ -1002,7 +1002,9 @@ Todos los cambios notables en este proyecto se documentan en este archivo.
 ### 🔧 Mejorado
 - README actualizado con información de nuevas funcionalidades
 - Menú principal expandido con opciones [7] Analizar Seguridad y [8] Revertir Cambios
-- Mejor organización de estructura de archivos
+- Agregada validación de integridad de archivos en CI.
+- Renombrado `EJECUTAR-COMO-ADMIN.bat` a `EJECUTAR-OPTIMIZADOR.bat` para mayor claridad.
+- Corregidos errores en el sistema de logging.
 - Documentación de comandos de mantenimiento
 
 ### 📝 Documentación

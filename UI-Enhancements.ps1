@@ -4,7 +4,7 @@
 # Versión: 4.0.0
 # ============================================
 
-$ErrorActionPreference = 'SilentlyContinue'
+$ErrorActionPreference = 'Stop'
 
 # ============================================
 # Función: Mostrar barra de progreso
@@ -303,9 +303,9 @@ function Show-StatusBar {
     }
     
     Write-Host ""
-    Write-Host "═" * 70 -ForegroundColor $color
+    Write-Host ("═" * 70) -ForegroundColor $color
     Write-Host "  $Text" -ForegroundColor $color
-    Write-Host "═" * 70 -ForegroundColor $color
+    Write-Host ("═" * 70) -ForegroundColor $color
     Write-Host ""
 }
 
@@ -322,7 +322,7 @@ function Show-SectionHeader {
     
     Write-Host ""
     Write-Host "  $Icon $Title" -ForegroundColor Cyan
-    Write-Host "  $(('-' * ($Title.Length + $Icon.Length + 1)))" -ForegroundColor Gray
+    Write-Host "  $('-' * ($Title.Length + $Icon.Length + 1))" -ForegroundColor Gray
     Write-Host ""
 }
 
@@ -336,17 +336,18 @@ function Show-ImportantWarning {
     )
     
     Write-Host ""
-    Write-Host "╔" + ("═" * 68) + "╗" -ForegroundColor Red
-    Write-Host "║  ⚠️  ADVERTENCIA IMPORTANTE" + (" " * 42) + "║" -ForegroundColor Red
-    Write-Host "╠" + ("═" * 68) + "╣" -ForegroundColor Red
+    Write-Host ("╔" + ("═" * 68) + "╗") -ForegroundColor Red
+    Write-Host ("║  ⚠️  ADVERTENCIA IMPORTANTE" + (" " * 42) + "║") -ForegroundColor Red
+    Write-Host ("╠" + ("═" * 68) + "╣") -ForegroundColor Red
     
     $lines = $Message -split "`n"
     foreach ($line in $lines) {
         $padding = 68 - $line.Length
-        Write-Host "║  $line" + (" " * $padding) + "║" -ForegroundColor Red
+        if ($padding -lt 0) { $padding = 0 }
+        Write-Host ("║  $line" + (" " * $padding) + "║") -ForegroundColor Red
     }
     
-    Write-Host "╚" + ("═" * 68) + "╝" -ForegroundColor Red
+    Write-Host ("╚" + ("═" * 68) + "╝") -ForegroundColor Red
     Write-Host ""
 }
 

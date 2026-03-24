@@ -33,7 +33,7 @@ function Initialize-Config {
         }
         else {
             Write-Host "⚠️  No se encontró config.default.json" -ForegroundColor Yellow
-            return $null
+            return @{}
         }
     }
     
@@ -66,7 +66,6 @@ function Set-ConfigValue {
         Establece un valor en la configuración
     #>
     param(
-        [Parameter(Mandatory=$true)]
         [string]$Section,
         
         [Parameter(Mandatory=$true)]
@@ -78,21 +77,29 @@ function Set-ConfigValue {
     
     $config = Get-Config
     
-    if ($config.$Section) {
-        $config.$Section.$Key = $Value
-        
-        try {
-            $config | ConvertTo-Json -Depth 10 | Out-File -FilePath $Global:ConfigPath -Encoding UTF8 -Force
-            Write-Host "✅ Configuración actualizada: $Section.$Key = $Value" -ForegroundColor Green
-            return $true
+    $target = $config
+    if ($null -ne $Section -and '' -ne $Section) {
+        if ($null -eq $config.$Section) {
+            $config | Add-Member -MemberType NoteProperty -Name $Section -Value @{} -Force
         }
-        catch {
-            Write-Host "❌ Error al guardar configuración: $_" -ForegroundColor Red
-            return $false
-        }
+        $target = $config.$Section
+    }
+
+    if ($null -eq $target.$Key) {
+        $target | Add-Member -MemberType NoteProperty -Name $Key -Value $Value -Force
     }
     else {
-        Write-Host "❌ Sección no encontrada: $Section" -ForegroundColor Red
+        $target.$Key = $Value
+    }
+    
+    try {
+        $config | ConvertTo-Json -Depth 10 | Out-File -FilePath $Global:ConfigPath -Encoding UTF8 -Force
+        $displayPath = if ($Section) { "$Section.$Key" } else { $Key }
+        Write-Host "✅ Configuración actualizada: $displayPath = $Value" -ForegroundColor Green
+        return $true
+    }
+    catch {
+        Write-Host "❌ Error al guardar configuración: $_" -ForegroundColor Red
         return $false
     }
 }
@@ -103,20 +110,32 @@ function Get-ConfigValue {
         Obtiene un valor específico de la configuración
     #>
     param(
-        [Parameter(Mandatory=$true)]
         [string]$Section,
         
         [Parameter(Mandatory=$true)]
-        [string]$Key
+        [string]$Key,
+        
+        [string]$Default = $null
     )
     
     $config = Get-Config
     
-    if ($config.$Section -and $config.$Section.$Key -ne $null) {
-        return $config.$Section.$Key
+    $config = Get-Config
+    
+    $target = $config
+    if ($null -ne $Section -and '' -ne $Section) {
+        $target = $config.$Section
+    }
+
+    if ($null -ne $target -and $null -ne $target.$Key) {
+        return $target.$Key
+    }
+    elseif ($null -ne $Default) {
+        return $Default
     }
     else {
-        Write-Host "⚠️  No se encontró: $Section.$Key" -ForegroundColor Yellow
+        $displayPath = if ($Section) { "$Section.$Key" } else { $Key }
+        Write-Host "⚠️  No se encontró: $displayPath" -ForegroundColor Yellow
         return $null
     }
 }

@@ -74,16 +74,6 @@ function Write-LogMessage {
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss.fff"
     $levelStr = $Level.ToString().PadRight(5)
     
-    $logEntry = @{
-        timestamp = $timestamp
-        level = $levelStr
-        category = $Category
-        message = $Message
-        data = $Data
-        thread = [Threading.Thread]::CurrentThread.ManagedThreadId
-        process = $PID
-    }
-    
     # Formato de salida
     $logLine = "$timestamp [$levelStr] [$Category] $Message"
     
@@ -116,6 +106,30 @@ function Write-LogMessage {
     
     # Verificar tamaño y rotar si es necesario
     Invoke-LogRotation
+}
+
+function Write-Log {
+    <#
+    .SYNOPSIS
+        Alias para Write-LogMessage (usado en tests)
+    #>
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$Message,
+        
+        [Parameter(Mandatory=$true)]
+        $Level
+    )
+    
+    $logLevel = [LogLevel]::INFO
+    if ($Level -is [string]) {
+        $logLevel = [LogLevel]::Parse([LogLevel], $Level)
+    }
+    else {
+        $logLevel = $Level
+    }
+    
+    Write-LogMessage -Level $logLevel -Message $Message
 }
 
 function Invoke-LogRotation {
@@ -253,6 +267,6 @@ function Export-LogsToJson {
 Initialize-Logger
 
 # Exportar funciones
-Export-ModuleMember -Function Initialize-Logger, Write-LogMessage, Write-LogTrace, Write-LogDebug, `
+Export-ModuleMember -Function Initialize-Logger, Write-LogMessage, Write-Log, Write-LogTrace, Write-LogDebug, `
                               Write-LogInfo, Write-LogWarn, Write-LogError, Write-LogFatal, `
                               Get-LogHistory, Clear-Logs, Export-LogsToJson
