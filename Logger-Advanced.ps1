@@ -1,10 +1,10 @@
 <#
 .SYNOPSIS
-    Sistema de logging avanzado con rotación y niveles
+    Sistema de logging avanzado con rotacion y niveles
 .DESCRIPTION
-    Maneja logs estructurados con diferentes niveles de severidad y rotación automática
+    Maneja logs estructurados con diferentes niveles de severidad y rotacion automatica
 .NOTES
-    Versión: 4.0.0
+    Version: 4.0.0
     Autor: Fernando Farfan
 #>
 
@@ -54,14 +54,9 @@ function Write-LogMessage {
         Escribe un mensaje en el log
     #>
     param(
-        [Parameter(Mandatory=$true)]
-        [LogLevel]$Level,
-        
-        [Parameter(Mandatory=$true)]
-        [string]$Message,
-        
+        [Parameter(Mandatory=$true)][LogLevel]$Level,
+        [Parameter(Mandatory=$true)][string]$Message,
         [string]$Category = "General",
-        
         [hashtable]$Data = @{}
     )
     
@@ -102,118 +97,48 @@ function Write-LogMessage {
         ([LogLevel]::FATAL) { "DarkRed" }
     }
     
-    Write-Host $logLine -ForegroundColor $color
-    
-    # Verificar tamaño y rotar si es necesario
-    Invoke-LogRotation
+    Write-Host "[$Category] $Message" -ForegroundColor $color
 }
 
-function Write-Log {
-    <#
-    .SYNOPSIS
-        Alias para Write-LogMessage (usado en tests)
-    #>
-    param(
-        [Parameter(Mandatory=$true)]
-        [string]$Message,
-        
-        [Parameter(Mandatory=$true)]
-        $Level
-    )
-    
-    $logLevel = [LogLevel]::INFO
-    if ($Level -is [string]) {
-        $logLevel = [LogLevel]::Parse([LogLevel], $Level)
-    }
-    else {
-        $logLevel = $Level
-    }
-    
-    Write-LogMessage -Level $logLevel -Message $Message
-}
+function Write-Log { param($Message, $Level = [LogLevel]::INFO) Write-LogMessage -Level $Level -Message $Message }
+function Write-LogTrace { param($Message) Write-LogMessage -Level TRACE -Message $Message }
+function Write-LogDebug { param($Message) Write-LogMessage -Level DEBUG -Message $Message }
+function Write-LogInfo  { param($Message) Write-LogMessage -Level INFO -Message $Message }
+function Write-LogWarn  { param($Message) Write-LogMessage -Level WARN -Message $Message }
+function Write-LogError { param($Message) Write-LogMessage -Level ERROR -Message $Message }
+function Write-LogFatal { param($Message) Write-LogMessage -Level FATAL -Message $Message }
 
 function Invoke-LogRotation {
     <#
     .SYNOPSIS
-        Rota los archivos de log cuando exceden el tamaño máximo
+        Maneja la rotacion de archivos de log por tamano
     #>
-    
-    if (-not (Test-Path $Global:LogFile)) {
-        return
-    }
-    
-    $logSize = (Get-Item $Global:LogFile).Length / 1MB
-    
-    if ($logSize -gt $Global:MaxLogSizeMB) {
-        # Obtener archivos de log existentes
-        $logFiles = Get-ChildItem -Path $Global:LogPath -Filter "optimizador_*.log" | 
-                    Sort-Object LastWriteTime -Descending
-        
-        # Eliminar archivos antiguos si exceden el máximo
-        if ($logFiles.Count -ge $Global:MaxLogFiles) {
-            $logFiles | Select-Object -Skip ($Global:MaxLogFiles - 1) | Remove-Item -Force
+    if (Test-Path $Global:LogFile) {
+        $file = Get-Item $Global:LogFile
+        if ($file.Length -gt ($Global:MaxLogSizeMB * 1MB)) {
+            $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+            $archiveName = "$Global:LogPath\optimizador_$timestamp.log.bak"
+            Move-Item -Path $Global:LogFile -Destination $archiveName -Force
+            
+            # Limpiar archivos antiguos
+            $oldFiles = Get-ChildItem -Path $Global:LogPath -Filter "*.log.bak" | Sort-Object LastWriteTime -Descending
+            if ($oldFiles.Count -gt $Global:MaxLogFiles) {
+                $oldFiles | Select-Object -Skip $Global:MaxLogFiles | Remove-Item -Force
+            }
         }
-        
-        # Rotar archivo actual
-        $rotatedName = "optimizador_$(Get-Date -Format 'yyyy-MM-dd_HHmmss').log"
-        Move-Item -Path $Global:LogFile -Destination "$Global:LogPath\$rotatedName" -Force
     }
-}
-
-function Write-LogTrace {
-    param([string]$Message, [string]$Category = "General", [hashtable]$Data = @{})
-    Write-LogMessage -Level TRACE -Message $Message -Category $Category -Data $Data
-}
-
-function Write-LogDebug {
-    param([string]$Message, [string]$Category = "General", [hashtable]$Data = @{})
-    Write-LogMessage -Level DEBUG -Message $Message -Category $Category -Data $Data
-}
-
-function Write-LogInfo {
-    param([string]$Message, [string]$Category = "General", [hashtable]$Data = @{})
-    Write-LogMessage -Level INFO -Message $Message -Category $Category -Data $Data
-}
-
-function Write-LogWarn {
-    param([string]$Message, [string]$Category = "General", [hashtable]$Data = @{})
-    Write-LogMessage -Level WARN -Message $Message -Category $Category -Data $Data
-}
-
-function Write-LogError {
-    param([string]$Message, [string]$Category = "General", [hashtable]$Data = @{})
-    Write-LogMessage -Level ERROR -Message $Message -Category $Category -Data $Data
-}
-
-function Write-LogFatal {
-    param([string]$Message, [string]$Category = "General", [hashtable]$Data = @{})
-    Write-LogMessage -Level FATAL -Message $Message -Category $Category -Data $Data
 }
 
 function Get-LogHistory {
     <#
     .SYNOPSIS
-        Obtiene el historial de logs
+        Obtiene los ultimos mensajes del log
     #>
-    param(
-        [int]$LastLines = 100,
-        [LogLevel]$MinLevel = [LogLevel]::INFO
-    )
-    
-    if (-not (Test-Path $Global:LogFile)) {
-        Write-Host "⚠️  No hay logs disponibles" -ForegroundColor Yellow
-        return
+    param([int]$Lines = 100)
+    if (Test-Path $Global:LogFile) {
+        return Get-Content -Path $Global:LogFile -Tail $Lines
     }
-    
-    $logs = Get-Content -Path $Global:LogFile -Tail $LastLines
-    
-    # Filtrar por nivel
-    $filteredLogs = $logs | Where-Object {
-        $_ -match '\[(\w+)\]' -and 
-        [LogLevel]::Parse([LogLevel], $Matches[1]) -ge $MinLevel
-    }
-    
-    $filteredLogs | ForEach-Object { Write-Host $_ }
+    return @()
 }
 
 function Clear-Logs {
@@ -221,12 +146,8 @@ function Clear-Logs {
     .SYNOPSIS
         Limpia todos los archivos de log
     #>
-    
-    $confirmation = Read-Host "¿Eliminar todos los logs? (S/N)"
-    
-    if ($confirmation -eq "S" -or $confirmation -eq "s") {
-        Get-ChildItem -Path $Global:LogPath -Filter "*.log" | Remove-Item -Force
-        Write-Host "✅ Logs eliminados" -ForegroundColor Green
+    if (Test-Path $Global:LogPath) {
+        Remove-Item -Path "$Global:LogPath\*.log*" -Force
         Initialize-Logger
     }
 }
@@ -234,33 +155,25 @@ function Clear-Logs {
 function Export-LogsToJson {
     <#
     .SYNOPSIS
-        Exporta logs a formato JSON
+        Exporta logs actuales a formato JSON para analisis
     #>
-    param(
-        [string]$OutputPath = "$Global:LogPath\export_$(Get-Date -Format 'yyyy-MM-dd_HHmmss').json"
-    )
+    param([string]$OutputPath = "$PSScriptRoot\logs_export.json")
+    $logs = Get-LogHistory -Lines 1000
+    $structuredLogs = @()
     
-    if (-not (Test-Path $Global:LogFile)) {
-        Write-Host "⚠️  No hay logs para exportar" -ForegroundColor Yellow
-        return
-    }
-    
-    $logs = Get-Content -Path $Global:LogFile
-    $jsonLogs = @()
-    
-    foreach ($log in $logs) {
-        if ($log -match '^(\S+ \S+) \[(\w+)\] \[(\w+)\] (.+)') {
-            $jsonLogs += @{
-                timestamp = $Matches[1]
-                level = $Matches[2].Trim()
-                category = $Matches[3]
-                message = $Matches[4]
+    foreach ($line in $logs) {
+        if ($line -match '^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}) \[(.*?)\] \[(.*?)\] (.*)$') {
+            $structuredLogs += @{
+                Timestamp = $matches[1]
+                Level = $matches[2].Trim()
+                Category = $matches[3]
+                Message = $matches[4]
             }
         }
     }
     
-    $jsonLogs | ConvertTo-Json -Depth 5 | Out-File -FilePath $OutputPath -Encoding UTF8
-    Write-Host "✅ Logs exportados: $OutputPath" -ForegroundColor Green
+    $structuredLogs | ConvertTo-Json | Out-File -FilePath $OutputPath -Encoding UTF8
+    Write-Host "Logs exportados: $OutputPath" -ForegroundColor Green
 }
 
 # Inicializar logger al importar el modulo

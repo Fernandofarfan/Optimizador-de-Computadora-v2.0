@@ -98,9 +98,9 @@ Describe "Unit Tests - Logger-Advanced" {
     }
     
     Context "Funcionalidad de Logging" {
-        It "Log-Message debe estar disponible" {
+        It "Write-LogMessage debe estar disponible" {
             # Verificar si el comando existe en el scope actual de Pester
-            Get-Command -Name "Log-Message" -ErrorAction SilentlyContinue | Should -Not -BeNullOrEmpty
+            Get-Command -Name "Write-LogMessage" -ErrorAction SilentlyContinue | Should -Not -BeNullOrEmpty
         }
 
         It "Logger debe estar inicializado" {
