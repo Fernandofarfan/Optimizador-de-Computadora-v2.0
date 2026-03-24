@@ -181,7 +181,4 @@ function Edit-Config {
     }
 }
 
-# Exportar funciones (solo si se carga como modulo)
-if ($MyInvocation.InvocationName -ne '.') {
-    Export-ModuleMember -Function Initialize-Config, Get-Config, Set-ConfigValue, Get-ConfigValue, Reset-Config, Show-Config, Edit-Config
-}
+# Script finalizado

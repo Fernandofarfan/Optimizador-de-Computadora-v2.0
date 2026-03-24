@@ -263,12 +263,5 @@ function Export-LogsToJson {
     Write-Host "✅ Logs exportados: $OutputPath" -ForegroundColor Green
 }
 
-# Inicializar logger al importar el módulo
+# Inicializar logger al importar el modulo
 Initialize-Logger
-
-# Exportar funciones (solo si se carga como modulo)
-if ($MyInvocation.InvocationName -ne '.') {
-    Export-ModuleMember -Function Initialize-Logger, Write-LogMessage, Write-Log, Write-LogTrace, Write-LogDebug, `
-                                  Write-LogInfo, Write-LogWarn, Write-LogError, Write-LogFatal, `
-                                  Get-LogHistory, Clear-Logs, Export-LogsToJson
-}

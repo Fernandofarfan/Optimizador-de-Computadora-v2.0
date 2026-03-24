@@ -2,13 +2,13 @@
 .SYNOPSIS
     Notifications-Manager.ps1 - Wrapper for notification systems and resource monitoring helpers
 .DESCRIPTION
-    Este módulo sirve como puente entre los sistemas de notificaciones existentes
+    Este modulo sirve como puente entre los sistemas de notificaciones existentes
     y proporciona funciones de monitoreo de recursos para la suite de tests.
 .VERSION
     4.0.0
 #>
 
-# Forzar codificación UTF-8 para evitar problemas de consola
+# Forzar codificacion UTF-8 para evitar problemas de consola
 if ($PSVersionTable.PSVersion.Major -ge 5) {
     $OutputEncoding = [System.Text.Encoding]::UTF8
 }
@@ -27,7 +27,7 @@ if (Test-Path $smartPath) { . $smartPath }
 function Send-CriticalNotification {
     <#
     .SYNOPSIS
-        Envía una notificación crítica
+        Envia una notificacion critica
     #>
     param(
         [Parameter(Mandatory=$true)][string]$Title,
@@ -44,7 +44,7 @@ function Send-CriticalNotification {
 function Send-WarningNotification {
     <#
     .SYNOPSIS
-        Envía una notificación de advertencia
+        Envia una notificacion de advertencia
     #>
     param(
         [Parameter(Mandatory=$true)][string]$Title,
@@ -61,7 +61,7 @@ function Send-WarningNotification {
 function Send-InfoNotification {
     <#
     .SYNOPSIS
-        Envía una notificación informativa
+        Envia una notificacion informativa
     #>
     param(
         [Parameter(Mandatory=$true)][string]$Title,
@@ -120,6 +120,3 @@ function Get-CPUUsage {
         return 0
     }
 }
-
-Export-ModuleMember -Function Send-CriticalNotification, Send-WarningNotification, Send-InfoNotification, `
-                              Get-RAMUsage, Get-DiskUsage, Get-CPUUsage

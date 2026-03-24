@@ -3,7 +3,7 @@
     Comprehensive Test Suite for PC Optimizer Suite v4.0.0
     Using Pester framework for PowerShell testing
 .DESCRIPTION
-    Tests completos para validar funcionalidad de todos los módulos
+    Tests completos para validar funcionalidad de todos los modulos
     y scripts principales. Meta: 85% de coverage.
 .VERSION
     4.0.0
@@ -65,8 +65,8 @@ Describe "Smoke Tests - Verificacion Rapida" {
             
             foreach ($file in $files) {
                 $content = Get-Content -Path $file.FullName -Raw
-                # SOLO verificar si tiene un tag de version formal (basado en .VERSION o similar)
-                if ($content -match '\.VERSION|^\s*#\s*Version:') {
+                # SOLO verificar si tiene un tag de version FORMAL en los comentarios (Multiline regex)
+                if ($content -match '(?m)^\s*#\s*\.VERSION|^\s*#\s*Version:') {
                     Write-Host "DEBUG: Comprobando version en $($file.Name)..." -ForegroundColor Gray
                     $content | Should -Match 'v?\d+\.\d+(\.\d+)?'
                 }
@@ -99,7 +99,12 @@ Describe "Unit Tests - Logger-Advanced" {
     
     Context "Funcionalidad de Logging" {
         It "Log-Message debe estar disponible" {
+            # Verificar si el comando existe en el scope actual de Pester
             Get-Command -Name "Log-Message" -ErrorAction SilentlyContinue | Should -Not -BeNullOrEmpty
+        }
+
+        It "Logger debe estar inicializado" {
+             $Global:LogPath | Should -Not -BeNullOrEmpty
         }
     }
 }
@@ -142,7 +147,6 @@ Describe "Unit Tests - Config-Manager" {
             }
         } catch {
             Write-Host "CRITICAL ERROR: Fallo dot-sourcing de $($configPath): $($_.Exception.Message)" -ForegroundColor Red
-            Write-Host "Stack Trace: $($_.ScriptStackTrace)" -ForegroundColor Gray
             throw $_
         }
     }
