@@ -152,8 +152,8 @@ jobs:
       - name: 🛡️ Verificar seguridad de módulos
         shell: powershell
         run: |
-          Write-Host "Verificando seguridad de módulos..." -ForegroundColor Cyan
-          $modules = Get-ChildItem -Path "./Modules" -Filter "*.ps1"
+          Write-Host "Verificando seguridad de modulos..." -ForegroundColor Cyan
+          $modules = Get-ChildItem -Path "." -Filter "*.ps1" -Exclude "*-Tests.ps1", "Test-Suite.ps1"
           
           foreach ($module in $modules) {
               $content = Get-Content -Path $module.FullName -Raw
@@ -188,8 +188,7 @@ jobs:
           New-Item -ItemType Directory -Path $buildDir -Force | Out-Null
           
           # Copiar archivos principales
-          Copy-Item -Path "./Optimizador.ps1" -Destination "$buildDir/"
-          Copy-Item -Path "./Modules" -Destination "$buildDir/" -Recurse -Force
+          Get-ChildItem -Path "." -Filter "*.ps1" -Exclude "*-Tests.ps1", "Test-Suite.ps1" | Copy-Item -Destination "$buildDir/" -Force
           Copy-Item -Path "./README.md" -Destination "$buildDir/"
           Copy-Item -Path "./CHANGELOG.md" -Destination "$buildDir/"
           Copy-Item -Path "./LICENSE" -Destination "$buildDir/"

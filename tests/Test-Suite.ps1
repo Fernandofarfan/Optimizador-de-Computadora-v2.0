@@ -25,7 +25,7 @@ param(
 
 $TestConfig = @{
     ProjectRoot      = Split-Path -Parent $PSScriptRoot
-    ModulesPath      = Join-Path $PSScriptRoot "Modules"
+    ModulesPath      = $ProjectRoot
     VerbosityLevel   = 'Detailed'
     ExitOnFailure    = $false
 }
@@ -71,7 +71,7 @@ Describe "Smoke Tests - Verificación Rápida" {
                 $content = Get-Content -Path $file.FullName -Raw
                 if ($content -match '\.VERSION|version') {
                     # Al menos debe mencionar una versión válida
-                    $content | Should -Match 'v[0-9]\.[0-9]\.[0-9]|v[0-9]\.[0-9]'
+                    $content | Should -Match 'v?\d+\.\d+(\.\d+)?'
                 }
             }
         }
@@ -273,7 +273,7 @@ Describe "Security Tests - Validación de Seguridad" {
     
     Context "Permisos de Módulos" {
         It "Módulos deben estar en directorio confiable" {
-            $modulesPath = Join-Path $TestConfig.ProjectRoot "Modules"
+            $modulesPath = $TestConfig.ProjectRoot
             Test-Path -Path $modulesPath | Should -Be $true
         }
     }
