@@ -42,7 +42,7 @@ settings.json
 TestResults/
 
 # === Dependencias (si se usan módulos externos) ===
-Modules/
+# Modules/
 node_modules/
 
 # === Archivos de compilación y generados ===

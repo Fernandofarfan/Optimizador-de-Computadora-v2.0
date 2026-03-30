@@ -67,13 +67,14 @@ Describe "Logger-Advanced Tests" {
     
     Context "Logging Functionality" {
         It "Should write log entry" {
-            Write-Log -Message "Test message" -Level INFO
+            Initialize-Logger -Level INFO
+            Write-LogMessage -Message "Test message" -Level INFO
             # El archivo se crea en el perfil de usuario por defecto
             Test-Path $Global:LogFile | Should -Be $true
         }
         
         It "Should handle log levels" {
-            { Write-Log -Message "Test" -Level INFO } | Should -Not -Throw
+            { Write-LogMessage -Message "Test" -Level INFO } | Should -Not -Throw
         }
     }
 }
