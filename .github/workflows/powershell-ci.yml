@@ -165,12 +165,12 @@ jobs:
         
         $requiredFiles = @(
             "Optimizador.ps1",
-            "Analizar-Sistema.ps1",
-            "Optimizar-Sistema-Seguro.ps1",
-            "Limpieza-Profunda.ps1",
-            "Optimizar-Servicios.ps1",
-            "Gestionar-Procesos.ps1",
-            "Reparar-Red-Sistema.ps1",
+            "src/Analizar-Sistema.ps1",
+            "src/Optimizar-Sistema-Seguro.ps1",
+            "src/Limpieza-Profunda.ps1",
+            "src/Optimizar-Servicios.ps1",
+            "src/Gestionar-Procesos.ps1",
+            "src/Reparar-Red-Sistema.ps1",
             "EJECUTAR-OPTIMIZADOR.bat",
             "README.md",
             "LICENSE",
